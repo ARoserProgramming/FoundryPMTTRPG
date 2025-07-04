@@ -24,7 +24,7 @@
         }
       },
       "abilities": {
-        "str": {
+        "Fortitude": {
           "value": 10
         },
         "dex": {
