@@ -107,7 +107,7 @@ export class PmTTRPGActor extends Actor {
      * Prepare Abno type specific data.
      */
     _prepareAbnormalityData(actorData) {
-        if (actorData.type !== 'npc') return;
+        if (actorData.type !== 'abnormality') return;
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
@@ -116,7 +116,7 @@ export class PmTTRPGActor extends Actor {
      * Prepare Distortion type specific data.
      */
     _prepareDistortionData(actorData) {
-        if (actorData.type !== 'npc') return;
+        if (actorData.type !== 'distortion') return;
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;

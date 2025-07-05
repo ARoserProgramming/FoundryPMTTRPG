@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["character", "Abnormality", "Distortion"],
     "templates": {
       "base": {
         "health_points": {
@@ -55,9 +55,13 @@
         }
       }
     },
-    "npc": {
-      "templates": ["base"],
-      "cr": 0
+    "Abnormality": {
+      "templates": ["base","character"],
+      "risk": "zayin"
+    },
+    "Distortion": {
+      "templates": ["base,character"],
+      "risk": "zayin"
     }
   },
   "Item": {
