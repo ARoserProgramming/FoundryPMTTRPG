@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "CSS compiler for the PmTTRPG system",
   "scripts": {
-    "build": "sass src/scss/pmttrg.scss css/pmttrg.css --style=expanded --no-source-map",
-    "watch": "sass src/scss/pmttrg.scss css/pmttrg.css --style=expanded --source-map --watch"
+    "build": "sass src/scss/pmttrpg.scss css/pmttrpg.css --style=expanded --no-source-map",
+    "watch": "sass src/scss/pmttrpg.scss css/pmttrpg.css --style=expanded --source-map --watch"
   },
   "browserslist": [
     "last 3 versions"

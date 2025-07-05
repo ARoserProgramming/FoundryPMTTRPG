@@ -1,41 +1,46 @@
 {
-  "id": "pmttrg",
+  "id": "pmttrpg",
   "title": "PMTTRPG",
-  "description": "The PMTTRPG system for FoundryVTT!",
+  "description": "The UOPMTTRPG system for FoundryVTT!",
   "authors": [
     {
-      "name": "Asacolips",
-      "discord": "asacolips"
+      "name": "Ases",
+      "discord": "_ases"
     },
     {
-      "name": "Lee Talman",
-      "discord": ".pizzaWizard"
+      "name": "AgenteMayonesa",
+      "discord": "manuel013"
     }
   ],
-  "url": "Replace this with a link to your public repository",
+  "url": "https://github.com/ARoserProgramming/FoundryPMTTRPG",
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "bugs": "Replace this with a link to file issues or tickets",
+  "bugs": "",
   "changelog": "CHANGELOG.md",
   "media": [
     {
       "type": "setup",
-      "url": "systems/pmttrg/assets/anvil-impact.png",
-      "thumbnail": "systems/pmttrg/assets/anvil-impact.png"
+      "url": "systems/pmttrpg/assets/Images/PM_LOGO.png",
+      "thumbnail": "systems/pmttrpg/assets/Images/PM_LOGO.png"
     }
   ],
-  "version": "2.0.0",
+  "version": "1.0.0",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"
   },
-  "esmodules": ["module/pmttrg.mjs"],
-  "styles": ["css/pmttrg.css"],
+  "esmodules": ["module/pmttrpg.mjs"],
+  "styles": ["css/pmttrpg.css"],
   "languages": [
     {
       "lang": "en",
       "name": "English",
       "path": "lang/en.json"
+    },
+    {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "lang/es.json"
     }
   ],
   "packs": [],
@@ -43,9 +48,9 @@
   "socket": false,
   "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
   "download": "This must link to a .zip file of the current version",
-  "background": "systems/pmttrg/assets/anvil-impact.png",
+  "background": "systems/pmttrpg/assets/Images/City_Map.webp",
   "gridDistance": 5,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "power"
+  "gridUnits": "SQR",
+  "primaryTokenAttribute": "Health",
+  "secondaryTokenAttribute": "Stagger Threshold"
 }
