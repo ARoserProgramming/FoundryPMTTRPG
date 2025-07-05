@@ -59,13 +59,13 @@ export class PmTTRPGActor extends Actor {
         // Make separate methods for each Actor type (character, npc, etc.) to keep
         // things organized.
         this._prepareCharacterData(actorData);
-        this._prepareNpcData(actorData);
+        this._prepareAbnormalityData(actorData);
+        this._prepareDistortionData(actorData);
         if (actorData.type === 'character') {
-            // Guarda los máximos anteriores
             const prevHpMax = systemData.health_points.max;
             const prevStaggerMax = systemData.stagger_threshold.max;
 
-            // Calcula los nuevos máximos
+
             const newHpMax = this.health_points;
             const newStaggerMax = this.stagger_threshold;
 
@@ -104,14 +104,22 @@ export class PmTTRPGActor extends Actor {
     }
 
     /**
-     * Prepare NPC type specific data.
+     * Prepare Abno type specific data.
      */
-    _prepareNpcData(actorData) {
+    _prepareAbnormalityData(actorData) {
         if (actorData.type !== 'npc') return;
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
-        systemData.xp = systemData.cr * systemData.cr * 100;
+    }
+    /**
+     * Prepare Distortion type specific data.
+     */
+    _prepareDistortionData(actorData) {
+        if (actorData.type !== 'npc') return;
+
+        // Make modifications to data here. For example:
+        const systemData = actorData.system;
     }
 
     /**

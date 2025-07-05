@@ -1,7 +1,7 @@
 {
   "Actor": {
     "types": [
-      "character",
+      "Character",
       "Abnormality",
       "Distortion"
     ],
@@ -57,27 +57,33 @@
         }
       }
     },
-    "character": {
+    "Character": {
       "templates": [
-        "base"
+        "base",
+        "attributes",
+        "abilities"
       ],
       "mentality": {
         "value": 0,
         "max": 10
       }
+    },
+    "Abnormality": {
+      "templates": [
+        "base",
+        "attributes",
+        "abilities"
+      ],
+      "risk": "zayin"
+    },
+    "Distortion": {
+      "templates": [
+        "Character",
+        "attributes",
+        "abilities",
+        "Abnormality"
+      ]
     }
-  },
-  "Abnormality": {
-    "templates": [
-      "base"
-    ],
-    "risk": "zayin"
-  },
-  "Distortion": {
-    "templates": [
-      "character",
-      "abnormality"
-    ]
   },
   "Item": {
     "types": [
