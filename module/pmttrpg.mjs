@@ -20,7 +20,6 @@ Hooks.once('init', function () {
     PmTTRPGItem,
     rollItemMacro,
   };
-
   // Add custom constants for configuration.
   CONFIG.PM_TTRPG = PM_TTRPG;
 
@@ -33,15 +32,16 @@ Hooks.once('init', function () {
     decimals: 2,
   };
 
+
+
+
   // Define custom Document classes
   CONFIG.Actor.documentClass = PmTTRPGActor;
   CONFIG.Item.documentClass = PmTTRPGItem;
-
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
   // if the transfer property on the Active Effect is true.
   CONFIG.ActiveEffect.legacyTransferral = false;
-
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet('pmttrpg', PmTTRPGActorSheet, {
