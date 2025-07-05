@@ -17,6 +17,13 @@ export class PmTTRPGActor extends Actor {
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }
+  get health_points() {
+    if (this.type !== 'character') return 0;
+    const system = this.system;
+    const ftd = system.abilities?.ftd?.value ?? 0;
+    const lvl = system.attributes?.level?.value ?? 0;
+    return 72 + (8 * ftd) + (8 * lvl);
+  }
   /**
    * @override
    * Augment the actor source data with additional dynamic data. Typically,
@@ -35,6 +42,19 @@ export class PmTTRPGActor extends Actor {
     // things organized.
     this._prepareCharacterData(actorData);
     this._prepareNpcData(actorData);
+    if (actorData.type === 'character') {
+      systemData.health_points.max = this.health_points;
+
+      // Si el valor es nulo, menor que 0 o mayor que el máximo, ajústalo
+      if (
+          systemData.health_points.value == null ||
+          systemData.health_points.value > systemData.health_points.max
+      ) {
+        systemData.health_points.value = systemData.health_points.max;
+      }else if (systemData.health_points.value < 0) {
+        systemData.health_points.value = 0;
+      }
+    }
   }
 
   /**
@@ -77,6 +97,7 @@ export class PmTTRPGActor extends Actor {
 
     return data;
   }
+
 
   /**
    * Prepare character roll data.
