@@ -51,6 +51,6 @@
   "background": "systems/pmttrpg/assets/Images/City_Map.webp",
   "gridDistance": 5,
   "gridUnits": "Feet",
-  "primaryTokenAttribute": "Health",
+  "primaryTokenAttribute": "Health Points",
   "secondaryTokenAttribute": "Stagger Threshold"
 }
