@@ -1,5 +1,5 @@
 {
-  "name": "pmttrg",
+  "name": "pmttrpg",
   "version": "2.0.0",
   "description": "CSS compiler for the PmTTRPG system",
   "scripts": {
@@ -9,7 +9,7 @@
   "browserslist": [
     "last 3 versions"
   ],
-  "author": "Asacolips",
+  "author": "Asses",
   "license": "MIT",
   "private": true,
   "devDependencies": {

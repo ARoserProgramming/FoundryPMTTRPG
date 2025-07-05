@@ -15,7 +15,7 @@ import { PM_TTRPG } from './helpers/config.mjs';
 Hooks.once('init', function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
-  game.pmttrg = {
+  game.pmttrpg = {
     PmTTRPGActor,
     PmTTRPGItem,
     rollItemMacro,
@@ -44,12 +44,12 @@ Hooks.once('init', function () {
 
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('pmttrg', PmTTRPGActorSheet, {
+  Actors.registerSheet('pmttrpg', PmTTRPGActorSheet, {
     makeDefault: true,
     label: 'PM_TTRPG.SheetLabels.Actor',
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('pmttrg', PmTTRPGItemSheet, {
+  Items.registerSheet('pmttrpg', PmTTRPGItemSheet, {
     makeDefault: true,
     label: 'PM_TTRPG.SheetLabels.Item',
   });
@@ -99,7 +99,7 @@ async function createItemMacro(data, slot) {
   const item = await Item.fromDropData(data);
 
   // Create the macro command using the uuid.
-  const command = `game.pmttrg.rollItemMacro("${data.uuid}");`;
+  const command = `game.pmttrpg.rollItemMacro("${data.uuid}");`;
   let macro = game.macros.find(
     (m) => m.name === item.name && m.command === command
   );
@@ -109,7 +109,7 @@ async function createItemMacro(data, slot) {
       type: 'script',
       img: item.img,
       command: command,
-      flags: { 'pmttrg.itemMacro': true },
+      flags: { 'pmttrpg.itemMacro': true },
     });
   }
   game.user.assignHotbarMacro(macro, slot);

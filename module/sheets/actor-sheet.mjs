@@ -11,7 +11,7 @@ export class PmTTRPGActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['pmttrg', 'sheet', 'actor'],
+      classes: ['pmttrpg', 'sheet', 'actor'],
       width: 600,
       height: 600,
       tabs: [
@@ -26,7 +26,7 @@ export class PmTTRPGActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/pmttrg/templates/actor/actor-${this.actor.type}-sheet.hbs`;
+    return `systems/pmttrpg/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */

@@ -203,11 +203,11 @@
   text-align: center;
 }
 
-/* Styles limited to pmttrg sheets */
-.pmttrg .item-form {
+/* Styles limited to pmttrpg sheets */
+.pmttrpg .item-form {
   font-family: "Roboto", sans-serif;
 }
-.pmttrg .sheet-header {
+.pmttrpg .sheet-header {
   flex: 0 auto;
   overflow: hidden;
   display: flex;
@@ -216,43 +216,43 @@
   justify-content: flex-start;
   margin-bottom: 10px;
 }
-.pmttrg .sheet-header .profile-img {
+.pmttrpg .sheet-header .profile-img {
   flex: 0 0 100px;
   height: 100px;
   margin-right: 10px;
 }
-.pmttrg .sheet-header .header-fields {
+.pmttrpg .sheet-header .header-fields {
   flex: 1;
 }
-.pmttrg .sheet-header h1.charname {
+.pmttrpg .sheet-header h1.charname {
   height: 50px;
   padding: 0;
   margin: 5px 0;
   border-bottom: 0;
 }
-.pmttrg .sheet-header h1.charname input {
+.pmttrpg .sheet-header h1.charname input {
   width: 100%;
   height: 100%;
   margin: 0;
 }
-.pmttrg .sheet-tabs {
+.pmttrpg .sheet-tabs {
   flex: 0;
 }
-.pmttrg .sheet-body,
-.pmttrg .sheet-body .tab,
-.pmttrg .sheet-body .tab .editor {
+.pmttrpg .sheet-body,
+.pmttrpg .sheet-body .tab,
+.pmttrpg .sheet-body .tab .editor {
   height: 100%;
 }
-.pmttrg .tox .tox-editor-container {
+.pmttrpg .tox .tox-editor-container {
   background: #fff;
 }
-.pmttrg .tox .tox-edit-area {
+.pmttrpg .tox .tox-edit-area {
   padding: 0 8px;
 }
-.pmttrg .resource-label {
+.pmttrpg .resource-label {
   font-weight: bold;
 }
-.pmttrg .items-header {
+.pmttrpg .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -261,17 +261,17 @@
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.pmttrg .items-header > * {
+.pmttrpg .items-header > * {
   font-size: 14px;
   text-align: center;
 }
-.pmttrg .items-header .item-name {
+.pmttrpg .items-header .item-name {
   font-weight: bold;
   padding-left: 5px;
   text-align: left;
   display: flex;
 }
-.pmttrg .items-list {
+.pmttrpg .items-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -279,12 +279,12 @@
   scrollbar-width: thin;
   color: #444;
 }
-.pmttrg .items-list .item-list {
+.pmttrpg .items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.pmttrg .items-list .item-name {
+.pmttrpg .items-list .item-name {
   flex: 2;
   margin: 0;
   overflow: hidden;
@@ -293,46 +293,46 @@
   align-items: center;
   display: flex;
 }
-.pmttrg .items-list .item-name h3, .pmttrg .items-list .item-name h4 {
+.pmttrpg .items-list .item-name h3, .pmttrpg .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
-.pmttrg .items-list .item-controls {
+.pmttrpg .items-list .item-controls {
   display: flex;
   flex: 0 0 100px;
   justify-content: flex-end;
 }
-.pmttrg .items-list .item-controls a {
+.pmttrpg .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
   margin: 0 6px;
 }
-.pmttrg .items-list .item {
+.pmttrpg .items-list .item {
   align-items: center;
   padding: 0 2px;
   border-bottom: 1px solid #c9c7b8;
 }
-.pmttrg .items-list .item:last-child {
+.pmttrpg .items-list .item:last-child {
   border-bottom: none;
 }
-.pmttrg .items-list .item .item-name {
+.pmttrpg .items-list .item .item-name {
   color: #191813;
 }
-.pmttrg .items-list .item .item-name .item-image {
+.pmttrpg .items-list .item .item-name .item-image {
   flex: 0 0 30px;
   height: 30px;
   background-size: 30px;
   border: none;
   margin-right: 5px;
 }
-.pmttrg .items-list .item-prop {
+.pmttrpg .items-list .item-prop {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-.pmttrg .items-list .items-header {
+.pmttrpg .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -341,26 +341,26 @@
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.pmttrg .items-list .items-header > * {
+.pmttrpg .items-list .items-header > * {
   font-size: 12px;
   text-align: center;
 }
-.pmttrg .items-list .items-header .item-name {
+.pmttrpg .items-list .items-header .item-name {
   padding-left: 5px;
   text-align: left;
 }
-.pmttrg .item-formula {
+.pmttrpg .item-formula {
   flex: 0 0 200px;
   padding: 0 8px;
 }
-.pmttrg .effects .item .effect-source,
-.pmttrg .effects .item .effect-duration,
-.pmttrg .effects .item .effect-controls {
+.pmttrpg .effects .item .effect-source,
+.pmttrpg .effects .item .effect-duration,
+.pmttrpg .effects .item .effect-controls {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-.pmttrg .effects .item .effect-controls {
+.pmttrpg .effects .item .effect-controls {
   border: none;
 }

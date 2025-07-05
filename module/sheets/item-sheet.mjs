@@ -11,7 +11,7 @@ export class PmTTRPGItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['pmttrg', 'sheet', 'item'],
+      classes: ['pmttrpg', 'sheet', 'item'],
       width: 520,
       height: 480,
       tabs: [
@@ -26,7 +26,7 @@ export class PmTTRPGItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = 'systems/pmttrg/templates/item';
+    const path = 'systems/pmttrpg/templates/item';
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.hbs`;
 
