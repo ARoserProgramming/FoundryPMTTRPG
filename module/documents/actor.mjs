@@ -17,7 +17,6 @@ export class PmTTRPGActor extends Actor {
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }
-
   /**
    * @override
    * Augment the actor source data with additional dynamic data. Typically,

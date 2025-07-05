@@ -20,27 +20,27 @@
       "templates": ["base"],
       "attributes": {
         "level": {
-          "value": 1
+          "value": 0
         }
       },
       "abilities": {
         "ftd": {
-          "value": 10
+          "value": 0
         },
         "prd": {
-          "value": 10
+          "value": 0
         },
         "jst": {
-          "value": 10
+          "value": 0
         },
         "chr": {
-          "value": 10
+          "value": 0
         },
         "ins": {
-          "value": 10
+          "value": 0
         },
         "tmp": {
-          "value": 10
+          "value": 0
         }
       }
     },
