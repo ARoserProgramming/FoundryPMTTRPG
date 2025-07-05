@@ -50,7 +50,7 @@
   "download": "This must link to a .zip file of the current version",
   "background": "systems/pmttrpg/assets/Images/City_Map.webp",
   "gridDistance": 5,
-  "gridUnits": "SQR",
+  "gridUnits": "Feet",
   "primaryTokenAttribute": "Health",
   "secondaryTokenAttribute": "Stagger Threshold"
 }
