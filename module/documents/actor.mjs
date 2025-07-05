@@ -31,7 +31,7 @@ export class PmTTRPGActor extends Actor {
         const system = this.system;
         const CHR = system.abilities?.chr?.value ?? 0;
         const RANK = system.attributes?.rank?.value ?? 0;
-        return [20 + (CHR * 4) + (RANK * 4)];
+        return 20 + (CHR * 4) + (RANK * 4);
     }
     clampBarAttribute(bar) {
         if (!bar) return;
