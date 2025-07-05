@@ -1,12 +1,12 @@
 {
   "PM_TTRPG": {
     "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
+      "Ftd": { "long": "Fortitude", "abbr": "ftd" },
+      "Prd": { "long": "Prudence", "abbr": "prd" },
+      "Jst": { "long": "Justice", "abbr": "jst" },
+      "Chr": { "long": "Charm", "abbr": "chr" },
+      "Ins": { "long": "Insight", "abbr": "ins" },
+      "Tmp": { "long": "Temperance", "abbr": "tmp" }
     },
     "SheetLabels": {
       "Actor": "PmTTRPG Actor Sheet",

@@ -24,22 +24,22 @@
         }
       },
       "abilities": {
-        "Fortitude": {
+        "ftd": {
           "value": 10
         },
-        "dex": {
+        "prd": {
           "value": 10
         },
-        "con": {
+        "jst": {
           "value": 10
         },
-        "int": {
+        "chr": {
           "value": 10
         },
-        "wis": {
+        "ins": {
           "value": 10
         },
-        "cha": {
+        "tmp": {
           "value": 10
         }
       }
