@@ -44,10 +44,12 @@ export class PmTTRPGActor extends Actor {
     }
     clampBarAttribute(bar) {
         if (!bar) return;
-        if (bar.value == null || bar.value > bar.max) {
-            bar.value = bar.max;
-        } else if (bar.value < 0) {
-            bar.value = 0;
+        const max = bar.max || Infinity;
+        const min = bar.min || 0;
+        if (bar.value == null || bar.value > max) {
+            bar.value = max;
+        } else if (bar.value < min) {
+            bar.value = min;
         }
     }
 
@@ -65,6 +67,7 @@ export class PmTTRPGActor extends Actor {
         const systemData = actorData.system;
         const flags = actorData.flags.pmttrpg || {};
 
+
         // Make separate methods for each Actor type (character, npc, etc.) to keep
         // things organized.
         this._prepareCharacterData(actorData);
@@ -72,7 +75,7 @@ export class PmTTRPGActor extends Actor {
         this._prepareDistortionData(actorData);
         systemData.health_points.max = this.health_points;
         systemData.stagger_threshold.max = this.stagger_threshold;
-        systemData.light.max = this.light;
+        systemData.attributes.light.max = this.light;
         if (this.type === 'character' || this.type === 'Distortion') {
             systemData.mentality.max = this.mentality;
         }
