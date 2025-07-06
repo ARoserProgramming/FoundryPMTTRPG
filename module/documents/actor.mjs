@@ -109,7 +109,7 @@ export class PmTTRPGActor extends Actor {
      * Prepare Abno type specific data.
      */
     _prepareAbnormalityData(actorData) {
-        if (actorData.type !== 'abnormality') return;
+        if (actorData.type !== 'Abnormality') return;
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
@@ -125,7 +125,7 @@ export class PmTTRPGActor extends Actor {
      * Prepare Distortion type specific data.
      */
     _prepareDistortionData(actorData) {
-        if (actorData.type !== 'distortion') return;
+        if (actorData.type !== 'Distortion') return;
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
@@ -146,7 +146,8 @@ export class PmTTRPGActor extends Actor {
 
         // Prepare character roll data.
         this._getCharacterRollData(data);
-        this._getNpcRollData(data);
+        this._getAbnormalityRollData(data)
+        this._getDistortionRollData(data);
 
         return data;
     }
@@ -175,10 +176,36 @@ export class PmTTRPGActor extends Actor {
     /**
      * Prepare NPC roll data.
      */
-    _getNpcRollData(data) {
-        if (this.type !== 'npc') return;
+    _getAbnormalityRollData(data) {
+        if (this.type !== 'Abnormality') return;
 
-        // Process additional NPC data here.
+        // Copy the ability scores to the top level, so that rolls can use
+        // formulas like `@str.mod + 4`.
+        if (data.abilities) {
+            for (let [k, v] of Object.entries(data.abilities)) {
+                data[k] = foundry.utils.deepClone(v);
+            }
+        }
+
+        // Add rank for easier access, or fall back to 0.
+        if (data.attributes.rank) {
+            data.rank = data.attributes.rank.value ?? 0;
+        }
     }
+    _getDistortionRollData(data) {
+        if (this.type !== 'Distortion') return;
 
+        // Copy the ability scores to the top level, so that rolls can use
+        // formulas like `@str.mod + 4`.
+        if (data.abilities) {
+            for (let [k, v] of Object.entries(data.abilities)) {
+                data[k] = foundry.utils.deepClone(v);
+            }
+        }
+
+        // Add rank for easier access, or fall back to 0.
+        if (data.attributes.rank) {
+            data.rank = data.attributes.rank.value ?? 0;
+        }
+    }
 }
