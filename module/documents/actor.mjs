@@ -163,9 +163,9 @@ export class PmTTRPGActor extends Actor {
             }
         }
 
-        // Add level for easier access, or fall back to 0.
-        if (data.attributes.level) {
-            data.lvl = data.attributes.level.value ?? 0;
+        // Add rank for easier access, or fall back to 0.
+        if (data.attributes.rank) {
+            data.rank = data.attributes.rank.value ?? 0;
         }
     }
 
