@@ -13,55 +13,63 @@
           "min": 0,
           "max": 5
         },
-        "biography": ""
+        "biography": "",
+        "attributes": {
+          "rank": {
+            "value": 0,
+            "max": 6
+          },
+          "xp": {
+            "value": 0,
+            "max": 8
+          },
+          "level": {
+            "value": 0
+          },
+          "light": {
+            "value": 0
+          }
+        },
+        "abilities": {
+          "ftd": {
+            "value": 0
+          },
+          "prd": {
+            "value": 0
+          },
+          "jst": {
+            "value": 0
+          },
+          "chr": {
+            "value": 0
+          },
+          "ins": {
+            "value": 0
+          },
+          "tmp": {
+            "value": 0
+          }
+        }
       }
     },
     "character": {
       "templates": ["base"],
-      "attributes": {
-        "rank": {
-          "value": 0,
-            "max": 6
-        },
-        "xp": {
-          "value": 0,
-          "max": 8
-        },
-        "level": {
-          "value": 0
-        },
-        "light": {
-          "value": 0
-        }
-      },
-      "abilities": {
-        "ftd": {
-          "value": 0
-        },
-        "prd": {
-          "value": 0
-        },
-        "jst": {
-          "value": 0
-        },
-        "chr": {
-          "value": 0
-        },
-        "ins": {
-          "value": 0
-        },
-        "tmp": {
-          "value": 0
-        }
+      "mentality": {
+        "value": 0,
+        "max": 10
       }
     },
     "Abnormality": {
-      "templates": ["base","character"],
+      "templates": ["base"],
       "risk": "zayin"
     },
     "Distortion": {
-      "templates": ["base,character"],
-      "risk": "zayin"
+      "templates": ["base"],
+      "risk": "zayin",
+      "mentality": {
+        "value": 0,
+        "max": 10
+      }
     }
   },
   "Item": {
