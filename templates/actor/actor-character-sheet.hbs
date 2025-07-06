@@ -31,19 +31,17 @@
           </div>
         </div>
           <div class="resource flex-group-center">
-              <label for="system.stagger_threshold.value" class="resource-label">Sanity Level</label>
+              <label for="system.stagger_threshold.value" class="resource-label">Mentality</label>
               <div class="resource-content flexrow flex-center flex-between">
-                  <input type="text" name="0" value="0" data-dtype="Number"/>
+                  <input type="text" name="system.mentality.value" value="{{system.mentality.value}}" data-dtype="Number"/>
                   <span> / </span>
-                  <input type="text" name="0" value="0" data-dtype="Number"/>
+                  <input type="text" name="system.mentality.max" value="{{system.mentality.max}}" data-dtype="Number"/>
               </div>
           </div>
           <div class="resource flex-group-center">
               <label for="system.stagger_threshold.value" class="resource-label">Light</label>
               <div class="resource-content flexrow flex-center flex-between">
-                  <input type="text" name="0" value="0" data-dtype="Number"/>
-                  <span> / </span>
-                  <input type="text" name="0" value="0" data-dtype="Number"/>
+                  <input type="text" name="system.light.value" value="{{system.attributes.light.value}}" data-dtype="Number"/>
               </div>
           </div>
           <div class="resource flex-group-center">
@@ -58,6 +56,7 @@
           <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
           </div>
         </div>
+
 
       </div>
     </div>
