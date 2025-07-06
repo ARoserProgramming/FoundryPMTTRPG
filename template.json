@@ -57,7 +57,7 @@
       "templates": ["base"],
       "mentality": {
         "value": 0,
-        "max": 10
+        "max": 15
       }
     },
     "Abnormality": {
@@ -69,7 +69,7 @@
       "risk": "zayin",
       "mentality": {
         "value": 0,
-        "max": 10
+        "max": 15
       }
     }
   },

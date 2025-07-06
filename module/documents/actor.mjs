@@ -73,13 +73,13 @@ export class PmTTRPGActor extends Actor {
         systemData.health_points.max = this.health_points;
         systemData.stagger_threshold.max = this.stagger_threshold;
         systemData.light.max = this.light;
-        if (systemData.mentality) {
+        if (this.type === 'character' || this.type === 'Distortion') {
             systemData.mentality.max = this.mentality;
         }
         this.clampBarAttribute(systemData.health_points);
         this.clampBarAttribute(systemData.stagger_threshold);
         // Mentality
-        if (systemData.mentality) {
+        if (this.type === 'Distortion' || this.type === 'character') {
             this.clampBarAttribute(systemData.mentality);
         }
         // Light
