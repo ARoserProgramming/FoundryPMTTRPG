@@ -35,11 +35,11 @@ export class PmTTRPGActor extends Actor {
     get mentality() {
         const system = this.system;
         const SP = system.abilities?.prd?.value ?? 0;
-        const RANK = system.attributes?.rank?.value ?? 0;
         return 15 + (SP * 3);
     }
     get light() {
         const system = this.system;
+        const RANK = system.attributes?.rank?.value ?? 0;
         return 3 + (RANK);
     }
     clampBarAttribute(bar) {
