@@ -9,6 +9,10 @@
   text-shadow: 0 0 10px red;
   cursor: pointer;
 }
+.pmttrpg .dice-icon{
+  border: none;
+  max-width: 100%;
+}
 
 .grid,
 .grid-2col {

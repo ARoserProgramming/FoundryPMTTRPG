@@ -81,6 +81,11 @@ export class PmTTRPGActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
+    if (!Handlebars.helpers.asset) {
+      Handlebars.registerHelper('asset', function (path) {
+        return `/systems/pmttrpg/${path}`;
+      });
+    }
 
     return context;
   }
