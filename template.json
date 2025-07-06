@@ -27,8 +27,8 @@
             "value": 0
           },
           "light": {
-            "value": 0,
-            "max": 99
+            "value": 3,
+            "max": 3
           }
         },
         "abilities": {
@@ -56,7 +56,7 @@
     "character": {
       "templates": ["base"],
       "mentality": {
-        "value": 0,
+        "value": 15,
         "max": 15
       }
     },
@@ -68,7 +68,7 @@
       "templates": ["base"],
       "risk": "zayin",
       "mentality": {
-        "value": 0,
+        "value": 15,
         "max": 15
       }
     }
