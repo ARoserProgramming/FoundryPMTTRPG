@@ -152,6 +152,7 @@ export class PmTTRPGActorSheet extends ActorSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
+    html.find('select[name="system.risk"]').val(this.actor.system.risk);
 
     // Render the item sheet for viewing/editing prior to the editable check.
     html.on('click', '.item-edit', (ev) => {

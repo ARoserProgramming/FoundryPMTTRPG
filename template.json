@@ -62,11 +62,19 @@
     },
     "Abnormality": {
       "templates": ["base"],
-      "risk": "zayin"
+      "risk": {
+        "type": "String",
+        "default": "zayin",
+        "choices": ["zayin", "teth", "he", "waw", "aleph"]
+      }
     },
     "Distortion": {
       "templates": ["base"],
-      "risk": "zayin",
+      "risk": {
+        "type": "String",
+        "default": "zayin",
+        "choices": ["zayin", "teth", "he", "waw", "aleph"]
+      },
       "mentality": {
         "value": 15,
         "max": 15

@@ -10,7 +10,8 @@
     },
     "SheetLabels": {
       "Actor": "PmTTRPG Actor Sheet",
-      "Item": "PmTTRPG Item Sheet"
+      "Item": "PmTTRPG Item Sheet",
+      "Distortion": "Distortion Actor Sheet"
     },
     "Item": {
       "Spell": {
@@ -24,13 +25,38 @@
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
+    },
+    "Attributes": {
+      "Rank": "Rank",
+      "Level": "Level",
+      "Light": "Light",
+      "XP": "Experience Points"
+    },
+    "Stats": {
+      "HealthPoints": "Health Points",
+      "StaggerThreshold": "Stagger Threshold",
+      "Mentality": "Mentality",
+      "Risk": "Risk"
+    },
+    "Tabs": {
+      "Stats": "Statistics",
+      "Inventory": "Inventory",
+      "Notes": "Notes"
+    },
+    "Options": {
+      "Zayin": "Zayin",
+      "Teth": "Teth",
+      "He": "He",
+      "Waw": "Waw",
+      "Aleph": "Aleph"
     }
   },
-
   "TYPES": {
     "Actor": {
       "character": "Character",
-      "npc": "NPC"
+      "npc": "NPC",
+      "Abnormality": "Abnormality",
+      "Distortion": "Distortion"
     },
     "Item": {
       "item": "Item",

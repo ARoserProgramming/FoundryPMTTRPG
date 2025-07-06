@@ -1,0 +1,41 @@
+{
+  "PM_TTRPG": {
+    "Ability": {
+      "Ftd": { "long": "Fortitude", "abbr": "ftd" },
+      "Prd": { "long": "Prudence", "abbr": "prd" },
+      "Jst": { "long": "Justice", "abbr": "jst" },
+      "Chr": { "long": "Charm", "abbr": "chr" },
+      "Ins": { "long": "Insight", "abbr": "ins" },
+      "Tmp": { "long": "Temperance", "abbr": "tmp" }
+    },
+    "SheetLabels": {
+      "Actor": "PmTTRPG Actor Sheet",
+      "Item": "PmTTRPG Item Sheet"
+    },
+    "Item": {
+      "Spell": {
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    }
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
+}
