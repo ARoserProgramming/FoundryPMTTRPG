@@ -19,7 +19,6 @@ export class PmTTRPGActor extends Actor {
     }
 
     get health_points() {
-        if (this.type !== 'character') return 0;
         const system = this.system;
         const FTD = system.abilities?.ftd?.value ?? 0;
         const RANK = system.attributes?.rank?.value ?? 0;
@@ -27,11 +26,21 @@ export class PmTTRPGActor extends Actor {
     }
 
     get stagger_threshold() {
-        if (this.type !== 'character') return 0;
         const system = this.system;
         const CHR = system.abilities?.chr?.value ?? 0;
         const RANK = system.attributes?.rank?.value ?? 0;
         return 20 + (CHR * 4) + (RANK * 4);
+    }
+
+    get mentality() {
+        const system = this.system;
+        const SP = system.abilities?.prd?.value ?? 0;
+        const RANK = system.attributes?.rank?.value ?? 0;
+        return 15 + (SP * 3);
+    }
+    get light() {
+        const system = this.system;
+        return 3 + (RANK);
     }
     clampBarAttribute(bar) {
         if (!bar) return;
@@ -61,30 +70,20 @@ export class PmTTRPGActor extends Actor {
         this._prepareCharacterData(actorData);
         this._prepareAbnormalityData(actorData);
         this._prepareDistortionData(actorData);
-        if (actorData.type === 'character') {
-            const prevHpMax = systemData.health_points.max;
-            const prevStaggerMax = systemData.stagger_threshold.max;
-
-
-            const newHpMax = this.health_points;
-            const newStaggerMax = this.stagger_threshold;
-
-            // Si el valor era igual al máximo anterior, actualízalo al nuevo máximo
-            if (systemData.health_points.value === prevHpMax) {
-                systemData.health_points.value = newHpMax;
-            }
-            if (systemData.stagger_threshold.value === prevStaggerMax) {
-                systemData.stagger_threshold.value = newStaggerMax;
-            }
-
-            // Actualiza los máximos
-            systemData.health_points.max = newHpMax;
-            systemData.stagger_threshold.max = newStaggerMax;
-
-            // Aplica el clamp para asegurar los límites
-            this.clampBarAttribute(systemData.health_points);
-            this.clampBarAttribute(systemData.stagger_threshold);
+        systemData.health_points.max = this.health_points;
+        systemData.stagger_threshold.max = this.stagger_threshold;
+        systemData.light.max = this.light;
+        if (systemData.mentality) {
+            systemData.mentality.max = this.mentality;
         }
+        this.clampBarAttribute(systemData.health_points);
+        this.clampBarAttribute(systemData.stagger_threshold);
+        // Mentality
+        if (systemData.mentality) {
+            this.clampBarAttribute(systemData.mentality);
+        }
+        // Light
+        this.clampBarAttribute(systemData.light);
     }
 
     /**
@@ -111,7 +110,14 @@ export class PmTTRPGActor extends Actor {
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
+
+        // Loop through ability scores, and add their modifiers to our sheet output.
+        for (let [key, ability] of Object.entries(systemData.abilities)) {
+            // Calculate the modifier using d20 rules.
+            ability.mod = ability.value;
+        }
     }
+
     /**
      * Prepare Distortion type specific data.
      */
@@ -120,6 +126,12 @@ export class PmTTRPGActor extends Actor {
 
         // Make modifications to data here. For example:
         const systemData = actorData.system;
+
+        // Loop through ability scores, and add their modifiers to our sheet output.
+        for (let [key, ability] of Object.entries(systemData.abilities)) {
+            // Calculate the modifier using d20 rules.
+            ability.mod = ability.value;
+        }
     }
 
     /**
