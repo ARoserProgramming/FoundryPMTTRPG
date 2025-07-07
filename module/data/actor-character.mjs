@@ -16,7 +16,7 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     // Iterate over ability names and create a new SchemaField for each.
     schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
       obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
+        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
       });
       return obj;
     }, {}));
