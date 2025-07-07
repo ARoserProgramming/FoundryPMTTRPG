@@ -28,5 +28,19 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         this.abilities[key].label = game.i18n.localize(CONFIG.PMTTRPG.abilities[key]) ?? key;
       }
     }
+    const systemData = this;
+
+    // Cálculo de máximos de barras
+    systemData.health_points.max = 72;
+    this.clampBarAttribute(systemData.health_points, () => systemData.health_points.max);
   }
+  clampBarAttribute(bar, maxCalc, minCalc = 0) {
+    if (!bar) return;
+    const max = typeof maxCalc === 'function' ? maxCalc() : (maxCalc || bar.max || Infinity);
+    const min = typeof minCalc === 'function' ? minCalc() : (minCalc || bar.min || 0);
+    bar.value = bar.value ?? min;
+    if (bar.value > max) bar.value = max;
+    else if (bar.value < min) bar.value = min;
+  }
+
 }
