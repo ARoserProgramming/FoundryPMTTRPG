@@ -50,14 +50,9 @@ export class PmTTRPGActorSheet extends ActorSheet {
     context.config = CONFIG.PM_TTRPG;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
+    if (actorData.type === 'character' || actorData.type === 'abnormality' || actorData.type === 'distortion') {
       this._prepareItems(context);
       this._prepareCharacterData(context);
-    }
-
-    // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
-      this._prepareItems(context);
     }
 
     // Enrich biography info for display
