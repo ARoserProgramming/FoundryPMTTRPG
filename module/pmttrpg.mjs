@@ -1,12 +1,14 @@
 // Import document classes.
-import { PmTTRPGActor } from './documents/actor.mjs';
-import { PmTTRPGItem } from './documents/item.mjs';
+import { PMTTRPGActor } from './documents/actor.mjs';
+import { PMTTRPGItem } from './documents/item.mjs';
 // Import sheet classes.
-import { PmTTRPGActorSheet } from './sheets/actor-sheet.mjs';
-import { PmTTRPGItemSheet } from './sheets/item-sheet.mjs';
+import { PMTTRPGActorSheet } from './sheets/actor-sheet.mjs';
+import { PMTTRPGItemSheet } from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { PM_TTRPG } from './helpers/config.mjs';
+import { PMTTRPG } from './helpers/config.mjs';
+// Import DataModel classes
+import * as models from './data/_module.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -16,42 +18,56 @@ Hooks.once('init', function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
   game.pmttrpg = {
-    PmTTRPGActor,
-    PmTTRPGItem,
+    PMTTRPGActor,
+    PMTTRPGItem,
     rollItemMacro,
   };
+
   // Add custom constants for configuration.
-  CONFIG.PM_TTRPG = PM_TTRPG;
+  CONFIG.PMTTRPG = PMTTRPG;
 
   /**
    * Set an initiative formula for the system
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: '1d6 + @abilities.jst.mod',
+    formula: '1d20 + @abilities.dex.mod',
     decimals: 2,
   };
 
+  // Define custom Document and DataModel classes
+  CONFIG.Actor.documentClass = PMTTRPGActor;
 
+  // Note that you don't need to declare a DataModel
+  // for the base actor/item classes - they are included
+  // with the Character/NPC as part of super.defineSchema()
+  CONFIG.Actor.dataModels = {
+    character: models.PMTTRPGCharacter,
+    abnormality: models.PMTTRPGAbnormality,
+    distortion: models.PMTTRPGDistortion
+  }
+  CONFIG.Item.documentClass = PMTTRPGItem;
+  CONFIG.Item.dataModels = {
+    item: models.PMTTRPGItem,
+    feature: models.PMTTRPGFeature,
+    spell: models.PMTTRPGSpell
+  }
 
-
-  // Define custom Document classes
-  CONFIG.Actor.documentClass = PmTTRPGActor;
-  CONFIG.Item.documentClass = PmTTRPGItem;
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
   // if the transfer property on the Active Effect is true.
   CONFIG.ActiveEffect.legacyTransferral = false;
+
   // Register sheet application classes
   Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('pmttrpg', PmTTRPGActorSheet, {
+  Actors.registerSheet('pmttrpg', PMTTRPGActorSheet, {
     makeDefault: true,
-    label: 'PM_TTRPG.SheetLabels.Actor',
+    label: 'PMTTRPG.SheetLabels.Actor',
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('pmttrpg', PmTTRPGItemSheet, {
+  Items.registerSheet('pmttrpg', PMTTRPGItemSheet, {
     makeDefault: true,
-    label: 'PM_TTRPG.SheetLabels.Item',
+    label: 'PMTTRPG.SheetLabels.Item',
   });
 
   // Preload Handlebars templates.
@@ -66,6 +82,9 @@ Hooks.once('init', function () {
 Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
+Handlebars.registerHelper('asset', function (path){
+  return '/systems/pmttrpg/${path}';
+})
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

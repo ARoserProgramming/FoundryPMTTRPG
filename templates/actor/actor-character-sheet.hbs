@@ -5,84 +5,98 @@
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-            {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-            use both the "grid" and "grid-Ncol" class where "N" can be any number
-            from 1 to 12 and will create that number of columns.  --}}
             <div class="resources grid grid-3col">
-
-                {{!-- "flex-group-center" is also defined in the _grid.scss file
-                and it will add a small amount of padding, a border, and will
-                center all of its child elements content and text. --}}
                 <div class="resource flex-group-center">
                     <label for="system.health_points.value" class="resource-label">{{localize 'PM_TTRPG.Stats.HealthPoints'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.health_points" value="{{system.health_points}}"
-                               data-dtype="Number"/>
+                        <input type="text" name="system.health_points.value" value="{{system.health_points.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.health_points" value="{{system.health_points}}"
-                               data-dtype="Number"/>
+                        <input type="text" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
                     <label for="system.stagger_threshold.value" class="resource-label">{{localize 'PM_TTRPG.Stats.StaggerThreshold'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.stagger_threshold.value"
-                               value="0" data-dtype="Number"/>
+                        <input type="text" name="system.stagger_threshold.value" value="{{system.stagger_threshold.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.stagger_threshold" value="{{system.stagger_threshold}}"
-                               data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.mentality.value" class="resource-label">{{localize 'PM_TTRPG.Stats.Mentality'}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.mentality.value" value="0"
-                               data-dtype="Number"/>
-                        <span> / </span>
-                        <input type="text" name="system.mentality.max" value="{{system.mentality}}"
-                               data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.light" class="resource-label">{{localize 'PM_TTRPG.Attributes.Light'}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.light"
-                               value="0" data-dtype="Number"/>
-                        <span> / </span>
-                        <input type="text" name="system.light" value="{{system.light}}"
-                               data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.attributes.rank.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Rank'}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.rank.value" value="{{system.rank}}"
-                               data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Level'}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.level.value"
-                               value="{{system.level}}" data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.XP'}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.xp.value"
-                               value="{{system.attributes.xp.value}}" data-dtype="Number"/>
-                    </div>
-                </div>
-                <div class="resource flex-group-center">
-                    <label for="system.attack_modifier" class="resource-label">Attack modifier</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attack_modifier"
-                               value="{{system.attack_modifier}}" data-dtype="Number"/>
+                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
+                <div class="resource flex-group-center">
+                    <label for="system.mentality.value" class="resource-label">{{localize 'PM_TTRPG.Stats.Mentality'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.mentality.value" value="{{system.mentality.value}}" data-dtype="Number"/>
+                        <span> / </span>
+                        <input type="text" name="system.mentality.max" value="{{system.mentality.max}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.light.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Light'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.light.value" value="{{system.light.value}}" data-dtype="Number"/>
+                        <span> / </span>
+                        <input type="text" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.attributes.rank.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Rank'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attributes.rank.value" value="{{system.rank}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Level'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attributes.level.value" value="{{system.level}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.attributes.xp.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.XP'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attributes.xp.value" value="{{system.attributes.xp.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.attack_modifier" class="resource-label">AttackModifier</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attack_modifier" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.block_modifier" class="resource-label">BlockModifier</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.block_modifier" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.evade_modifier" class="resource-label">EvadeModifier</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.evade_modifier" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.equipment_limit" class="resource-label">Equipmentlimit</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.equipment_limit" value="{{system.equipment_limit}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.tool_slots" class="resource-label">ToolSlots</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.tool_slots" value="{{system.tool_slots}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -90,7 +104,6 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        {{!-- Default tab is specified in actor-sheet.mjs --}}
         <a class="item" data-tab="features">Features</a>
         <a class="item" data-tab="description">Description</a>
         <a class="item" data-tab="items">Items</a>
@@ -105,40 +118,34 @@
         <div class="tab features" data-group="primary" data-tab="features">
             <section class="grid grid-3col">
                 <aside class="sidebar">
-
-                    {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-                    use both the "grid" and "grid-Ncol" class where "N" can be any number
-                    from 1 to 12 and will create that number of columns.  --}}
                     <div class="abilities flexcol">
                         {{#each system.abilities as |ability key|}}
                             <div class="ability flexrow flex-group-center">
-                                <label for="system.abilities.{{key}}.value"
-                                       class="resource-label flexlarge align-left"
-                                       data-label="{{localize (lookup @root.config.abilities key)}}">{{localize
-                                        (lookup @root.config.abilities key)}}</label>
-                                <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}"
-                                       data-dtype="Number"/>
-                                <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod"
-                                      data-label="{{localize (lookup @root.config.abilities key)}}"><span
-                                        class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span><span
-                                        title="Roll 2d6"><img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/></span></span>
+                                <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
+                                    {{localize (lookup @root.config.abilities key)}}
+                                    <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll">
+                                </span>
+                                </label>
+                                <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+                                <span class="ability-mod rollable" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
+                                <span class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                                <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll">
+                                    <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/>
+                                </span>
+                            </span>
                             </div>
                         {{/each}}
                     </div>
                 </aside>
 
-                {{!-- For the main features list, span the right two columns --}}
                 <section class="main grid-span-2">
-                    {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
                     {{> "systems/pmttrpg/templates/actor/parts/actor-features.hbs"}}
                 </section>
-
             </section>
         </div>
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
-            {{!-- Editors must receive enriched text data from getData to properly handle rolls --}}
             {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
         </div>
 

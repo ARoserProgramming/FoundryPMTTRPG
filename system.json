@@ -1,7 +1,7 @@
 {
   "id": "pmttrpg",
-  "title": "PMTTRPG",
-  "description": "The UOPMTTRPG system for FoundryVTT!",
+  "title": "PM TTRPG",
+  "description": "The PM TTRPG system for FoundryVTT!",
   "authors": [
     {
       "name": "Ases",
@@ -12,10 +12,10 @@
       "discord": "manuel013"
     }
   ],
-  "url": "https://github.com/ARoserProgramming/FoundryPMTTRPG",
+  "url": "Replace this with a link to your public repository",
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "bugs": "",
+  "bugs": "Replace this with a link to file issues or tickets",
   "changelog": "CHANGELOG.md",
   "media": [
     {
@@ -26,8 +26,8 @@
   ],
   "version": "1.0.0",
   "compatibility": {
-    "minimum": 11,
-    "verified": "11.315"
+    "minimum": 12,
+    "verified": "12"
   },
   "esmodules": ["module/pmttrpg.mjs"],
   "styles": ["css/pmttrpg.css"],
@@ -48,11 +48,11 @@
   "socket": false,
   "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
   "download": "This must link to a .zip file of the current version",
-  "background": "systems/pmttrpg/assets/Images/City_Map.webp",
+  "background": "systems/pmttrpg/assets/Images/City_map.webp",
   "grid": {
     "distance": 5,
-    "units": "Feet"
+    "units": "feet"
   },
-  "primaryTokenAttribute": "Health Points",
-  "secondaryTokenAttribute": "Stagger Threshold"
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power"
 }

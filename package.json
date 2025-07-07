@@ -1,7 +1,7 @@
 {
   "name": "pmttrpg",
   "version": "2.0.0",
-  "description": "CSS compiler for the PmTTRPG system",
+  "description": "CSS compiler for the PMTTRPG system",
   "scripts": {
     "build": "sass src/scss/pmttrpg.scss css/pmttrpg.css --style=expanded --no-source-map",
     "watch": "sass src/scss/pmttrpg.scss css/pmttrpg.css --style=expanded --source-map --watch"
@@ -9,11 +9,10 @@
   "browserslist": [
     "last 3 versions"
   ],
-  "author": "Asses",
+  "author": "Asacolips",
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^13.346.0-beta.20250705141556",
     "sass": "^1.53.0"
   }
 }
