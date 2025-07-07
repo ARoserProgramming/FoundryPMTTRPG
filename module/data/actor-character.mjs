@@ -25,7 +25,12 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
   }
 
   prepareDerivedData() {
-
+    for (const key in this.abilities) {
+      // Calculate the modifier using d20 rules.
+      this.abilities[key].mod = Math.floor((this.abilities[key].value - 10) / 2);
+      // Handle ability label localization.
+      this.abilities[key].label = game.i18n.localize(CONFIG.PMTTRPG.abilities[key]) ?? key;
+    }
   }
 
   getRollData() {
