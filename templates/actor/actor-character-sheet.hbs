@@ -16,56 +16,70 @@
                 <div class="resource flex-group-center">
                     <label for="system.health_points.value" class="resource-label">{{localize 'PM_TTRPG.Stats.HealthPoints'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.health_points.value" value="{{system.health_points.value}}"
+                        <input type="text" name="system.health_points" value="{{system.health_points}}"
                                data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.health_points.max" value="{{system.health_points.max}}"
+                        <input type="text" name="system.health_points" value="{{system.health_points}}"
                                data-dtype="Number"/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.stagger_threshold.value" class="resource-label">Stagger Threshold</label>
+                    <label for="system.stagger_threshold.value" class="resource-label">{{localize 'PM_TTRPG.Stats.StaggerThreshold'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input type="text" name="system.stagger_threshold.value"
-                               value="{{system.stagger_threshold.value}}" data-dtype="Number"/>
+                               value="0" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}"
+                        <input type="text" name="system.stagger_threshold" value="{{system.stagger_threshold}}"
                                data-dtype="Number"/>
                     </div>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.mentality.value" class="resource-label">Mentality</label>
+                    <label for="system.mentality.value" class="resource-label">{{localize 'PM_TTRPG.Stats.Mentality'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.mentality.value" value="{{system.mentality.value}}"
+                        <input type="text" name="system.mentality.value" value="0"
                                data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.mentality.max" value="{{system.mentality.max}}"
+                        <input type="text" name="system.mentality.max" value="{{system.mentality}}"
                                data-dtype="Number"/>
                     </div>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.light.value" class="resource-label">Light</label>
+                    <label for="system.light" class="resource-label">{{localize 'PM_TTRPG.Attributes.Light'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.light.value"
-                               value="{{system.attributes.light.value}}" data-dtype="Number"/>
+                        <input type="text" name="system.light"
+                               value="0" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.attributes.light.max" value="{{system.attributes.light.max}}"
+                        <input type="text" name="system.light" value="{{system.light}}"
                                data-dtype="Number"/>
                     </div>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.rank.value" class="resource-label">Rank</label>
+                    <label for="system.attributes.rank.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Rank'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.rank.value" value="{{system.attributes.rank.value}}"
+                        <input type="text" name="system.attributes.rank.value" value="{{system.rank}}"
                                data-dtype="Number"/>
                     </div>
                 </div>
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.level.value" class="resource-label">Level</label>
+                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Level'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input type="text" name="system.attributes.level.value"
-                               value="{{system.attributes.level.value}}" data-dtype="Number"/>
+                               value="{{system.level}}" data-dtype="Number"/>
+                    </div>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.XP'}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attributes.xp.value"
+                               value="{{system.attributes.xp.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.attack_modifier" class="resource-label">Attack modifier</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.attack_modifier"
+                               value="{{system.attack_modifier}}" data-dtype="Number"/>
                     </div>
                 </div>
 
@@ -107,10 +121,7 @@
                                 <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod"
                                       data-label="{{localize (lookup @root.config.abilities key)}}"><span
                                         class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span><span
-                                        title="Roll 2d6"><img class="dice-icon rollable"
-                                                              src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice"
-                                                              width="32"
-                                                              height="32"/></span></span>
+                                        title="Roll 2d6"><img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/></span></span>
                             </div>
                         {{/each}}
                     </div>

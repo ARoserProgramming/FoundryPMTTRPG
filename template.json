@@ -3,62 +3,43 @@
     "types": ["character", "Abnormality", "Distortion"],
     "templates": {
       "base": {
-        "health_points": {
-          "value": 72,
-          "min": 0,
-          "max": 9999
-        },
-        "stagger_threshold": {
-          "value": 20,
-          "min": 0,
-          "max": 9999
-        },
         "biography": "",
         "attributes": {
-          "rank": {
-            "value": 0,
-            "max": 6
-          },
           "xp": {
             "value": 0,
-            "max": 8
-          },
-          "level": {
-            "value": 0
-          },
-          "light": {
-            "value": 3,
-            "max": 3
+            "min": -24
           }
         },
         "abilities": {
           "ftd": {
-            "value": 0
+            "value": 0,
+            "min": -1
           },
           "prd": {
-            "value": 0
+            "value": 0,
+            "min": -1
           },
           "jst": {
-            "value": 0
+            "value": 0,
+            "min": -1
           },
           "chr": {
-            "value": 0
+            "value": 0,
+            "min": -1
           },
           "ins": {
-            "value": 0
+            "value": 0,
+            "min": -1
           },
           "tmp": {
-            "value": 0
+            "value": 0,
+            "min": -1
           }
         }
       }
     },
     "character": {
-      "templates": ["base"],
-      "mentality": {
-        "value": 15,
-        "max": 15
-      }
+      "templates": ["base"]
     },
     "Abnormality": {
       "templates": ["base"],
@@ -74,10 +55,6 @@
         "type": "String",
         "default": "zayin",
         "choices": ["zayin", "teth", "he", "waw", "aleph"]
-      },
-      "mentality": {
-        "value": 15,
-        "max": 15
       }
     }
   },

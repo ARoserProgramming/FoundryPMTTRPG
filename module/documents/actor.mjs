@@ -17,18 +17,27 @@ export class PmTTRPGActor extends Actor {
         // Data modifications in this step occur before processing embedded
         // documents or derived data.
     }
+    get level() {
+        const system = this.system;
+        const XP = system.attributes?.xp?.value ?? 0;
+        return Math.floor(XP / 8);
+    }
+    get rank() {
+        const LEVEL = this.level;
+        return Math.floor(LEVEL / 3) +1;
 
+    }
     get health_points() {
         const system = this.system;
         const FTD = system.abilities?.ftd?.value ?? 0;
-        const RANK = system.attributes?.rank?.value ?? 0;
+        const RANK = this.rank;
         return 72 + (8 * FTD) + (8 * RANK);
     }
 
     get stagger_threshold() {
         const system = this.system;
         const CHR = system.abilities?.chr?.value ?? 0;
-        const RANK = system.attributes?.rank?.value ?? 0;
+        const RANK = this.rank;
         return 20 + (CHR * 4) + (RANK * 4);
     }
 
@@ -38,14 +47,34 @@ export class PmTTRPGActor extends Actor {
         return 15 + (SP * 3);
     }
     get light() {
-        const system = this.system;
-        const RANK = system.attributes?.rank?.value ?? 0;
+        const RANK = this.rank;
         return 3 + (RANK);
     }
-    clampBarAttribute(bar) {
+    get attack_modifier() {
+        return this.rank;
+    }
+    get block_modifier() {
+        const system = this.system;
+        return system.abilities?.tmp?.value ?? 0;
+    }
+    get evade_modifier() {
+        const system = this.system;
+        return system.abilities?.ins?.value ?? 0;
+    }
+    get equipment_limit() {
+        const RANK = this.rank;
+        return RANK + 1;
+    }
+    get tool_slots() {
+        return 4;
+    }
+    clampBarAttribute(bar, maxCalc, minCalc = 0) {
         if (!bar) return;
-        const max = bar.max || Infinity;
-        const min = bar.min || 0;
+        // Si maxCalc es una función, úsala para obtener el máximo dinámico
+        const max = typeof maxCalc === "function" ? maxCalc() : (maxCalc ?? bar.max ?? Infinity);
+        const min = typeof minCalc === "function" ? minCalc() : (minCalc ?? bar.min ?? 0);
+        bar.max = max;
+        bar.min = min;
         if (bar.value == null || bar.value > max) {
             bar.value = max;
         } else if (bar.value < min) {
@@ -73,17 +102,22 @@ export class PmTTRPGActor extends Actor {
         this._prepareCharacterData(actorData);
         this._prepareAbnormalityData(actorData);
         this._prepareDistortionData(actorData);
-        systemData.health_points.max = this.health_points;
-        systemData.stagger_threshold.max = this.stagger_threshold;
-        systemData.attributes.light.max = this.light;
-        this.clampBarAttribute(systemData.health_points);
-        this.clampBarAttribute(systemData.stagger_threshold);
+        // lvl, rank, block_modifier, evade_modifier, equipment_limit, tool_slots
+        systemData.level = this.level;
+        systemData.rank = this.rank;
+        systemData.block_modifier = this.block_modifier;
+        systemData.evade_modifier = this.evade_modifier;
+        systemData.equipment_limit = this.equipment_limit;
+        systemData.tool_slots = this.tool_slots;
+        // Health, Stagger, and Light
+        systemData.health_points = this.health_points;
+        systemData.stagger_threshold = this.stagger_threshold;
+        systemData.light = this.light;
+        systemData.attack_modifier = this.attack_modifier;
         // Mentality
         if (this.type === 'Distortion' || this.type === 'character') {
-            this.clampBarAttribute(systemData.mentality);
+            systemData.mentality = this.mentality;
         }
-        // Light
-        this.clampBarAttribute(systemData.light);
     }
 
     /**
