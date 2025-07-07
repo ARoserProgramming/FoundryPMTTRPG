@@ -1,246 +1,173 @@
-/**
- * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
- * @extends {Actor}
- */
+import { onManageActiveEffect, prepareActiveEffectCategories } from '../helpers/effects.mjs';
+
 export class PmTTRPGActor extends Actor {
-    /** @override */
-    prepareData() {
-        // Prepare data for the actor. Calling the super version of this executes
-        // the following, in order: data reset (to clear active effects),
-        // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
-        // prepareDerivedData().
-        super.prepareData();
+    static defineSchema() {
+        const models = CONFIG.PM_TTRPG.models.Actor;
+        const type = this.type || 'character'; // Default a 'character' si no está definido
+        return models[type] ? models[type].defineSchema() : models.base.defineSchema();
     }
 
-    /** @override */
-    prepareBaseData() {
-        // Data modifications in this step occur before processing embedded
-        // documents or derived data.
-    }
-    get level() {
-        const system = this.system;
-        const XP = system.attributes?.xp?.value ?? 0;
-        return Math.floor(XP / 8);
-    }
-    get rank() {
-        const LEVEL = this.level;
-        return Math.floor(LEVEL / 3) +1;
+    prepareDerivedData() {
+        const systemData = this.system;
+        const actorType = this.type;
 
-    }
-    get health_points() {
-        const system = this.system;
-        const FTD = system.abilities?.ftd?.value ?? 0;
-        const RANK = this.rank;
-        return 72 + (8 * FTD) + (8 * RANK);
+        if (!systemData || !systemData.attributes || !systemData.attributes.xp) {
+            console.warn('Actor data not fully initialized, skipping derived data preparation.');
+            return;
+        }
+
+        systemData.attributes.level = Math.floor(systemData.attributes.xp.value / 8);
+        systemData.attributes.rank = Math.floor(systemData.attributes.level / 3) + 1;
+
+        systemData.health_points.max = 72 + (8 * (systemData.abilities.ftd || 0)) + (8 * systemData.attributes.rank);
+        systemData.stagger_threshold.max = 20 + (4 * (systemData.abilities.chr || 0)) + (4 * systemData.attributes.rank);
+        if (actorType === 'Distortion' || actorType === 'character') {
+            systemData.mentality.max = 15 + (3 * (systemData.abilities.prd || 0));
+        }
+        systemData.light.max = 3 + systemData.attributes.rank;
+
+        if ((actorType === 'Abnormality' || actorType === 'Distortion') && !systemData.risk) {
+            systemData.risk = 'zayin';
+        }
+
+        this.clampBarAttribute(systemData.health_points, () => systemData.health_points.max);
+        this.clampBarAttribute(systemData.stagger_threshold, () => systemData.stagger_threshold.max);
+        if (actorType === 'Distortion' || actorType === 'character') {
+            this.clampBarAttribute(systemData.mentality, () => systemData.mentality.max);
+        }
+        this.clampBarAttribute(systemData.light, () => systemData.light.max);
     }
 
-    get stagger_threshold() {
-        const system = this.system;
-        const CHR = system.abilities?.chr?.value ?? 0;
-        const RANK = this.rank;
-        return 20 + (CHR * 4) + (RANK * 4);
-    }
-
-    get mentality() {
-        const system = this.system;
-        const SP = system.abilities?.prd?.value ?? 0;
-        return 15 + (SP * 3);
-    }
-    get light() {
-        const RANK = this.rank;
-        return 3 + (RANK);
-    }
-    get attack_modifier() {
-        return this.rank;
-    }
-    get block_modifier() {
-        const system = this.system;
-        return system.abilities?.tmp?.value ?? 0;
-    }
-    get evade_modifier() {
-        const system = this.system;
-        return system.abilities?.ins?.value ?? 0;
-    }
-    get equipment_limit() {
-        const RANK = this.rank;
-        return RANK + 1;
-    }
-    get tool_slots() {
-        return 4;
-    }
     clampBarAttribute(bar, maxCalc, minCalc = 0) {
         if (!bar) return;
-        // Si maxCalc es una función, úsala para obtener el máximo dinámico
-        const max = typeof maxCalc === "function" ? maxCalc() : (maxCalc ?? bar.max ?? Infinity);
-        const min = typeof minCalc === "function" ? minCalc() : (minCalc ?? bar.min ?? 0);
-        bar.max = max;
-        bar.min = min;
-        if (bar.value == null || bar.value > max) {
-            bar.value = max;
-        } else if (bar.value < min) {
-            bar.value = min;
-        }
+        const max = typeof maxCalc === 'function' ? maxCalc() : (maxCalc || bar.max || Infinity);
+        const min = typeof minCalc === 'function' ? minCalc() : (minCalc || bar.min || 0);
+        bar.value = bar.value ?? min;
+        if (bar.value > max) bar.value = max;
+        else if (bar.value < min) bar.value = min;
     }
 
-    /**
-     * @override
-     * Augment the actor source data with additional dynamic data. Typically,
-     * you'll want to handle most of your calculated/derived data in this step.
-     * Data calculated in this step should generally not exist in template.json
-     * (such as ability modifiers rather than ability scores) and should be
-     * available both inside and outside of character sheets (such as if an actor
-     * is queried and has a roll executed directly from it).
-     */
-    prepareDerivedData() {
-        const actorData = this;
-        const systemData = actorData.system;
-        const flags = actorData.flags.pmttrpg || {};
-
-        this._prepareCharacterData(actorData);
-        this._prepareAbnormalityData(actorData);
-        this._prepareDistortionData(actorData);
-
-        // Asignar valores calculados
-        systemData.level = this.level;
-        systemData.rank = this.rank;
-        systemData.block_modifier = this.block_modifier;
-        systemData.evade_modifier = this.evade_modifier;
-        systemData.equipment_limit = this.equipment_limit;
-        systemData.tool_slots = this.tool_slots;
-        systemData.health_points = { value: systemData.health_points.value, max: this.health_points };
-        systemData.stagger_threshold = { value: systemData.stagger_threshold.value, max: this.stagger_threshold };
-        systemData.light = { value: systemData.light.value, max: this.light };
-        systemData.attack_modifier = this.attack_modifier;
-        if (this.type === 'Distortion' || this.type === 'character') {
-            systemData.mentality = { value: systemData.mentality.value, max: this.mentality };
-        }
-
-        // Clamping de barras
-        this.clampBarAttribute(systemData.health_points, () => this.health_points);
-        this.clampBarAttribute(systemData.stagger_threshold, () => this.stagger_threshold);
-        if (this.type === 'Distortion' || this.type === 'character') {
-            this.clampBarAttribute(systemData.mentality, () => this.mentality);
-        }
-        this.clampBarAttribute(systemData.light, () => this.light);
-    }
-
-    /**
-     * Prepare Character type specific data
-     */
-    _prepareCharacterData(actorData) {
-        if (actorData.type !== 'character') return;
-
-        // Make modifications to data here. For example:
-        const systemData = actorData.system;
-
-        // Loop through ability scores, and add their modifiers to our sheet output.
-        for (let [key, ability] of Object.entries(systemData.abilities)) {
-            // Calculate the modifier using d20 rules.
-            ability.mod = ability.value;
-        }
-    }
-
-    /**
-     * Prepare Abno type specific data.
-     */
-    _prepareAbnormalityData(actorData) {
-        if (actorData.type !== 'Abnormality') return;
-
-        // Make modifications to data here. For example:
-        const systemData = actorData.system;
-
-        // Loop through ability scores, and add their modifiers to our sheet output.
-        for (let [key, ability] of Object.entries(systemData.abilities)) {
-            // Calculate the modifier using d20 rules.
-            ability.mod = ability.value;
-        }
-    }
-
-    /**
-     * Prepare Distortion type specific data.
-     */
-    _prepareDistortionData(actorData) {
-        if (actorData.type !== 'Distortion') return;
-
-        // Make modifications to data here. For example:
-        const systemData = actorData.system;
-
-        // Loop through ability scores, and add their modifiers to our sheet output.
-        for (let [key, ability] of Object.entries(systemData.abilities)) {
-            // Calculate the modifier using d20 rules.
-            ability.mod = ability.value;
-        }
-    }
-
-    /**
-     * Override getRollData() that's supplied to rolls.
-     */
     getRollData() {
-        // Starts off by populating the roll data with a shallow copy of `this.system`
-        const data = {...this.system};
-
-        // Prepare character roll data.
-        this._getCharacterRollData(data);
-        this._getAbnormalityRollData(data)
-        this._getDistortionRollData(data);
-
-        return data;
+        return foundry.utils.deepClone(this.system);
     }
 
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            classes: ['pmttrpg', 'sheet', 'actor'],
+            width: 600,
+            height: 600,
+            tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'features' }],
+        });
+    }
 
-    /**
-     * Prepare character roll data.
-     */
-    _getCharacterRollData(data) {
-        if (this.type !== 'character') return;
+    get template() {
+        const type = this.actor.type || 'character';
+        const templatePath = `systems/pmttrpg/templates/actor/actor-${type}-sheet.hbs`;
+        // Verificación de existencia del template (debug)
+        if (!game.template.exists(templatePath)) {
+            console.warn(`Template not found for type ${type}, falling back to generic: ${templatePath}`);
+            return 'systems/pmttrpg/templates/actor/actor-sheet.hbs'; // Fallback genérico
+        }
+        return templatePath;
+    }
 
-        // Copy the ability scores to the top level, so that rolls can use
-        // formulas like `@str.mod + 4`.
-        if (data.abilities) {
-            for (let [k, v] of Object.entries(data.abilities)) {
-                data[k] = foundry.utils.deepClone(v);
+    async getData() {
+        const context = super.getData();
+        const actorData = this.actor.toObject(false);
+
+        context.system = actorData.system;
+        context.flags = actorData.flags;
+        context.config = CONFIG.PM_TTRPG;
+        context.actorType = this.actor.type;
+
+        context.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.biography, {
+            secrets: this.actor.isOwner,
+            rollData: this.actor.getRollData(),
+            relativeTo: this.actor,
+        });
+
+        context.effects = prepareActiveEffectCategories(this.actor.allApplicableEffects());
+
+        if (!Handlebars.helpers.asset) {
+            Handlebars.registerHelper('asset', function (path) {
+                return `/systems/pmttrpg/${path}`;
+            });
+        }
+
+        return context;
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        if (this.actor.type === 'Abnormality' || this.actor.type === 'Distortion') {
+            html.find('select[name="system.risk"]').val(this.actor.system.risk);
+        }
+
+        html.on('click', '.item-edit', (ev) => {
+            const li = $(ev.currentTarget).parents('.item');
+            const item = this.actor.items.get(li.data('itemId'));
+            item.sheet.render(true);
+        });
+
+        if (!this.isEditable) return;
+
+        html.on('click', '.item-create', this._onItemCreate.bind(this));
+        html.on('click', '.item-delete', (ev) => {
+            const li = $(ev.currentTarget).parents('.item');
+            const item = this.actor.items.get(li.data('itemId'));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+        });
+
+        html.on('click', '.effect-control', (ev) => {
+            const row = ev.currentTarget.closest('li');
+            const document = row.dataset.parentId === this.actor.id ? this.actor : this.actor.items.get(row.dataset.parentId);
+            onManageActiveEffect(ev, document);
+        });
+
+        if (this.actor.isOwner) {
+            let handler = (ev) => this._onDragStart(ev);
+            html.find('li.item').each((i, li) => {
+                if (li.classList.contains('inventory-header')) return;
+                li.setAttribute('draggable', true);
+                li.addEventListener('dragstart', handler, false);
+            });
+        }
+    }
+
+    async _onItemCreate(event) {
+        event.preventDefault();
+        const header = event.currentTarget;
+        const type = header.dataset.type;
+        const data = duplicate(header.dataset);
+        const name = `New ${type.capitalize()}`;
+        const itemData = { name, type, system: data };
+        delete itemData.system['type'];
+        return await Item.create(itemData, { parent: this.actor });
+    }
+
+    _onRoll(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+
+        if (dataset.rollType) {
+            if (dataset.rollType === 'item') {
+                const itemId = element.closest('.item').dataset.itemId;
+                const item = this.actor.items.get(itemId);
+                if (item) return item.roll();
             }
         }
 
-        // Add rank for easier access, or fall back to 0.
-        if (data.attributes.rank) {
-            data.rank = data.attributes.rank.value ?? 0;
-        }
-    }
-
-    /**
-     * Prepare NPC roll data.
-     */
-    _getAbnormalityRollData(data) {
-        if (this.type !== 'Abnormality') return;
-
-        // Copy the ability scores to the top level, so that rolls can use
-        // formulas like `@str.mod + 4`.
-        if (data.abilities) {
-            for (let [k, v] of Object.entries(data.abilities)) {
-                data[k] = foundry.utils.deepClone(v);
-            }
-        }
-
-        // Add rank for easier access, or fall back to 0.
-        if (data.attributes.rank) {
-            data.rank = data.attributes.rank.value ?? 0;
-        }
-    }
-    _getDistortionRollData(data) {
-        if (this.type !== 'Distortion') return;
-
-        // Copy the ability scores to the top level, so that rolls can use
-        // formulas like `@str.mod + 4`.
-        if (data.abilities) {
-            for (let [k, v] of Object.entries(data.abilities)) {
-                data[k] = foundry.utils.deepClone(v);
-            }
-        }
-
-        // Add rank for easier access, or fall back to 0.
-        if (data.attributes.rank) {
-            data.rank = data.attributes.rank.value ?? 0;
+        if (dataset.roll) {
+            let label = dataset.label ? `[ability] ${dataset.label}` : '';
+            let roll = new Roll(dataset.roll, this.actor.getRollData());
+            roll.toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: label,
+                rollMode: game.settings.get('core', 'rollMode'),
+            });
+            return roll;
         }
     }
 }

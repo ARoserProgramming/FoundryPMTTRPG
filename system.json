@@ -3,14 +3,8 @@
   "title": "PMTTRPG",
   "description": "The UOPMTTRPG system for FoundryVTT!",
   "authors": [
-    {
-      "name": "Ases",
-      "discord": "_ases"
-    },
-    {
-      "name": "AgenteMayonesa",
-      "discord": "manuel013"
-    }
+    { "name": "Ases", "discord": "_ases" },
+    { "name": "AgenteMayonesa", "discord": "manuel013" }
   ],
   "url": "https://github.com/ARoserProgramming/FoundryPMTTRPG",
   "license": "LICENSE.txt",
@@ -18,41 +12,48 @@
   "bugs": "",
   "changelog": "CHANGELOG.md",
   "media": [
-    {
-      "type": "setup",
-      "url": "systems/pmttrpg/assets/Images/PM_LOGO.png",
-      "thumbnail": "systems/pmttrpg/assets/Images/PM_LOGO.png"
-    }
+    { "type": "setup", "url": "systems/pmttrpg/assets/Images/PM_LOGO.png", "thumbnail": "systems/pmttrpg/assets/Images/PM_LOGO.png" }
   ],
-  "version": "1.0.0",
-  "compatibility": {
-    "minimum": 11,
-    "verified": "11.315"
-  },
-  "esmodules": ["module/pmttrpg.mjs"],
+  "version": "1.1.0",
+  "compatibility": { "minimum": "12", "verified": "13" },
+  "esmodules": [
+    "module/pmttrpg.mjs",
+    "module/documents/actor.mjs",
+    "module/documents/item.mjs",
+    "module/data/models/base-model.mjs",
+    "module/data/models/base-actor-model.mjs",
+    "module/data/models/actor-character-model.mjs",
+    "module/data/models/actor-abnormality-model.mjs",
+    "module/data/models/actor-distortion-model.mjs",
+    "module/data/models/base-item-model.mjs",
+    "module/data/models/item-item-model.mjs",
+    "module/data/models/item-feature-model.mjs",
+    "module/data/models/item-spell-model.mjs"
+  ],
   "styles": ["css/pmttrpg.css"],
   "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "es",
-      "name": "Spanish",
-      "path": "lang/es.json"
-    }
+    { "lang": "en", "name": "English", "path": "lang/en.json" },
+    { "lang": "es", "name": "Spanish", "path": "lang/es.json" }
   ],
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
+  "manifest": "Replace this with a link to the /latest release system.json",
   "download": "This must link to a .zip file of the current version",
   "background": "systems/pmttrpg/assets/Images/City_Map.webp",
-  "grid": {
-    "distance": 5,
-    "units": "Feet"
-  },
-  "primaryTokenAttribute": "Health Points",
-  "secondaryTokenAttribute": "Stagger Threshold"
+  "grid": { "distance": 5, "units": "Feet" },
+  "primaryTokenAttribute": "health_points.value",
+  "secondaryTokenAttribute": "stagger_threshold.value",
+  "documentTypes": {
+    "Actor": {
+      "character": { "label": "Character" },
+      "Abnormality": { "label": "Abnormality" },
+      "Distortion": { "label": "Distortion" }
+    },
+    "Item": {
+      "item": { "label": "Item" },
+      "feature": { "label": "Feature" },
+      "spell": { "label": "Spell" }
+    }
+  }
 }

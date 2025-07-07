@@ -1,70 +1,85 @@
-// Import document classes.
 import { PmTTRPGActor } from './documents/actor.mjs';
 import { PmTTRPGItem } from './documents/item.mjs';
-// Import sheet classes.
 import { PmTTRPGActorSheet } from './sheets/actor-sheet.mjs';
 import { PmTTRPGItemSheet } from './sheets/item-sheet.mjs';
-// Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { PM_TTRPG } from './helpers/config.mjs';
+import PmTTRPGActorBaseModel from './data/models/base-actor-model.mjs';
+import PmTTRPGCharacterModel from './data/models/actor-character-model.mjs';
+import PmTTRPGAbnormalityModel from './data/models/actor-abnormality-model.mjs';
+import PmTTRPGDistortionModel from './data/models/actor-distortion-model.mjs';
+import PmTTRPGItemBaseModel from './data/models/base-item-model.mjs';
+import PmTTRPGItemModel from './data/models/item-item-model.mjs';
+import PmTTRPGFeatureModel from './data/models/item-feature-model.mjs';
+import PmTTRPGSpellModel from './data/models/item-spell-model.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
 
 Hooks.once('init', function () {
-  // Add utility classes to the global game object so that they're more easily
-  // accessible in global contexts.
+  // Registrar modelos de datos en CONFIG
+  CONFIG.PM_TTRPG = {
+    ...PM_TTRPG,
+    models: {
+      Actor: {
+        base: PmTTRPGActorBaseModel,
+        character: PmTTRPGCharacterModel,
+        Abnormality: PmTTRPGAbnormalityModel,
+        Distortion: PmTTRPGDistortionModel
+      },
+      Item: {
+        base: PmTTRPGItemBaseModel,
+        item: PmTTRPGItemModel,
+        feature: PmTTRPGFeatureModel,
+        spell: PmTTRPGSpellModel
+      }
+    }
+  };
+
+  // Añadir clases de utilidad al objeto global
   game.pmttrpg = {
     PmTTRPGActor,
     PmTTRPGItem,
     rollItemMacro,
   };
-  // Add custom constants for configuration.
-  CONFIG.PM_TTRPG = PM_TTRPG;
 
-  /**
-   * Set an initiative formula for the system
-   * @type {String}
-   */
+  // Configurar clases de documentos
+  CONFIG.Actor.documentClass = PmTTRPGActor;
+  CONFIG.Item.documentClass = PmTTRPGItem;
+
+  // Configurar iniciativa
   CONFIG.Combat.initiative = {
     formula: '1d6 + @abilities.jst.mod',
     decimals: 2,
   };
 
-
-
-
-  // Define custom Document classes
-  CONFIG.Actor.documentClass = PmTTRPGActor;
-  CONFIG.Item.documentClass = PmTTRPGItem;
-  // Active Effects are never copied to the Actor,
-  // but will still apply to the Actor from within the Item
-  // if the transfer property on the Active Effect is true.
+  // Deshabilitar transferencia heredada de efectos
   CONFIG.ActiveEffect.legacyTransferral = false;
-  // Register sheet application classes
-  Actors.unregisterSheet('core', ActorSheet);
+
+  // Registrar hojas de aplicación
+  Actors.unregisterSheet('core', ActorSheet); // Desregistrar la hoja genérica
   Actors.registerSheet('pmttrpg', PmTTRPGActorSheet, {
     makeDefault: true,
-    label: 'PM_TTRPG.SheetLabels.Actor',
+    label: 'PM_TTRPG.SheetLabels.Actor'
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('pmttrpg', PmTTRPGItemSheet, {
-    makeDefault: true,
-    label: 'PM_TTRPG.SheetLabels.Item',
-  });
+  Items.registerSheet('pmttrpg', PmTTRPGItemSheet, { makeDefault: true, label: 'PM_TTRPG.SheetLabels.Item' });
 
-  // Preload Handlebars templates.
+  // Registrar etiquetas de tipos de actores
+  CONFIG.Actor.typeLabels = {
+    character: 'PM_TTRPG.Actor.Type.Character',
+    Abnormality: 'PM_TTRPG.Actor.Type.Abnormality',
+    Distortion: 'PM_TTRPG.Actor.Type.Distortion'
+  };
+
+  // Depuración
+  console.log('PMTTRPG Init: Data models registered:', CONFIG.PM_TTRPG.models);
+  console.log('PMTTRPG Init: Actor type labels registered:', CONFIG.Actor.typeLabels);
+  console.log('PMTTRPG Init: System entity types:', game.system.entityTypes);
+
+  // Preload Handlebars templates
   return preloadHandlebarsTemplates();
-});
-
-/* -------------------------------------------- */
-/*  Handlebars Helpers                          */
-/* -------------------------------------------- */
-
-// If you need to add Handlebars helpers, here is a useful example:
-Handlebars.registerHelper('toLowerCase', function (str) {
-  return str.toLowerCase();
 });
 
 /* -------------------------------------------- */
@@ -72,37 +87,30 @@ Handlebars.registerHelper('toLowerCase', function (str) {
 /* -------------------------------------------- */
 
 Hooks.once('ready', function () {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+  console.log('PMTTRPG Ready: Final system entity types:', game.system.entityTypes);
   Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
+});
+
+/* -------------------------------------------- */
+/*  Handlebars Helpers                          */
+/* -------------------------------------------- */
+
+Handlebars.registerHelper('toLowerCase', function (str) {
+  return str.toLowerCase();
 });
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
 /* -------------------------------------------- */
 
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {Object} data     The dropped data
- * @param {number} slot     The hotbar slot to use
- * @returns {Promise}
- */
 async function createItemMacro(data, slot) {
-  // First, determine if this is a valid owned item.
   if (data.type !== 'Item') return;
   if (!data.uuid.includes('Actor.') && !data.uuid.includes('Token.')) {
-    return ui.notifications.warn(
-      'You can only create macro buttons for owned Items'
-    );
+    return ui.notifications.warn('You can only create macro buttons for owned Items');
   }
-  // If it is, retrieve it based on the uuid.
   const item = await Item.fromDropData(data);
-
-  // Create the macro command using the uuid.
   const command = `game.pmttrpg.rollItemMacro("${data.uuid}");`;
-  let macro = game.macros.find(
-    (m) => m.name === item.name && m.command === command
-  );
+  let macro = game.macros.find(m => m.name === item.name && m.command === command);
   if (!macro) {
     macro = await Macro.create({
       name: item.name,
@@ -116,28 +124,13 @@ async function createItemMacro(data, slot) {
   return false;
 }
 
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {string} itemUuid
- */
 function rollItemMacro(itemUuid) {
-  // Reconstruct the drop data so that we can load the item.
-  const dropData = {
-    type: 'Item',
-    uuid: itemUuid,
-  };
-  // Load the item from the uuid.
+  const dropData = { type: 'Item', uuid: itemUuid };
   Item.fromDropData(dropData).then((item) => {
-    // Determine if the item loaded and if it's an owned item.
     if (!item || !item.parent) {
       const itemName = item?.name ?? itemUuid;
-      return ui.notifications.warn(
-        `Could not find item ${itemName}. You may need to delete and recreate this macro.`
-      );
+      return ui.notifications.warn(`Could not find item ${itemName}. You may need to delete and recreate this macro.`);
     }
-
-    // Trigger the item roll
     item.roll();
   });
 }
