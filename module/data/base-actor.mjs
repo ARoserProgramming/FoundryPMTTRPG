@@ -11,7 +11,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
       value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 10 })
     });
-    schema.power = new fields.SchemaField({
+    schema.stagger_threshold = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 5, min: 0 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 5 })
     });
@@ -20,4 +20,13 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
     return schema;
   }
 
+  prepareDerivedData() {
+    // Lógica común de modificadores de habilidades
+    if (this.abilities) {
+      for (const key in this.abilities) {
+        this.abilities[key].mod = this.abilities[key].value;
+        this.abilities[key].label = game.i18n.localize(CONFIG.PMTTRPG.abilities[key]) ?? key;
+      }
+    }
+  }
 }
