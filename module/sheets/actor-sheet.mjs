@@ -82,7 +82,6 @@ export class PMTTRPGActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
-
     return context;
   }
 

@@ -83,8 +83,8 @@ Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
 Handlebars.registerHelper('asset', function (path){
-  return '/systems/pmttrpg/${path}';
-})
+  return `/systems/pmttrpg/${path}`;
+});
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */

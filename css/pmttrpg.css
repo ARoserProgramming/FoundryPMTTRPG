@@ -1,13 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Manufacturing+Consent&display=swap');
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
 }
-
+.manufacturing-consent-regular {
+  font-family: "Manufacturing Consent", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 .rollable:hover, .rollable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
+}
+.pmttrpg .dice-icon{
+  border: none;
+  max-width: 100%;
 }
 
 .grid,
@@ -226,7 +235,7 @@
 }
 .pmttrpg .sheet-header h1.charname {
   height: 50px;
-  padding: 0px;
+  padding: 0;
   margin: 5px 0;
   border-bottom: 0;
 }
