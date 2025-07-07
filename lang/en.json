@@ -55,8 +55,8 @@
     "Actor": {
       "character": "Character",
       "npc": "NPC",
-      "Abnormality": "Abnormality",
-      "Distortion": "Distortion"
+      "abnormality": "Abnormality",
+      "distortion": "Distortion"
     },
     "Item": {
       "item": "Item",
