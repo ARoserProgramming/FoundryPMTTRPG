@@ -123,13 +123,13 @@
                             <div class="ability flexrow flex-group-center">
                                 <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
                                     {{localize (lookup @root.config.abilities key)}}
-                                    <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll">
+                                    <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll 2d6">
                                 </span>
                                 </label>
                                 <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-                                <span class="ability-mod rollable" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
+                                <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
                                 <span class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                                <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll">
+                                <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll 2d6">
                                     <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/>
                                 </span>
                             </span>

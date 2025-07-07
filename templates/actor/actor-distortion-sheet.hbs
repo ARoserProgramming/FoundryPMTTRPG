@@ -80,7 +80,7 @@
             <div class="abilities flexcol">
                 {{#each system.abilities as |ability key|}}
                     <div class="ability flexrow flex-group-center">
-                        <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">
+                        <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-label="{{localize (lookup @root.config.abilities key)}}">
                             {{localize (lookup @root.config.abilities key)}}
                             <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll d20">
                             <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="d20 Dice" width="32" height="32"/>
