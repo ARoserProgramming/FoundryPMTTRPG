@@ -7,7 +7,7 @@ import {
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class PmTTRPGItemSheet extends ItemSheet {
+export class PMTTRPGItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -43,7 +43,7 @@ export class PmTTRPGItemSheet extends ItemSheet {
     const context = super.getData();
 
     // Use a safe clone of the item data for further operations.
-    const itemData = this.document.toObject(false);
+    const itemData = this.document.toPlainObject();
 
     // Enrich description info for display
     // Enrichment turns text like `[[/r 1d20]]` into buttons
@@ -65,8 +65,8 @@ export class PmTTRPGItemSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
 
-    // Adding a pointer to CONFIG.PM_TTRPG
-    context.config = CONFIG.PM_TTRPG;
+    // Adding a pointer to CONFIG.PMTTRPG
+    context.config = CONFIG.PMTTRPG;
 
     // Prepare active effects for easier access
     context.effects = prepareActiveEffectCategories(this.item.effects);

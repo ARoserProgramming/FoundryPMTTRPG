@@ -1,10 +1,10 @@
-export const PM_TTRPG = {};
+export const PMTTRPG = {};
 
 /**
  * The set of Ability Scores used within the system.
  * @type {Object}
  */
-PM_TTRPG.abilities = {
+PMTTRPG.abilities = {
   ftd: 'PM_TTRPG.Ability.Ftd.long',
   prd: 'PM_TTRPG.Ability.Prd.long',
   jst: 'PM_TTRPG.Ability.Jst.long',
@@ -13,7 +13,7 @@ PM_TTRPG.abilities = {
   tmp: 'PM_TTRPG.Ability.Tmp.long',
 };
 
-PM_TTRPG.abilityAbbreviations = {
+PMTTRPG.abilityAbbreviations = {
   ftd: 'PM_TTRPG.Ability.Ftd.long',
   prd: 'PM_TTRPG.Ability.Prd.long',
   jst: 'PM_TTRPG.Ability.Jst.long',

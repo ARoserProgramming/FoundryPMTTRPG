@@ -7,7 +7,7 @@ import {
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class PmTTRPGActorSheet extends ActorSheet {
+export class PMTTRPGActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -40,14 +40,14 @@ export class PmTTRPGActorSheet extends ActorSheet {
     const context = super.getData();
 
     // Use a safe clone of the actor data for further operations.
-    const actorData = this.document.toObject(false);
+    const actorData = this.document.toPlainObject();
 
     // Add the actor's data to context.data for easier access, as well as flags.
     context.system = actorData.system;
     context.flags = actorData.flags;
 
-    // Adding a pointer to CONFIG.PM_TTRPG
-    context.config = CONFIG.PM_TTRPG;
+    // Adding a pointer to CONFIG.PMTTRPG
+    context.config = CONFIG.PMTTRPG;
 
     // Prepare character data and items.
     if (actorData.type == 'character') {
@@ -68,6 +68,7 @@ export class PmTTRPGActorSheet extends ActorSheet {
         // Whether to show secret blocks in the finished html
         secrets: this.document.isOwner,
         // Necessary in v11, can be removed in v12
+        async: true,
         // Data to fill in for inline rolls
         rollData: this.actor.getRollData(),
         // Relative UUID resolution
@@ -81,11 +82,6 @@ export class PmTTRPGActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
-    if (!Handlebars.helpers.asset) {
-      Handlebars.registerHelper('asset', function (path) {
-        return `/systems/pmttrpg/${path}`;
-      });
-    }
 
     return context;
   }
@@ -152,7 +148,6 @@ export class PmTTRPGActorSheet extends ActorSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find('select[name="system.risk"]').val(this.actor.system.risk);
 
     // Render the item sheet for viewing/editing prior to the editable check.
     html.on('click', '.item-edit', (ev) => {

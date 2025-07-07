@@ -1,82 +1,8 @@
 {
   "Actor": {
-    "types": ["character", "Abnormality", "Distortion"],
-    "templates": {
-      "base": {
-        "biography": "",
-        "attributes": {
-          "xp": {
-            "value": 0,
-            "min": -24
-          }
-        },
-        "abilities": {
-          "ftd": {
-            "value": 0,
-            "min": -1
-          },
-          "prd": {
-            "value": 0,
-            "min": -1
-          },
-          "jst": {
-            "value": 0,
-            "min": -1
-          },
-          "chr": {
-            "value": 0,
-            "min": -1
-          },
-          "ins": {
-            "value": 0,
-            "min": -1
-          },
-          "tmp": {
-            "value": 0,
-            "min": -1
-          }
-        }
-      }
-    },
-    "character": {
-      "templates": ["base"]
-    },
-    "Abnormality": {
-      "templates": ["base"],
-      "risk": {
-        "type": "String",
-        "default": "zayin",
-        "choices": ["zayin", "teth", "he", "waw", "aleph"]
-      }
-    },
-    "Distortion": {
-      "templates": ["base"],
-      "risk": {
-        "type": "String",
-        "default": "zayin",
-        "choices": ["zayin", "teth", "he", "waw", "aleph"]
-      }
-    }
+    "types": ["character", "abnormality","distortion"]
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
-    "templates": {
-      "base": {
-        "description": ""
-      }
-    },
-    "item": {
-      "templates": ["base"],
-      "quantity": 1,
-      "weight": 0,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
-    },
-    "feature": {
-      "templates": ["base"]
-    },
-    "spell": {
-      "templates": ["base"],
-      "spellLevel": 1
-    }
+    "types": ["item", "feature", "spell"]
   }
 }
