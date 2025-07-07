@@ -1,41 +1,67 @@
 {
   "PM_TTRPG": {
     "Ability": {
-      "Ftd": { "long": "Fortitude", "abbr": "ftd" },
-      "Prd": { "long": "Prudence", "abbr": "prd" },
-      "Jst": { "long": "Justice", "abbr": "jst" },
-      "Chr": { "long": "Charm", "abbr": "chr" },
-      "Ins": { "long": "Insight", "abbr": "ins" },
-      "Tmp": { "long": "Temperance", "abbr": "tmp" }
+      "Ftd": { "long": "Fortaleza", "abbr": "ftd" },
+      "Prd": { "long": "Prudencia", "abbr": "prd" },
+      "Jst": { "long": "Justicia", "abbr": "jst" },
+      "Chr": { "long": "Encanto", "abbr": "chr" },
+      "Ins": { "long": "Comprensión", "abbr": "ins" },
+      "Tmp": { "long": "Temple", "abbr": "tmp" }
     },
     "SheetLabels": {
-      "Actor": "PmTTRPG Actor Sheet",
-      "Item": "PmTTRPG Item Sheet"
+      "Actor": "PmTTRPG Hoja de Actor",
+      "Item": "PmTTRPG Hoja de Objeto",
+      "Distortion": "Hoja de Distorsión"
     },
     "Item": {
       "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
+        "SpellLVL": "Nivel {level} Hechizos",
+        "AddLVL": "Añadir LVL {level}"
       }
     },
     "Effect": {
-      "Source": "Source",
-      "Toggle": "Toggle Effect",
-      "Temporary": "Temporary Effects",
-      "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
+      "Source": "Fuente",
+      "Toggle": "Alternar Efecto",
+      "Temporary": "Effectos Temporales",
+      "Passive": "Efectos Pasivos",
+      "Inactive": "Efectos Inactivos"
+    },
+    "Attributes": {
+      "Rank": "Rango",
+      "Level": "Nivel",
+      "Light": "Luz",
+      "XP": "Puntos de Experiencia"
+    },
+    "Stats": {
+      "HealthPoints": "Puntos de Salud",
+      "StaggerThreshold": "Umbral de Aturdimiento",
+      "Mentality": "Mentalidad",
+      "Risk": "Peligro"
+    },
+    "Tabs": {
+      "Stats": "Estatísticas",
+      "Inventory": "Inventario",
+      "Notes": "Notas"
+    },
+    "Options": {
+      "Zayin": "Zayin",
+      "Teth": "Teth",
+      "He": "He",
+      "Waw": "Waw",
+      "Aleph": "Aleph"
     }
   },
-
   "TYPES": {
     "Actor": {
-      "character": "Character",
-      "npc": "NPC"
+      "character": "Personaje",
+      "npc": "NPC",
+      "Abnormality": "Abnormalidad",
+      "Distortion": "Distorsión"
     },
     "Item": {
-      "item": "Item",
-      "feature": "Feature",
-      "spell": "Spell"
+      "item": "Objeto",
+      "feature": "Rasgo",
+      "spell": "Hechizo"
     }
   }
 }
