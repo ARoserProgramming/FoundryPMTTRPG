@@ -96,28 +96,32 @@ export class PmTTRPGActor extends Actor {
         const systemData = actorData.system;
         const flags = actorData.flags.pmttrpg || {};
 
-
-        // Make separate methods for each Actor type (character, npc, etc.) to keep
-        // things organized.
         this._prepareCharacterData(actorData);
         this._prepareAbnormalityData(actorData);
         this._prepareDistortionData(actorData);
-        // lvl, rank, block_modifier, evade_modifier, equipment_limit, tool_slots
+
+        // Asignar valores calculados
         systemData.level = this.level;
         systemData.rank = this.rank;
         systemData.block_modifier = this.block_modifier;
         systemData.evade_modifier = this.evade_modifier;
         systemData.equipment_limit = this.equipment_limit;
         systemData.tool_slots = this.tool_slots;
-        // Health, Stagger, and Light
-        systemData.health_points = this.health_points;
-        systemData.stagger_threshold = this.stagger_threshold;
-        systemData.light = this.light;
+        systemData.health_points = { value: systemData.health_points.value, max: this.health_points };
+        systemData.stagger_threshold = { value: systemData.stagger_threshold.value, max: this.stagger_threshold };
+        systemData.light = { value: systemData.light.value, max: this.light };
         systemData.attack_modifier = this.attack_modifier;
-        // Mentality
         if (this.type === 'Distortion' || this.type === 'character') {
-            systemData.mentality = this.mentality;
+            systemData.mentality = { value: systemData.mentality.value, max: this.mentality };
         }
+
+        // Clamping de barras
+        this.clampBarAttribute(systemData.health_points, () => this.health_points);
+        this.clampBarAttribute(systemData.stagger_threshold, () => this.stagger_threshold);
+        if (this.type === 'Distortion' || this.type === 'character') {
+            this.clampBarAttribute(systemData.mentality, () => this.mentality);
+        }
+        this.clampBarAttribute(systemData.light, () => this.light);
     }
 
     /**
