@@ -1,3 +1,5 @@
+import * as CONFIG from "../helpers/config.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -16,7 +18,14 @@ export class PMTTRPGActor extends Actor {
   prepareBaseData() {
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
-  }
+      // Loop through ability scores, and add their modifiers to our sheet output.
+      for (const key in this.abilities) {
+        // Calculate the modifier using d20 rules.
+        this.abilities[key].mod = Math.floor((this.abilities[key].value));
+        // Handle ability label localization.
+        this.abilities[key].label = game.i18n.localize(CONFIG.PMTTRPG.abilities[key]) ?? key;
+      }
+    }
 
   /**
    * @override
@@ -28,6 +37,7 @@ export class PMTTRPGActor extends Actor {
   prepareDerivedData() {
     const actorData = this;
     const flags = actorData.flags.pmttrpg || {};
+
   }
 
   /**

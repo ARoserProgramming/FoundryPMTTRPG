@@ -7,7 +7,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = {};
 
-    schema.health = new fields.SchemaField({
+    schema.health_points = new fields.SchemaField({
       value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
       max: new fields.NumberField({ ...requiredInteger, initial: 10 })
     });
