@@ -7,20 +7,20 @@
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resources grid grid-3col">
                 <div class="resource flex-group-center">
-                    <label for="system.health_points.value" class="resource-label">{{localize 'PM_TTRPG.Stats.HealthPoints'}}</label>
+                    <label for="system.attributes.health_points.value" class="resource-label">{{localize 'PM_TTRPG.Stats.HealthPoints'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.health_points.value" value="{{system.health_points.value}}" data-dtype="Number"/>
+                        <input type="text" name="system.attributes.health_points.value" value="{{system.attributes.health_points.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled/>
+                        <input type="text" name="system.attributes.health_points.max" value="{{system.attributes.health_points.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.stagger_threshold.value" class="resource-label">{{localize 'PM_TTRPG.Stats.StaggerThreshold'}}</label>
+                    <label for="system.attributes.stagger_threshold.value" class="resource-label">{{localize 'PM_TTRPG.Stats.StaggerThreshold'}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.stagger_threshold.value" value="{{system.stagger_threshold.value}}" data-dtype="Number"/>
+                        <input type="text" name="system.attributes.stagger_threshold.value" value="{{system.attributes.stagger_threshold.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                        <input type="text" name="system.attributes.stagger_threshold.max" value="{{system.attributes.stagger_threshold.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 

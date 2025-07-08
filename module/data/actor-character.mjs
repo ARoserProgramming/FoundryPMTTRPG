@@ -7,25 +7,22 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
-    schema.attributes = new fields.SchemaField({
-      level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 1 })
-      }),
-    });
-
-    // Iterate over ability names and create a new SchemaField for each.
-    schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
-      obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
-      });
-      return obj;
-    }, {}));
 
     return schema;
   }
 
   prepareDerivedData() {
     super.prepareDerivedData();
+    // Cálculo de máximos de barras
+    for (const key in this.attributes) {
+      if (this.attributes[key].value > this.attributes[key].max) {
+        this.attributes[key].value = this.attributes[key].max;
+        console.log(`Clamped ${key} to max: ${this.attributes[key].max}`);
+      } else if (this.attributes[key].value < this.attributes[key].min) {
+        this.attributes[key].value = this.attributes[key].min;
+        console.log(`Clamped ${key} to min: ${this.attributes[key].min}`);
+      }
+    }
   }
 
   getRollData() {
@@ -39,7 +36,7 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
       }
     }
 
-    data.lvl = this.attributes.level.value;
+    //data.lvl = this.attributes.level.value;
 
     return data
   }
