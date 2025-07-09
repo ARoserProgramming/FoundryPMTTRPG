@@ -33,7 +33,6 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
       }
     }
 
-    data.lvl = this.attributes.level.value;
 
     return data
   }
