@@ -373,14 +373,3 @@
 .pmttrpg .effects .item .effect-controls {
   border: none;
 }
-.clamp-attribute {
-  border: 2px solid #e57373; /* Rojo claro para destacar */
-  background-color: #fffbe6; /* Fondo suave */
-  border-radius: 4px;
-  transition: border-color 0.2s;
-}
-
-.clamp-attribute:focus {
-  border-color: #b71c1c; /* Rojo más fuerte al enfocar */
-  outline: none;
-}
