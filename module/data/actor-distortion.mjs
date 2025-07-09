@@ -7,19 +7,10 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
-    schema.attributes = new fields.SchemaField({
-      level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 1 })
-      }),
+    schema.attributes.mentality = new fields.SchemaField({
+      value: new fields.NumberField({ ...requiredInteger, initial: 20, min: 0 }),
+      max: new fields.NumberField({ ...requiredInteger, initial: 20 })
     });
-
-    // Iterate over ability names and create a new SchemaField for each.
-    schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
-      obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
-      });
-      return obj;
-    }, {}));
 
     return schema;
   }
