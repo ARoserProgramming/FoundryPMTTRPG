@@ -14,7 +14,7 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
   prepareDerivedData() {
     super.prepareDerivedData();
     // Cálculo de máximos de barras
-    for (const key in this.attributes) {
+    /*for (const key in this.attributes) {
       if (this.attributes[key].value > this.attributes[key].max) {
         this.attributes[key].value = this.attributes[key].max;
         console.log(`Clamped ${key} to max: ${this.attributes[key].max}`);
@@ -22,7 +22,7 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
         this.attributes[key].value = this.attributes[key].min;
         console.log(`Clamped ${key} to min: ${this.attributes[key].min}`);
       }
-    }
+    }*/
   }
 
   getRollData() {
