@@ -7,6 +7,11 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
+    // Añadir mentality correctamente al objeto fields de attributes
+    schema.attributes.fields.mentality = new fields.SchemaField({
+      value: new fields.NumberField({ ...requiredInteger, initial: 20, min: 0 }),
+      max: new fields.NumberField({ ...requiredInteger, initial: 20 })
+    });
 
     return schema;
   }

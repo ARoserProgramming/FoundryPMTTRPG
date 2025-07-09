@@ -15,6 +15,38 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
       stagger_threshold: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 20, min: 0 }),
         max: new fields.NumberField({ ...requiredInteger, initial: 20 })
+      }),
+      light: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 3, min: 0 }),
+        max: new fields.NumberField({ ...requiredInteger, initial: 3 })
+      }),
+      rank: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 }),
+        max: new fields.NumberField({ ...requiredInteger, initial: 1 })
+      }),
+      level: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+        max: new fields.NumberField({ ...requiredInteger, initial: 0 })
+      }),
+      xp: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+        max: new fields.NumberField({ ...requiredInteger, initial: 0 })
+      }),
+      attack_modifier: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0}),
+      }),
+      block_modifier: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0}),
+      }),
+      evade_modifier: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0}),
+      }),
+      equipment_limit: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 0}),
+      }),
+      tool_slots: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 4, min: 0 }),
+        max: new fields.NumberField({ ...requiredInteger, initial: 4 }),
       })
     });
     schema.biography = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
@@ -38,24 +70,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
     }
     const systemData = this;
 
-
     //this.clampBarAttribute(systemData.attributes.stagger_threshold, () => systemData.attributes.stagger_threshold.max);
     //this.clampBarAttribute(systemData.attributes.health_points, () => systemData.attributes.health_points.max);
   }
-  clampBarAttribute(bar, maxCalc, minCalc = 0) {
-    if (!bar) {
-      console.error('clampBarAttribute: bar is undefined', bar);
-      return;
-    }
-    const max = typeof maxCalc === 'function' ? maxCalc() : (maxCalc || bar.max || Infinity);
-    const min = typeof minCalc === 'function' ? minCalc() : (minCalc || bar.min || 0);
-    // Asegurarse de que bar.value y bar.max estén definidos
-    bar.value = bar.value !== undefined ? bar.value : min;
-    bar.max = max; // Actualizar max explícitamente
-    if (bar.value > max) bar.value = max;
-    else if (bar.value < min) bar.value = min;
-    console.log(`Clamped ${bar}: value=${bar.value}, max=${bar.max}, min=${min}`); // Depuración
-  }
-
-
 }
