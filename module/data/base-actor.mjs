@@ -1,4 +1,5 @@
 import PMTTRPGDataModel from "./base-model.mjs";
+
 export default class PMTTRPGActorBase extends PMTTRPGDataModel {
 
     static defineSchema() {
@@ -28,8 +29,13 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             }
         }
         // Common attribute logic
+
         this.level = Math.floor(this.xp / 8);
         this.rank = Math.floor(this.level / 3) + 1;
+        this.attack_modifier = this.rank;
+        this.evade_modifier = this.abilities.ins.value;
+        this.block_modifier = this.abilities.tmp.value;
+        this.equipment_rank_limit = this.rank + 1
         this.stagger_threshold = {
             value: 20,
             max: 20 + (this.abilities.chr.value * 4) + (this.rank * 4),
@@ -43,18 +49,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             value: 3,
             max: 3 + this.rank,
         };
-        this.attack_modifier = {
-            value: this.rank,
-        };
-        this.evade_modifier = {
-            value: this.abilities.ins.value,
-        };
-        this.block_modifier = {
-            value: this.abilities.tmp.value,
-        };
-        this.equipment_rank_limit = {
-            value: this.rank + 1
-        };
+
         this.tool_slots = {
             value: 4,
             max: 4,
