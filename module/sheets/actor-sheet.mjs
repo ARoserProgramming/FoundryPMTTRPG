@@ -87,6 +87,15 @@ export class PMTTRPGActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
+    //localize
+    context.localize_health = game.i18n.localize('PMTTRPG.Stats.HealthPoints');
+    context.localize_stagger = game.i18n.localize('PMTTRPG.Stats.StaggerThreshold');
+    context.localize_mentality = game.i18n.localize('PMTTRPG.Stats.Mentality');
+    context.localize_rank = game.i18n.localize('PMTTRPG.Attributes.Rank');
+    context.localize_light = game.i18n.localize('PMTTRPG.Attributes.Light');
+    context.localize_level = game.i18n.localize('PMTTRPG.Attributes.Level');
+    context.localize_xp = game.i18n.localize('PMTTRPG.Attributes.XP');
+
     return context;
   }
 
