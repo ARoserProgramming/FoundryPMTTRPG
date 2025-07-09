@@ -37,7 +37,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         this.block_modifier = this.abilities.tmp.value;
         this.equipment_rank_limit = this.rank + 1
         this.stagger_threshold = {
-            value: 20,
+            value: 24,
             max: 20 + (this.abilities.chr.value * 4) + (this.rank * 4),
         };
         this.health_points = {
@@ -46,7 +46,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         };
 
         this.light = {
-            value: 3,
+            value: 4,
             max: 3 + this.rank,
         };
 
