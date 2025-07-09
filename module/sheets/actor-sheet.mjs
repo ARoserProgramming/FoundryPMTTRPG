@@ -181,39 +181,7 @@ export class PMTTRPGActorSheet extends ActorSheet {
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
-    // Store the previous value of clamp attribute inputs
-    html.on('focus', 'input.clamp-attribute', (ev) => {
-      console.log("Storing previous value for clamp attribute input");
-      ev.currentTarget.dataset.prevValue = ev.currentTarget.value;
-    });
-    // Clamp Attribute Inputs usando min y max del sistema
-    html.on('change', 'input.clamp-attribute', (ev) => {
-      console.log("2");
-      const input = ev.currentTarget;
-      const prevValue = input.dataset.prevValue;
-      let value = parseInt(input.value, 10);
 
-      // Extrae el path del atributo, por ejemplo: system.abilities.str.value
-      const path = input.name.split('.');
-      // Navega por el objeto system para encontrar el campo correspondiente
-      let data = this.actor.system;
-      for (let i = 1; i < path.length - 1; i++) {
-        data = data?.[path[i]];
-        if (!data) break;
-      }
-      // Obtiene min y max del sistema si existen
-      const min = data?.min ?? undefined;
-      const max = data?.max ?? undefined;
-
-      if (isNaN(value)) {
-        input.value = prevValue;
-        return;
-      }
-      if (min !== undefined && value < min) value = min;
-      if (max !== undefined && value > max) value = max;
-
-      input.value = value;
-    });
     // Add Inventory Item
     html.on('click', '.item-create', this._onItemCreate.bind(this));
 
