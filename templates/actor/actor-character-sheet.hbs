@@ -9,92 +9,92 @@
                 <div class="resource flex-group-center">
                     <label for="system.health_points.value" class="resource-label">{{localize_health}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute" type="number" name="system.health_points.value" min =0 max ="{{system.health_points.max}}" value="{{system.health_points.value}}" data-dtype="Number">
+                        <input type="number" name="system.health_points.value" min =0 max ="{{system.health_points.max}}" value="{{system.health_points.value}}" data-dtype="Number">
                         <span> / </span>
-                        <input type="number" name="system.attributes.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
+                        <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
+                    <label for="system.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute" type="text" name="system.attributes.stagger_threshold.value" value="{{system.attributes.stagger_threshold.value}}" data-dtype="Number"/>
+                        <input type="number" name="system.stagger_threshold.value" min=0 max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.attributes.stagger_threshold.max" value="{{system.attributes.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.mentality.value" class="resource-label">{{localize_mentality}}</label>
+                    <label for="system.sanity_points.value" class="resource-label">{{localize_mentality}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute"  type="text" name="system.attributes.mentality.value" value="{{system.attributes.mentality.value}}" data-dtype="Number"/>
+                        <input type="number" name="system.sanity_points.value" min=0 max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.attributes.mentality.max" value="{{system.attributes.mentality.max}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.light.value" class="resource-label">{{localize_light}}</label>
+                    <label for="system.light.value" class="resource-label">{{localize_light}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute" type="text" name="system.attributes.light.value" value="{{system.attributes.light.value}}" data-dtype="Number"/>
+                        <input type="number" name="system.light.value" min=0 max="{{system.light.max}}" value="{{system.light.value}}" data-dtype="Number"/>
                         <span> / </span>
-                        <input type="text" name="system.attributes.light.max" value="{{system.attributes.light.max}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.rank.value" class="resource-label">{{localize_rank}}</label>
+                    <label for="system.rank" class="resource-label">{{localize_rank}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.rank.value" value="{{system.attributes.rank.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.rank" value="{{system.rank}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.level.value" class="resource-label">{{localize_level}}</label>
+                    <label for="system.level" class="resource-label">{{localize_level}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.xp.value" class="resource-label">{{localize_xp}}</label>
+                    <label for="system.xp" class="resource-label">{{localize_xp}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute" type="text" name="system.attributes.xp.value" value="{{system.attributes.xp.value}}" data-dtype="Number"/>
+                        <input type="number" name="system.xp" value="{{system.xp}}" data-dtype="Number"/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.attack_modifier.value" class="resource-label">AttackModifier</label>
+                    <label for="system.attack_modifier" class="resource-label">AttackModifier</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attack_modifier.value" value="{{system.attributes.attack_modifier.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.attack_modifier" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.block_modifier.value" class="resource-label">BlockModifier</label>
+                    <label for="system.block_modifier.value" class="resource-label">BlockModifier</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.block_modifier.value" value="{{system.attributes.block_modifier.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.block_modifier.value" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.evade_modifier.value" class="resource-label">EvadeModifier</label>
+                    <label for="system.evade_modifier" class="resource-label">EvadeModifier</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.evade_modifier.value" value="{{system.attributes.evade_modifier.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.evade_modifier" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.equipment_limit.value" class="resource-label">Equipmentlimit</label>
+                    <label for="system.equipment_limit" class="resource-label">Equipmentlimit</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.equipment_limit.value" value="{{system.attributes.equipment_limit.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.equipment_limit" value="{{system.equipment_limit}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.tool_slots.value" class="resource-label">ToolSlots</label>
+                    <label for="system.tool_slots.value" class="resource-label">ToolSlots</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input type="text" name="system.attributes.tool_slots.value" value="{{system.attributes.tool_slots.value}}" data-dtype="Number" disabled/>
+                        <input type="number" name="system.tool_slots.value" value="{{system.tool_slots.value}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
