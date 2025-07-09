@@ -5,19 +5,19 @@ export const PMTTRPG = {};
  * @type {Object}
  */
 PMTTRPG.abilities = {
-  ftd: 'PM_TTRPG.Ability.Ftd.long',
-  prd: 'PM_TTRPG.Ability.Prd.long',
-  jst: 'PM_TTRPG.Ability.Jst.long',
-  chr: 'PM_TTRPG.Ability.Chr.long',
-  ins: 'PM_TTRPG.Ability.Ins.long',
-  tmp: 'PM_TTRPG.Ability.Tmp.long',
+  ftd: 'PMTTRPG.Ability.Ftd.long',
+  prd: 'PMTTRPG.Ability.Prd.long',
+  jst: 'PMTTRPG.Ability.Jst.long',
+  chr: 'PMTTRPG.Ability.Chr.long',
+  ins: 'PMTTRPG.Ability.Ins.long',
+  tmp: 'PMTTRPG.Ability.Tmp.long',
 };
 
 PMTTRPG.abilityAbbreviations = {
-  ftd: 'PM_TTRPG.Ability.Ftd.long',
-  prd: 'PM_TTRPG.Ability.Prd.long',
-  jst: 'PM_TTRPG.Ability.Jst.long',
-  chr: 'PM_TTRPG.Ability.Chr.long',
-  ins: 'PM_TTRPG.Ability.Ins.long',
-  tmp: 'PM_TTRPG.Ability.Tmp.long',
+  ftd: 'PMTTRPG.Ability.Ftd.long',
+  prd: 'PMTTRPG.Ability.Prd.long',
+  jst: 'PMTTRPG.Ability.Jst.long',
+  chr: 'PMTTRPG.Ability.Chr.long',
+  ins: 'PMTTRPG.Ability.Ins.long',
+  tmp: 'PMTTRPG.Ability.Tmp.long',
 };

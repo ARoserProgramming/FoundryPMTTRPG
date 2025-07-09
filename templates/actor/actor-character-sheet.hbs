@@ -7,7 +7,7 @@
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resources grid grid-3col">
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.health_points.value" class="resource-label">{{localize 'PM_TTRPG.Stats.HealthPoints'}}</label>
+                    <label for="system.attributes.health_points.value" class="resource-label">{{localize_health}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input class= "clamp-attribute" type="text" name="system.attributes.health_points.value" value="{{system.attributes.health_points.value}}" data-dtype="Number"/>
                         <span> / </span>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.stagger_threshold.value" class="resource-label">{{localize 'PM_TTRPG.Stats.StaggerThreshold'}}</label>
+                    <label for="system.attributes.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input class= "clamp-attribute" type="text" name="system.attributes.stagger_threshold.value" value="{{system.attributes.stagger_threshold.value}}" data-dtype="Number"/>
                         <span> / </span>
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.mentality.value" class="resource-label">{{localize 'PM_TTRPG.Stats.Mentality'}}</label>
+                    <label for="system.mentality.value" class="resource-label">{{localize_mentality}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input class= "clamp-attribute"  type="text" name="system.mentality.value" value="{{system.mentality.value}}" data-dtype="Number"/>
                         <span> / </span>
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.light.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Light'}}</label>
+                    <label for="system.light.value" class="resource-label">{{localize_light}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input class= "clamp-attribute" type="text" name="system.light.value" value="{{system.light.value}}" data-dtype="Number"/>
                         <span> / </span>
@@ -43,21 +43,21 @@
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.rank.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Rank'}}</label>
+                    <label for="system.attributes.rank.value" class="resource-label">{{localize_rank}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input type="text" name="system.attributes.rank.value" value="{{system.rank}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.level.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.Level'}}</label>
+                    <label for="system.attributes.level.value" class="resource-label">{{localize_level}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input type="text" name="system.attributes.level.value" value="{{system.level}}" data-dtype="Number" disabled/>
                     </div>
                 </div>
 
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.xp.value" class="resource-label">{{localize 'PM_TTRPG.Attributes.XP'}}</label>
+                    <label for="system.attributes.xp.value" class="resource-label">{{localize_xp}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
                         <input class= "clamp-attribute" type="text" name="system.attributes.xp.value" value="{{system.attributes.xp.value}}" data-dtype="Number"/>
                     </div>
@@ -123,13 +123,13 @@
                             <div class="ability flexrow flex-group-center">
                                 <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
                                     {{localize (lookup @root.config.abilities key)}}
-                                    <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll 2d6">
+                                    <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
                                 </span>
                                 </label>
                                 <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
                                 <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
                                 <span class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                                <span class="dice-icon rollable" title="{{localize 'PM_TTRPG.Tabs.Stats'}} Roll 2d6">
+                                <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
                                     <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/>
                                 </span>
                             </span>
