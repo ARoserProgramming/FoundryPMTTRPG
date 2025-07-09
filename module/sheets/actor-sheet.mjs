@@ -181,7 +181,26 @@ export class PMTTRPGActorSheet extends ActorSheet {
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
+    //Clamp values
+    html.on('change', '.clamp-attribute', async (ev) => {
+      const input = ev.currentTarget;
+      const min = Number(input.min);
+      const max = Number(input.max);
+      let value = Number(input.value);
 
+      // Clampea el valor
+      if (value > max) value = max;
+      if (value < min) value = min;
+
+      input.value = value; // Actualiza el input visualmente
+
+      // Actualiza el actor
+      try {
+        await this.actor.update({ [input.name]: value });
+      } catch (err) {
+        ui.notifications.warn("Valor inválido.");
+      }
+    });
     // Add Inventory Item
     html.on('click', '.item-create', this._onItemCreate.bind(this));
 
@@ -216,7 +235,6 @@ export class PMTTRPGActorSheet extends ActorSheet {
       });
     }
   }
-
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
