@@ -50,14 +50,19 @@ export class PMTTRPGActorSheet extends ActorSheet {
     context.config = CONFIG.PMTTRPG;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
+    if (actorData.type === 'character' ) {
       this._prepareItems(context);
       this._prepareCharacterData(context);
     }
 
     // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
-      this._prepareItems(context);
+    if (actorData.type === 'abnormality') {
+        this._prepareItems(context);
+        this._prepareAbnormalityData(context);
+    }
+    if (actorData.type === 'distortion') {
+        this._prepareItems(context);
+        this.__prepareDistortionData(context);
     }
 
     // Enrich biography info for display
@@ -92,6 +97,14 @@ export class PMTTRPGActorSheet extends ActorSheet {
    */
   _prepareCharacterData(context) {
     // This is where you can enrich character-specific editor fields
+    // or setup anything else that's specific to this type
+  }
+  _prepareAbnormalityData(context) {
+    // This is where you can enrich abnormality-specific editor fields
+    // or setup anything else that's specific to this type
+  }
+  __prepareDistortionData(context) {
+    // This is where you can enrich distortion-specific editor fields
     // or setup anything else that's specific to this type
   }
 
