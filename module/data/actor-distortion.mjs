@@ -16,6 +16,10 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
       value: 15,
       max: 15 + (this.abilities.prd.value * 3),
     };
+    this.risk = new Enum
+    {
+      "Zayin", "Teth", "HE", "Waw", "Aleph"
+    };
   }
 
   getRollData() {
