@@ -6,6 +6,11 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
+    schema.risk = new fields.StringField({
+      required: true,
+      choices: ["zayin", "teth", "he", "waw", "aleph"],
+      initial: "zayin"
+    });
     return schema;
   }
 
@@ -15,10 +20,6 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     this.sanity_points = {
       value: 15,
       max: 15 + (this.abilities.prd.value * 3),
-    };
-    this.risk = new Enum
-    {
-      "Zayin", "Teth", "HE", "Waw", "Aleph"
     };
   }
 
