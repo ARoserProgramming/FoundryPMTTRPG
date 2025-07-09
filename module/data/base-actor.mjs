@@ -41,7 +41,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             max: 20 + (this.abilities.chr.value * 4) + (this.rank * 4),
         };
         this.health_points = {
-            value: 72,
+            value: 80,
             max: 72 + (this.abilities.ftd.value * 8) + (this.rank * 8),
         };
 
