@@ -6,18 +6,16 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
-
-    schema.attributes.mentality = new fields.SchemaField({
-      value: new fields.NumberField({ ...requiredInteger, initial: 20, min: 0 }),
-      max: new fields.NumberField({ ...requiredInteger, initial: 20 })
-    });
-
     return schema;
   }
 
   prepareDerivedData() {
     // Loop through ability scores, and add their modifiers to our sheet output.
    super.prepareDerivedData();
+    this.sanity_points = {
+      value: 15,
+      max: 15 + (this.abilities.prd.value * 3),
+    };
   }
 
   getRollData() {

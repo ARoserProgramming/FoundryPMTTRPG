@@ -7,11 +7,11 @@
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
             <div class="resources grid grid-3col">
                 <div class="resource flex-group-center">
-                    <label for="system.attributes.health_points.value" class="resource-label">{{localize_health}}</label>
+                    <label for="system.health_points.value" class="resource-label">{{localize_health}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class= "clamp-attribute" type="number" name="system.attributes.health_points.value" min =0 max ="{{system.attributes.health_points.max}}" value="{{system.attributes.health_points.value}}" data-dtype="Number">
+                        <input class= "clamp-attribute" type="number" name="system.health_points.value" min =0 max ="{{system.health_points.max}}" value="{{system.health_points.value}}" data-dtype="Number">
                         <span> / </span>
-                        <input type="number" name="system.attributes.health_points.max" value="{{system.attributes.health_points.max}}" data-dtype="Number" disabled>
+                        <input type="number" name="system.attributes.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
                     </div>
                 </div>
 

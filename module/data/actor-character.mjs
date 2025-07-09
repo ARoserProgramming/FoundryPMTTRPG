@@ -7,27 +7,15 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
-    // Añadir mentality correctamente al objeto fields de attributes
-    schema.attributes.fields.mentality = new fields.SchemaField({
-      value: new fields.NumberField({ ...requiredInteger, initial: 20, min: 0 }),
-      max: new fields.NumberField({ ...requiredInteger, initial: 20 })
-    });
-
     return schema;
   }
 
   prepareDerivedData() {
     super.prepareDerivedData();
-    // Cálculo de máximos de barras
-    /*for (const key in this.attributes) {
-      if (this.attributes[key].value > this.attributes[key].max) {
-        this.attributes[key].value = this.attributes[key].max;
-        console.log(`Clamped ${key} to max: ${this.attributes[key].max}`);
-      } else if (this.attributes[key].value < this.attributes[key].min) {
-        this.attributes[key].value = this.attributes[key].min;
-        console.log(`Clamped ${key} to min: ${this.attributes[key].min}`);
-      }
-    }*/
+    this.sanity_points = {
+      value: 15,
+      max: 15 + (this.abilities.prd.value * 3),
+    };
   }
 
   getRollData() {
