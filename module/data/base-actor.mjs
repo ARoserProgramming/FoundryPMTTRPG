@@ -8,7 +8,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         const schema = {};
 
         schema.xp = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
-
+        schema.tokenBar = new fields.NumberField({ min: 0, max: 0, required: true })
         schema.biography = new fields.StringField({required: true, blank: true}); // equivalent to passing ({initial: ""}) for StringFields
         // Iterate over ability names and create a new SchemaField for each.
         schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
