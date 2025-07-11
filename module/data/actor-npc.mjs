@@ -1,26 +1,26 @@
-import PMTTRPGActorBase from "./base-actor.mjs";
+import PMTTRPGActorBase from "./actor-character.mjs";
+import {PMTTRPGCharacter} from "./_module.mjs";
 
-export default class PMTTRPGDistortion extends PMTTRPGActorBase {
+export default class PMTTRPGNpc extends PMTTRPGCharacter {
 
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
-    schema.risk = new fields.StringField({
-      required: true,
-      choices: ["zayin", "teth", "he", "waw", "aleph"],
-      initial: "zayin"
-    });
+
+    // Override abilities schema to remove max limit
+    schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
+      obj[ability] = new fields.SchemaField({
+        value: new fields.NumberField({...requiredInteger, initial: 0}),
+      });
+      return obj;
+    }, {}));
+
     return schema;
   }
 
   prepareDerivedData() {
-    // Loop through ability scores, and add their modifiers to our sheet output.
-   super.prepareDerivedData();
-    this.sanity_points = {
-      value: 15,
-      max: 15 + (this.abilities.prd.value * 3),
-    };
+    super.prepareDerivedData();
   }
 
   getRollData() {

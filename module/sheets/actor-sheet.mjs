@@ -65,7 +65,10 @@ export class PMTTRPGActorSheet extends ActorSheet {
         this._prepareItems(context);
         this.__prepareDistortionData(context);
     }
-
+    if (actorData.type === 'npc') {
+      this._prepareItems(context);
+      this.__prepareNpcData(context);
+    }
     // Enrich biography info for display
     // Enrichment turns text like `[[/r 1d20]]` into buttons
     context.enrichedBiography = await TextEditor.enrichHTML(
@@ -117,7 +120,10 @@ export class PMTTRPGActorSheet extends ActorSheet {
     // This is where you can enrich distortion-specific editor fields
     // or setup anything else that's specific to this type
   }
-
+  __prepareNpcData(context){
+    // This is where you can enrich npc-specific editor fields
+    // or setup anything else that's specific to this type
+  }
   /**
    * Organize and classify Items for Actor sheets.
    *

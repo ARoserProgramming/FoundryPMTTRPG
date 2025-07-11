@@ -1,6 +1,6 @@
 import PMTTRPGActorBase from "./base-actor.mjs";
 
-export default class PMTTRPGCharacter extends PMTTRPGActorBase {
+export default class PMTTRPGAbnormality extends PMTTRPGActorBase {
 
     static defineSchema() {
         const fields = foundry.data.fields;
@@ -11,6 +11,13 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
             choices: ["zayin", "teth", "he", "waw", "aleph"],
             initial: "zayin"
         });
+        schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
+            obj[ability] = new fields.SchemaField({
+                value: new fields.NumberField({...requiredInteger, initial: 0}),
+            });
+            return obj;
+        }, {}));
+
         return schema;
     }
 

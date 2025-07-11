@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "abnormality","distortion"]
+    "types": ["character", "abnormality","distortion","npc"]
   },
   "Item": {
     "types": ["item", "feature", "spell"]
