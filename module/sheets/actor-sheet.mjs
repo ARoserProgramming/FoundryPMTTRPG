@@ -241,6 +241,80 @@ export class PMTTRPGActorSheet extends ActorSheet {
       });
     }
   }
+  // module/sheets/actor-sheet.mjs (fragmento de _showLevelUpDialog)
+  async _showLevelUpDialog() {
+    const currentXP = this.actor.system.xp;
+    const newLevel = Math.floor(currentXP / 8) ; // Assuming 1000 XP per level
+    const currentRank = Math.floor(newLevel / 3) + 1;
+    const maxPoints = newLevel * 2;
+    let sum = 0;
+
+    const html = await renderTemplate('systems/pmttrpg/templates/dialogs/level-up-dialog.hbs', {
+      actor: this.actor,
+      newLevel: newLevel,
+      abilities: this.actor.system.abilities,
+    });
+
+    const dialog = new Dialog({
+      title: `Level Up to ${newLevel}`,
+      content: html,
+      buttons: {
+        submit: {
+          icon: '<i class="fas fa-check"></i>',
+          label: "Apply",
+          callback: async (html) => {
+            const updates = {};
+            html.find('.stat-value').each((i, el) => {
+              const stat = el.getAttribute('data-stat');
+              const value = parseInt(el.textContent) || 0;
+              if (value !== this.actor.system.abilities[stat].value) {
+                updates[`system.abilities.${stat}.value`] = value;
+              }
+            });
+            await this.actor.update(updates);
+            this.render();
+          },
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel",
+        },
+      },
+      default: "submit",
+      render: (html) => {
+
+        sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0);
+        html.find('.stat-increase').on('click', (event) => {
+          const button = event.currentTarget;
+          const stat = button.getAttribute('data-stat');
+          const span = button.parentElement.querySelector('.stat-value');
+          let value = parseInt(span.textContent) || 0;
+          if (sum < maxPoints && value < currentRank + 2 && value < 6) { // Evita superar el rango máximo
+            value += 1; // Incrementa el valor
+            span.textContent = value; // Actualiza visualmente
+            sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0); // Recalcula la suma
+          } else if(value > maxPoints) {
+            ui.notifications.warn(`Maximum value for ${stat} is ${currentRank + 2} in rank ${currentRank} and cannot exceed 6!`);
+          } else{
+            ui.notifications.warn(`Maximum points (${maxPoints}) reached for level ${newLevel}!`);
+          }
+
+        });
+        html.find('.stat-decrease').on('click', (event) => {
+          const button = event.currentTarget;
+          const stat = button.getAttribute('data-stat');
+          const span = button.parentElement.querySelector('.stat-value');
+          let value = parseInt(span.textContent) || 0;
+          if (sum <= maxPoints && value > -1) { // Evita valores negativos
+            value -= 1; // Decrementa el valor
+            span.textContent = value; // Actualiza visualmente
+            sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0); // Recalcula la suma
+          }
+
+        });
+      },
+    }).render(true);
+  }
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
