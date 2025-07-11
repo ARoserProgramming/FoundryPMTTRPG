@@ -235,6 +235,57 @@ export class PMTTRPGActorSheet extends ActorSheet {
       });
     }
   }
+  // module/sheets/actor-sheet.mjs (fragmento de _showLevelUpDialog)
+  async _showLevelUpDialog() {
+    const currentLevel = this.actor.system.level;
+    const pendingLevel = this.actor.getFlag('pmttrpg', 'pendingLevelUp') || currentLevel;
+    const newLevel = pendingLevel;
+
+    if (currentLevel > 20) {
+      ui.notifications.warn("Maximum level (20) reached!");
+      return;
+    }
+
+    const html = await renderTemplate('systems/pmttrpg/templates/level-up-dialog.hbs', {
+      actor: this.actor,
+      newLevel: newLevel,
+      abilities: this.actor.system.abilities || {},
+      rank: this.actor.system.rank || 1,
+      rankPlusTwo: (this.actor.system.rank || 1) + 2
+    });
+
+    new Dialog({
+      id: "level-up-dialog",
+      title: `Level Up to ${newLevel}`,
+      content: html,
+      buttons: {
+        submit: {
+          icon: '<i class="fas fa-check"></i>',
+          label: "Apply",
+          callback: async () => {
+            if (window.dialogData && window.dialogData.updates) {
+              await this.actor.update(window.dialogData.updates);
+              if (this.actor.getFlag('pmttrpg', 'pendingLevelUp') === newLevel) {
+                this.actor.unsetFlag('pmttrpg', 'pendingLevelUp');
+              }
+              this.render();
+            }
+          },
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: "Cancel",
+          callback: () => {
+            if (this.actor.getFlag('pmttrpg', 'pendingLevelUp') === newLevel) {
+              this.actor.unsetFlag('pmttrpg', 'pendingLevelUp');
+            }
+          },
+        },
+      },
+      default: "submit",
+      close: () => { window.dialogData = null; } // Limpiar datos al cerrar
+    }).render(true);
+  }
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
