@@ -1,0 +1,59 @@
+<form id="level-up-dialog" class="wrapper" autocomplete="off">
+
+    {{!-- Header --}}
+    <div class="text">
+        <h2>Level Up to {{newLevel}} (Rank: {{rank}}, Max: {{rankPlusTwo}}, Min: -1)</h2>
+        <p>Distribute stat points freely (within limits). Use + and - to adjust.</p>
+    </div>
+    <div class="formulario">
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/ftd.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="ftd"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="ftd">{{abilities.ftd.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="ftd"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/prd.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="prd"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="prd">{{abilities.prd.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="prd"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/jst.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="jst"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="jst">{{abilities.jst.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="jst"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/chr.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="chr"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="chr">{{abilities.chr.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="chr"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/ins.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="ins"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="ins">{{abilities.ins.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="ins"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+        <div class="separadores">
+            <img class="dice-icon" src="{{asset 'assets/Icons/tmp.png'}}" alt="2d6 Dice" width="32" height="32"/>
+            <div class="separadores2">
+                <button type="button" class="stat-decrease button-icon" data-stat="tmp"><img src="{{asset 'assets/Icons/-_icon.png'}}" alt=""></button>
+                <span class="stat-value" data-stat="tmp">{{abilities.tmp.value}}</span>
+                <button type="button" class="stat-increase button-icon" data-stat="tmp"><img src="{{asset 'assets/Icons/+_icon.png'}}" alt=""></button>
+            </div>
+        </div>
+    </div>
+
+</form>

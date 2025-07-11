@@ -77,35 +77,24 @@ Hooks.once('init', function () {
 
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
-        if (!actor.system || !changes.system) return;
-        if ('xp' in changes.system && !actor.getFlag('pmttrpg', 'levelUpInProgress')) {
-            const newXp = actor.system.xp + (changes.system.xp || 0);
-            const newLevel = Math.floor(newXp / 8);
-            const oldLevel = actor.system.level || 0;
-            if (newLevel > oldLevel) {
-                actor.setFlag('pmttrpg', 'pendingLevelUp', newLevel);
-                if (actor.sheet) {
-                    actor.setFlag('pmttrpg', 'levelUpInProgress', true);
-                    actor.sheet._showLevelUpDialog().then(() => {
-                        actor.unsetFlag('pmttrpg', 'levelUpInProgress');
-                        if (actor.getFlag('pmttrpg', 'pendingLevelUp') === newLevel) {
-                            actor.unsetFlag('pmttrpg', 'pendingLevelUp');
-                        }
-                    }).catch(err => console.error('Dialog error:', err));
-                }
+        // Verificar si hay cambios en el sistema y específicamente en xp
+        if (!changes.system || !('xp' in changes.system)) return;
+
+        // Calcular el nuevo nivel basado en el xp total
+        const currentXp = actor.system.xp + (changes.system.xp || 0);
+        const newLevel = Math.floor(currentXp / 8); // Asumiendo 8 XP por nivel
+        const oldLevel = actor.system.level || 0;
+
+        // Si el nuevo nivel es mayor que el anterior, mostrar el diálogo
+        if (newLevel !== oldLevel) {
+            if (actor.sheet) {
+                actor.sheet._showLevelUpDialog();
+                // Actualizar el nivel del actor después de mostrar el diálogo (opcional)
+                actor.update({ 'system.level': newLevel });
             }
         }
     } catch (error) {
         console.error('Error in updateActor hook:', error);
-    }
-});
-
-Hooks.on('renderActorSheet', (sheet, html) => {
-    const pendingLevel = sheet.actor.getFlag('pmttrpg', 'pendingLevelUp');
-    if (pendingLevel && pendingLevel > sheet.actor.system.level) {
-        const button = $('<button class="level-up-reopen">Reopen Level Up</button>');
-        button.on('click', () => sheet._showLevelUpDialog());
-        html.find('.sheet-header').append(button);
     }
 });
 

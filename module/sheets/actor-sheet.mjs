@@ -237,53 +237,76 @@ export class PMTTRPGActorSheet extends ActorSheet {
   }
   // module/sheets/actor-sheet.mjs (fragmento de _showLevelUpDialog)
   async _showLevelUpDialog() {
-    const currentLevel = this.actor.system.level;
-    const pendingLevel = this.actor.getFlag('pmttrpg', 'pendingLevelUp') || currentLevel;
-    const newLevel = pendingLevel;
+    const currentXP = this.actor.system.xp;
+    const newLevel = Math.floor(currentXP / 8) ; // Assuming 1000 XP per level
+    const currentRank = Math.floor(newLevel / 3) + 1;
+    const maxPoints = newLevel * 2;
+    let sum = 0;
 
-    if (currentLevel > 20) {
-      ui.notifications.warn("Maximum level (20) reached!");
-      return;
-    }
-
-    const html = await renderTemplate('systems/pmttrpg/templates/level-up-dialog.hbs', {
+    const html = await renderTemplate('systems/pmttrpg/templates/dialogs/level-up-dialog.hbs', {
       actor: this.actor,
       newLevel: newLevel,
-      abilities: this.actor.system.abilities || {},
-      rank: this.actor.system.rank || 1,
-      rankPlusTwo: (this.actor.system.rank || 1) + 2
+      abilities: this.actor.system.abilities,
     });
 
-    new Dialog({
-      id: "level-up-dialog",
+    const dialog = new Dialog({
       title: `Level Up to ${newLevel}`,
       content: html,
       buttons: {
         submit: {
           icon: '<i class="fas fa-check"></i>',
           label: "Apply",
-          callback: async () => {
-            if (window.dialogData && window.dialogData.updates) {
-              await this.actor.update(window.dialogData.updates);
-              if (this.actor.getFlag('pmttrpg', 'pendingLevelUp') === newLevel) {
-                this.actor.unsetFlag('pmttrpg', 'pendingLevelUp');
+          callback: async (html) => {
+            const updates = {};
+            html.find('.stat-value').each((i, el) => {
+              const stat = el.getAttribute('data-stat');
+              const value = parseInt(el.textContent) || 0;
+              if (value !== this.actor.system.abilities[stat].value) {
+                updates[`system.abilities.${stat}.value`] = value;
               }
-              this.render();
-            }
+            });
+            await this.actor.update(updates);
+            this.render();
           },
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
           label: "Cancel",
-          callback: () => {
-            if (this.actor.getFlag('pmttrpg', 'pendingLevelUp') === newLevel) {
-              this.actor.unsetFlag('pmttrpg', 'pendingLevelUp');
-            }
-          },
         },
       },
       default: "submit",
-      close: () => { window.dialogData = null; } // Limpiar datos al cerrar
+      render: (html) => {
+
+        sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0);
+        html.find('.stat-increase').on('click', (event) => {
+          const button = event.currentTarget;
+          const stat = button.getAttribute('data-stat');
+          const span = button.parentElement.querySelector('.stat-value');
+          let value = parseInt(span.textContent) || 0;
+          if (sum < maxPoints && value < currentRank + 2 && value < 6) { // Evita superar el rango máximo
+            value += 1; // Incrementa el valor
+            span.textContent = value; // Actualiza visualmente
+            sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0); // Recalcula la suma
+          } else if(value > maxPoints) {
+            ui.notifications.warn(`Maximum value for ${stat} is ${currentRank + 2} in rank ${currentRank} and cannot exceed 6!`);
+          } else{
+            ui.notifications.warn(`Maximum points (${maxPoints}) reached for level ${newLevel}!`);
+          }
+
+        });
+        html.find('.stat-decrease').on('click', (event) => {
+          const button = event.currentTarget;
+          const stat = button.getAttribute('data-stat');
+          const span = button.parentElement.querySelector('.stat-value');
+          let value = parseInt(span.textContent) || 0;
+          if (sum <= maxPoints && value > -1) { // Evita valores negativos
+            value -= 1; // Decrementa el valor
+            span.textContent = value; // Actualiza visualmente
+            sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0); // Recalcula la suma
+          }
+
+        });
+      },
     }).render(true);
   }
   /**
