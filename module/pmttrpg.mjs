@@ -44,7 +44,8 @@ Hooks.once('init', function () {
     CONFIG.Actor.dataModels = {
         character: models.PMTTRPGCharacter,
         abnormality: models.PMTTRPGAbnormality,
-        distortion: models.PMTTRPGDistortion
+        distortion: models.PMTTRPGDistortion,
+        npc: models.PMTTRPGNpc
     }
     CONFIG.Item.documentClass = PMTTRPGItem;
     CONFIG.Item.dataModels = {
