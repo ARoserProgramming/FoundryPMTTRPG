@@ -75,7 +75,11 @@ Hooks.once('init', function () {
     return preloadHandlebarsTemplates();
 });
 
-
+Hooks.on('createActor', (actor, data, options) => {
+    if (actor.type === 'character' || actor.type === 'distortion') {
+        actor.update({ 'prototypeToken.actorLink': true });
+    }
+});
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
         // Verificar si hay cambios en el sistema y específicamente en xp
