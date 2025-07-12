@@ -244,7 +244,7 @@ export class PMTTRPGActorSheet extends ActorSheet {
   // module/sheets/actor-sheet.mjs (fragmento de _showLevelUpDialog)
   async _showLevelUpDialog() {
     const currentXP = this.actor.system.xp;
-    const newLevel = Math.floor(currentXP / 8) ; // Assuming 1000 XP per level
+    const newLevel = Math.floor(currentXP / 8) ;
     const currentRank = Math.floor(newLevel / 3) + 1;
     const maxPoints = newLevel * 2;
     let sum = 0;
@@ -264,6 +264,10 @@ export class PMTTRPGActorSheet extends ActorSheet {
           label: "Apply",
           callback: async (html) => {
             const updates = {};
+            if (sum < maxPoints) {
+              ui.notifications.warn(`You must spend all points for level ${newLevel}!`);
+              await this._showLevelUpDialog(); // Re-show the dialog if not all points are spent
+            }
             html.find('.stat-value').each((i, el) => {
               const stat = el.getAttribute('data-stat');
               const value = parseInt(el.textContent) || 0;
@@ -278,12 +282,19 @@ export class PMTTRPGActorSheet extends ActorSheet {
         cancel: {
           icon: '<i class="fas fa-times"></i>',
           label: "Cancel",
+          callback: () => {
+            ui.notifications.warn(`You must spend all points for level ${newLevel}!`);
+            if (sum < maxPoints) {
+              this._showLevelUpDialog(); // Re-show the dialog if cancelled
+            }
+          },
         },
       },
       default: "submit",
       render: (html) => {
 
         sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0);
+
         html.find('.stat-increase').on('click', (event) => {
           const button = event.currentTarget;
           const stat = button.getAttribute('data-stat');
@@ -305,7 +316,7 @@ export class PMTTRPGActorSheet extends ActorSheet {
           const stat = button.getAttribute('data-stat');
           const span = button.parentElement.querySelector('.stat-value');
           let value = parseInt(span.textContent) || 0;
-          if (sum <= maxPoints && value > -1) { // Evita valores negativos
+          if (value > -1) { // Evita valores negativos
             value -= 1; // Decrementa el valor
             span.textContent = value; // Actualiza visualmente
             sum = html.find('.stat-value').toArray().reduce((sum, el) => sum + (parseInt(el.textContent) || 0), 0); // Recalcula la suma
