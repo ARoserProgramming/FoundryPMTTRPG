@@ -7,7 +7,7 @@ import {PMTTRPGItemSheet} from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import {preloadHandlebarsTemplates} from './helpers/templates.mjs';
 import {PMTTRPG} from './helpers/config.mjs';
-import PMTTRPGToken from "./overrides/TokenOverride.js";
+import PMTTRPGToken from "./overrides/TokenOverride.mjs";
 
 // Import DataModel classes
 import * as models from './data/_module.mjs';

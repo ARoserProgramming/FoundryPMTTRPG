@@ -61,9 +61,6 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
     async _preCreate(data, options, user) {
         const allowed = await super._preCreate(data, options, user);
         if (allowed === false) return false;
-        if (!this.parent.system.health_points?.value || !this.parent.system.stagger_threshold?.value) {
-            console.warn(`health_points o stagger_threshold no están inicializados para el actor ${this.parent.name}`);
-        }
         const updates = {
             prototypeToken: {
                 displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER

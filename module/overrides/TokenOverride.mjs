@@ -1,7 +1,4 @@
 export default class PMTTRPGToken extends Token {
-    /**
-     * Sobrescribe el método _drawBar para que la segunda barra sea amarilla.
-     */
     _drawBar(number, bar, data) {
         const val = Number(data.value);
         const pct = Math.clamp(val, 0, data.max) / data.max;
