@@ -7,6 +7,8 @@ import {PMTTRPGItemSheet} from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import {preloadHandlebarsTemplates} from './helpers/templates.mjs';
 import {PMTTRPG} from './helpers/config.mjs';
+import PMTTRPGToken from "./overrides/TokenOverride.js";
+
 // Import DataModel classes
 import * as models from './data/_module.mjs';
 
@@ -34,7 +36,7 @@ Hooks.once('init', function () {
         formula: '1d6 + @abilities.jst.mod',
         decimals: 2,
     };
-
+    CONFIG.Token.objectClass = PMTTRPGToken;
     // Define custom Document and DataModel classes
     CONFIG.Actor.documentClass = PMTTRPGActor;
 
@@ -74,7 +76,6 @@ Hooks.once('init', function () {
     // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
-
 Hooks.on('createActor', (actor, data, options) => {
 
 });
@@ -132,6 +133,7 @@ Handlebars.registerHelper('array', function (start, end, options) {
 Hooks.once('ready', function () {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
     Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
+
 });
 
 /* -------------------------------------------- */

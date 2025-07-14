@@ -11,12 +11,6 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
         disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
         sight: {
           enabled: true,
-        },
-        bar1: {
-          attribute: this.health_points,
-        },
-        bar2 : {
-           attribute: this.stagger_threshold,
         }
       },
     };
