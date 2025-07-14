@@ -86,8 +86,6 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
         if(actor.type !== 'character' && actor.type !== 'distortion') return;
         let newHp = actor.system.health_points.value;
         let newMaxHp = actor.system.health_points.max;
-        actor.system.tokenBar.value = newHp;
-        actor.system.tokenBar.max = newMaxHp;
         // Calcular el nuevo nivel basado en el xp total
         const currentXp = actor.system.xp + (changes.system.xp || 0);
         const newLevel = Math.floor(currentXp / 8); // Asumiendo 8 XP por nivel
