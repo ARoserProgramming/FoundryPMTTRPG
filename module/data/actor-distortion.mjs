@@ -4,6 +4,11 @@ import {PMTTRPGCharacter} from "./_module.mjs";
 export default class PMTTRPGDistortion extends PMTTRPGCharacter {
   async _preCreate(data, options, user) {
     super._preCreate(data);
+    this.parent.updateSource({
+      prototypeToken: {
+        disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
+      },
+    });
   }
   static defineSchema() {
     const fields = foundry.data.fields;
