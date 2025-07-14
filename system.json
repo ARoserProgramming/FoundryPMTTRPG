@@ -53,6 +53,6 @@
     "distance": 5,
     "units": "feet"
   },
-  "primaryTokenAttribute": "Health Points",
-  "secondaryTokenAttribute": "Stagger Threshold"
+  "primaryTokenAttribute": "health_points",
+  "secondaryTokenAttribute": "stagger_threshold"
 }

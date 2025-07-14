@@ -1,7 +1,10 @@
-import PMTTRPGActorBase from "./base-actor.mjs";
+import {PMTTRPGCharacter} from "./_module.mjs";
 
-export default class PMTTRPGDistortion extends PMTTRPGActorBase {
 
+export default class PMTTRPGDistortion extends PMTTRPGCharacter {
+  async _preCreate(data, options, user) {
+    super._preCreate(data);
+  }
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };

@@ -1,6 +1,21 @@
 import PMTTRPGActorBase from "./base-actor.mjs";
 
 export default class PMTTRPGAbnormality extends PMTTRPGActorBase {
+    async _preCreate(data, options, user) {
+        const allowed = await super._preCreate(data, options, user);
+        if (allowed === false) return false;
+
+        const updates = {
+            prototypeToken: {
+                actorLink: false,
+                disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
+                sight: {
+                    enabled: false,
+                },
+            },
+        };
+        this.parent.updateSource(updates);
+    }
 
     static defineSchema() {
         const fields = foundry.data.fields;
