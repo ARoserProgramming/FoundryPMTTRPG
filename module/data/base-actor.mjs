@@ -31,7 +31,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         return schema;
     }
 
-    prepareData(data) {
+    prepareBaseData() {
         super.prepareBaseData();
         this.stagger_threshold.min = 0;
         this.health_points.min = 0;
