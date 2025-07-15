@@ -90,7 +90,6 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
         const currentXp = actor.system.xp + (changes.system.xp || 0);
         const newLevel = Math.floor(currentXp / 8); // Asumiendo 8 XP por nivel
         const oldLevel = actor.system.level;
-
         // Si el nuevo nivel es distinto que el anterior, mostrar el diálogo
         if (newLevel !== oldLevel || newLevel === 0) {
             if (actor.sheet) {
