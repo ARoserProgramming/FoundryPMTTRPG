@@ -72,7 +72,15 @@ Hooks.once('init', function () {
         makeDefault: true,
         label: 'PMTTRPG.SheetLabels.Item',
     });
-
+    console.log(CONFIG.statusEffects);
+    //Remove Status Effects Not Available in DrawSteel
+    const toRemove = ["bleeding","freezing","frozen","burning","bless", "corrode", "curse", "degen", "disease", "upgrade", "fireShield", "fear", "holyShield", "hover", "coldShield", "magicShield", "paralysis", "poison", "prone", "regen", "restrain", "shock", "silence", "stun", "downgrade", "unconscious", "upgrade", "weakness", "wound"];
+    CONFIG.statusEffects = CONFIG.statusEffects.filter(effect => !toRemove.includes(effect.id));
+    // Status Effect Transfer
+    for (const [id, value] of Object.entries(PMTTRPG.conditions)) {
+        CONFIG.statusEffects.push({id, _id: id.padEnd(16, "0"), ...value});
+    }
+    console.log(CONFIG.statusEffects);
     // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
@@ -83,7 +91,7 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
         // Verificar si hay cambios en el sistema y específicamente en xp
         if (!changes.system || !('xp' in changes.system)) return;
-        if(actor.type !== 'character' && actor.type !== 'distortion') return;
+        if (actor.type !== 'character' && actor.type !== 'distortion') return;
         let newHp = actor.system.health_points.value;
         let newMaxHp = actor.system.health_points.max;
         // Calcular el nuevo nivel basado en el xp total
@@ -95,7 +103,7 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
             if (actor.sheet) {
                 actor.sheet._showLevelUpDialog();
                 // Actualizar el nivel del actor después de mostrar el diálogo (opcional)
-                actor.update({ 'system.level': newLevel });
+                actor.update({'system.level': newLevel});
             }
         }
     } catch (error) {
