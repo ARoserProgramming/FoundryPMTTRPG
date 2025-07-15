@@ -77,7 +77,7 @@ Hooks.once('init', function () {
     CONFIG.statusEffects = CONFIG.statusEffects.filter(effect => !toRemove.includes(effect.id));
     // Status Effect Transfer
     for (const [id, value] of Object.entries(PMTTRPG.conditions)) {
-        CONFIG.statusEffects.push({id, _id: id.padEnd(16, "0"), ...value});
+        CONFIG.statusEffects.push({id, ...value});
     }
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
