@@ -83,7 +83,7 @@ Hooks.once('init', function () {
     return preloadHandlebarsTemplates();
 });
 Hooks.on('createActor', (actor, data, options) => {
-    console.log(actor.system.resistances);
+
 });
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
