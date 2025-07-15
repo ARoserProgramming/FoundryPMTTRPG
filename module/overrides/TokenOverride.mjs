@@ -69,7 +69,7 @@ export default class PMTTRPGToken extends Token {
         bar.arc(cx, cy, r, startAngle, endAngleStagger, true); // Counterclockwise
 
         // Draw health points arc
-        const otroColor = 0x00ff00; // Color for health points
+        const otroColor = 0xff0000; // Color for health points
         bar.lineStyle({
             width: 4,
             color: otroColor,
