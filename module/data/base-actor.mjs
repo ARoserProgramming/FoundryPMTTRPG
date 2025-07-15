@@ -28,6 +28,12 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             });
             return obj;
         }, {}));
+        schema.resistances = new fields.SchemaField(
+            Object.keys(CONFIG.PMTTRPG.damageTypes).reduce((obj, type) => {
+                obj[type] = new fields.NumberField({ initial: 1, required: true, integer: true });
+                return obj;
+            }, {})
+        );
         return schema;
     }
 

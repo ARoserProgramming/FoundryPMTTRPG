@@ -72,20 +72,18 @@ Hooks.once('init', function () {
         makeDefault: true,
         label: 'PMTTRPG.SheetLabels.Item',
     });
-    console.log(CONFIG.statusEffects);
-    //Remove Status Effects Not Available in DrawSteel
+    //Remove Status Effects Not Available in PMTTRPG
     const toRemove = ["bleeding","freezing","frozen","burning","bless", "corrode", "curse", "degen", "disease", "upgrade", "fireShield", "fear", "holyShield", "hover", "coldShield", "magicShield", "paralysis", "poison", "prone", "regen", "restrain", "shock", "silence", "stun", "downgrade", "unconscious", "upgrade", "weakness", "wound"];
     CONFIG.statusEffects = CONFIG.statusEffects.filter(effect => !toRemove.includes(effect.id));
     // Status Effect Transfer
     for (const [id, value] of Object.entries(PMTTRPG.conditions)) {
         CONFIG.statusEffects.push({id, _id: id.padEnd(16, "0"), ...value});
     }
-    console.log(CONFIG.statusEffects);
-    // Preload Handlebars templates.
+   // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
 Hooks.on('createActor', (actor, data, options) => {
-
+    console.log(actor.system.resistances);
 });
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
