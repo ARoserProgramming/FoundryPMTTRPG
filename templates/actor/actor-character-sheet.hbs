@@ -9,7 +9,7 @@
                 <div class="resource flex-group-center">
                     <label for="system.health_points.value" class="resource-label">{{localize_health}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.health_points.value" min=0 max="{{system.health_points.max}}" value="{{system.health_points.value}}" data-dtype="Number">
+                        <input type="number" name="system.health_points.value" min=0 max="{{system.health_points.max}}" value="{{system.health_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
                         <span> / </span>
                         <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
                     </div>
@@ -18,7 +18,7 @@
                 <div class="resource flex-group-center">
                     <label for="system.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.stagger_threshold.value" min=0 max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" data-dtype="Number">
+                        <input type="number" name="system.stagger_threshold.value" min=0 max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
                         <span> / </span>
                         <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
                     </div>
@@ -27,7 +27,7 @@
                 <div class="resource flex-group-center">
                     <label for="system.sanity_points.value" class="resource-label">{{localize_mentality}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.sanity_points.value" min=0 max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" data-dtype="Number">
+                        <input type="number" name="system.sanity_points.value" min=0 max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
                         <span> / </span>
                         <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="resource flex-group-center">
                     <label for="system.light.value" class="resource-label">{{localize_light}}</label>
                     <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.light.value" min=0 max="{{system.light.max}}" value="{{system.light.value}}" data-dtype="Number"/>
+                        <input type="number" name="system.light.value" min=0 max="{{system.light.max}}" value="{{system.light.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number"/>
                         <span> / </span>
                         <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
                     </div>
