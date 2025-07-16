@@ -73,7 +73,7 @@ Hooks.once('init', function () {
         label: 'PMTTRPG.SheetLabels.Item',
     });
     //Remove Status Effects Not Available in PMTTRPG
-    const toRemove = ["bleeding","freezing","frozen","burning","bless", "corrode", "curse", "degen", "disease", "upgrade", "fireShield", "fear", "holyShield", "hover", "coldShield", "magicShield", "paralysis", "poison", "prone", "regen", "restrain", "shock", "silence", "stun", "downgrade", "unconscious", "upgrade", "weakness", "wound"];
+    const toRemove = ["marked","bleeding","freezing","frozen","burning","bless", "corrode", "curse", "degen", "disease", "upgrade", "fireShield", "fear", "holyShield", "hover", "coldShield", "magicShield", "paralysis", "poison", "prone", "regen", "restrain", "shock", "silence", "stun", "downgrade", "unconscious", "upgrade", "weakness", "wound"];
     CONFIG.statusEffects = CONFIG.statusEffects.filter(effect => !toRemove.includes(effect.id));
     // Status Effect Transfer
     for (const [id, value] of Object.entries(PMTTRPG.conditions)) {
