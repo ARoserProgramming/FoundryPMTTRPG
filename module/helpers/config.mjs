@@ -76,7 +76,7 @@ PMTTRPG.damageTypes = {
     },
     devastating: {
         label: 'PMTTRPG.DAMAGE_TYPE.Devastating',
-        img: 'systems/pmttrpg/assets/imgs/conditions/devastating.png',
+        img: 'systems/pmttrpg/assets/imgs/conditions/devastation.png',
     },
 
     force: {
