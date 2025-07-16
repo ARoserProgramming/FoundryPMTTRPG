@@ -79,6 +79,7 @@ Hooks.once('init', function () {
     for (const [id, value] of Object.entries(PMTTRPG.conditions)) {
         CONFIG.statusEffects.push({id, ...value});
     }
+    console.log(PMTTRPG.damageTypes);
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
@@ -106,6 +107,35 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
         }
     } catch (error) {
         console.error('Error in updateActor hook:', error);
+    }
+});
+Hooks.once('ready', async function () {
+    // Tipos de daño físicos fijos
+    const physicalTypes = ["slash", "pierce", "blunt"];
+    const testDamage = 2;
+
+    for (const actor of game.actors.contents) {
+        if (!actor.system?.health_points || !actor.system?.stagger_threshold) continue;
+        console.log(`\n--- Test daño físico en ${actor.name} ---`);
+        for (const type of physicalTypes) {
+            try {
+                console.log(`Aplicando ${testDamage} de daño tipo "${type}" a health_points`);
+                await actor.system.takeDamage(testDamage, { type, targetResource: "health_points", ignoreResistances: ["slash","stagger_slash"] });
+                console.log(`Nuevo estado de health_points:`, foundry.utils.deepClone(actor.system.health_points));
+                console.log(`Nuevo estado de stagger_threshold:`, foundry.utils.deepClone(actor.system.stagger_threshold));
+            } catch (e) {
+                console.error(`Error al aplicar daño tipo "${type}" en ${actor.name}:`, e);
+            }
+            // Restaurar valores
+            try {
+                await actor.update({
+                    "system.health_points.value": actor.system.health_points.max,
+                    "system.stagger_threshold.value": actor.system.stagger_threshold.max
+                });
+            } catch (e) {
+                console.error(`Error al restaurar recursos en ${actor.name}:`, e);
+            }
+        }
     }
 });
 

@@ -9,6 +9,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         schema.stagger_threshold = new fields.SchemaField({
             value: new fields.NumberField({initial: 24, nullable: false, integer: true}),
             max: new fields.NumberField({initial: 24, nullable: false, integer: true}),
+            temporal: new fields.NumberField({initial: 0, nullable: false, integer: true}),
         });
         schema.health_points = new fields.SchemaField({
             value: new fields.NumberField({initial: 80, nullable: false, integer: true}),
@@ -30,7 +31,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         }, {}));
         schema.resistances = new fields.SchemaField(
             Object.keys(CONFIG.PMTTRPG.damageTypes).reduce((obj, type) => {
-                obj[type] = new fields.NumberField({ initial: 1, required: true, integer: true });
+                obj[type] = new fields.NumberField({ initial: 4, required: true, integer: true });
                 return obj;
             }, {})
         );
@@ -78,4 +79,96 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         };
         this.parent.updateSource(updates);
     }
-}
+
+    async takeDamage(damage, options = {}) {
+        const damageType = options.type || "force";
+        const ignoreResistances = options.ignoreResistances || [];
+        const ignoreAll = ignoreResistances === "all";
+        if (typeof damage !== "number" || damage < 0) {
+            throw new Error("Invalid damage value. Must be a non-negative number.");
+        }
+        if (!this.resistances.hasOwnProperty(damageType) || options.type === "physical") {
+            throw new Error(`Invalid damage type: ${damageType}`);
+        }
+        if (!options.targetResource || !["health_points", "stagger_threshold","sanity_points"].includes(options.targetResource)) {
+            throw new Error(`Invalid target resource: ${options.targetResource}`);
+        }
+        if (options.targetResource === "sanity_points" && this.constructor.name === "PMTTRPGAbnormality") {
+            throw new Error("Abnormalities do not have sanity_points.");
+        }
+
+        const updates = {};
+        const physicalTypes = ["slash","pierce","blunt"];
+        const isPhysical = physicalTypes.includes(damageType);
+
+        // Helper para decidir si ignorar resistencia
+        const shouldIgnore = (type) => ignoreAll || (Array.isArray(ignoreResistances) && ignoreResistances.includes(type));
+
+        if (isPhysical && options.targetResource === "health_points") {
+            // HP Damage
+            const hpResistance = shouldIgnore(damageType) ? 1 : this.resistances[damageType];
+            const effectiveHPDamage = Math.max(0, damage * hpResistance);
+            const damageToTempHP = Math.min(effectiveHPDamage, this.health_points.temporal);
+            this.health_points.temporal = Math.max(0, this.health_points.temporal - damageToTempHP);
+            const remainingHPDamage = Math.max(0, effectiveHPDamage - damageToTempHP);
+            if (remainingHPDamage > 0) {
+                this.health_points.value = Math.max(0, this.health_points.value - remainingHPDamage);
+            }
+            updates["system.health_points"] = this.health_points;
+
+            // Stagger damage
+            const staggerResKey = "stagger_" + damageType;
+            if (!this.resistances.hasOwnProperty(staggerResKey)) {
+                throw new Error(`Missing stagger resistance for: ${damageType}`);
+            }
+            const staggerResistance = shouldIgnore(staggerResKey) ? 1 : this.resistances[staggerResKey];
+            const effectiveStaggerDamage = Math.max(0, damage * staggerResistance);
+            const damageToTempStagger = Math.min(effectiveStaggerDamage, this.stagger_threshold.temporal);
+            this.stagger_threshold.temporal = Math.max(0, this.stagger_threshold.temporal - damageToTempStagger);
+            const remainingStaggerDamage = Math.max(0, effectiveStaggerDamage - damageToTempStagger);
+            if (remainingStaggerDamage > 0) {
+                this.stagger_threshold.value = Math.max(0, this.stagger_threshold.value - remainingStaggerDamage);
+            }
+            updates["system.stagger_threshold"] = this.stagger_threshold;
+        } else {
+            const resistance = shouldIgnore(damageType) ? 1 : this.resistances[damageType];
+            const effectiveDamage = Math.max(0, damage * resistance);
+
+            switch (options.targetResource) {
+                case "health_points": {
+                    const damageToTempHP = Math.min(effectiveDamage, this.health_points.temporal);
+                    this.health_points.temporal = Math.max(0, this.health_points.temporal - damageToTempHP);
+                    const remainingDamage = Math.max(0, effectiveDamage - damageToTempHP);
+                    if (remainingDamage > 0) {
+                        this.health_points.value = Math.max(0, this.health_points.value - remainingDamage);
+                    }
+                    updates["system.health_points"] = this.health_points;
+                    break;
+                }
+                case "sanity_points": {
+                    const damageToTempSanity = Math.min(effectiveDamage, this.sanity_points.temporal);
+                    this.sanity_points.temporal = Math.max(0, this.sanity_points.temporal - damageToTempSanity);
+                    const remainingDamage = Math.max(0, effectiveDamage - damageToTempSanity);
+                    if (remainingDamage > 0) {
+                        this.sanity_points.value = Math.max(0, this.sanity_points.value - remainingDamage);
+                    }
+                    updates["system.sanity_points"] = this.sanity_points;
+                    break;
+                }
+                case "stagger_threshold": {
+                    const damageToTempStagger = Math.min(effectiveDamage, this.stagger_threshold.temporal);
+                    this.stagger_threshold.temporal = Math.max(0, this.stagger_threshold.temporal - damageToTempStagger);
+                    const remainingDamage = Math.max(0, effectiveDamage - damageToTempStagger);
+                    if (remainingDamage > 0) {
+                        this.stagger_threshold.value = Math.max(0, this.stagger_threshold.value - remainingDamage);
+                    }
+                    updates["system.stagger_threshold"] = this.stagger_threshold;
+                    break;
+                }
+                default:
+                    throw new Error(`Invalid target resource: ${options.targetResource}`);
+            }
+        }
+        return this.parent.update(updates, options);
+    }
+    }
