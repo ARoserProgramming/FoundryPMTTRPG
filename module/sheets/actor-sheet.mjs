@@ -92,6 +92,20 @@ export class PMTTRPGActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
+
+    // Después de preparar context.effects
+    for (const section of Object.values(context.effects)) {
+      for (const effect of section.effects) {
+        // Busca la condición por nombre
+        const cond = Object.values(CONFIG.PMTTRPG.conditions).find(
+            c => game.i18n.localize(c.name) === effect.name
+        );
+        if (cond && cond.potency) {
+          effect.potency = cond.potency;
+        }
+      }
+    }
+
     //localize
     context.localize_health = game.i18n.localize('PMTTRPG.Stats.HealthPoints');
     context.localize_stagger = game.i18n.localize('PMTTRPG.Stats.StaggerThreshold');
