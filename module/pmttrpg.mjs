@@ -117,14 +117,14 @@ Hooks.once('ready', async function () {
     for (const actor of game.actors.contents) {
         if (!actor.system?.health_points || !actor.system?.stagger_threshold) continue;
         console.log(`\n--- Test daño físico en ${actor.name} ---`);
-        for (const type of physicalTypes) {
+        for (const damageType of physicalTypes) {
             try {
-                console.log(`Aplicando ${testDamage} de daño tipo "${type}" a health_points`);
-                await actor.system.takeDamage(testDamage, { type, targetResource: "health_points", ignoreResistances: ["slash","stagger_slash"] });
+                console.log(`Aplicando ${testDamage} de daño tipo "${damageType}" a health_points`);
+                await actor.system.takeDamage(testDamage, { type: damageType, targetResource: "health_points"});
                 console.log(`Nuevo estado de health_points:`, foundry.utils.deepClone(actor.system.health_points));
                 console.log(`Nuevo estado de stagger_threshold:`, foundry.utils.deepClone(actor.system.stagger_threshold));
             } catch (e) {
-                console.error(`Error al aplicar daño tipo "${type}" en ${actor.name}:`, e);
+                console.error(`Error al aplicar daño tipo "${damageType}" en ${actor.name}:`, e);
             }
             // Restaurar valores
             try {
