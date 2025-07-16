@@ -4,7 +4,12 @@
 .window-app {
     font-family: "Roboto", sans-serif;
 }
-
+#token-hud .attribute.bar2 input {
+    border: 1px solid red ;
+}
+#token-hud .attribute.bar1 input {
+    border: 1px solid yellow;
+}
 /* level up dialog */
 .wrapper {
     margin: 0 0 8px 0;
