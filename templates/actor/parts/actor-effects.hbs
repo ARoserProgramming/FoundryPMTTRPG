@@ -2,6 +2,7 @@
   {{#each effects as |section sid|}}
     <li class="items-header flexrow" data-effect-type="{{section.type}}" data-parent-id="{{@root.actor.id}}" >
       <h3 class="item-name effect-name flexrow">{{localize section.label}}</h3>
+      <div class="effect-source">{{localize "PMTTRPG.Effect.Potency"}}</div>
       <div class="effect-source">{{localize "PMTTRPG.Effect.Source"}}</div>
       <div class="effect-source">{{localize "EFFECT.TabDuration"}}</div>
       <div class="item-controls effect-controls flexrow">
@@ -19,6 +20,7 @@
           <h4>{{effect.name}}</h4>
         </div>
         <div class="effect-source">{{effect.potency.value}}</div>
+        <div class="effect-source">{{effect.source}}</div>
         <div class="effect-duration">{{effect.duration.label}}</div>
         <div class="item-controls effect-controls flexrow">
           <a class="effect-control" data-action="toggle" title="{{localize 'PMTTRPG.Effect.Toggle'}}">

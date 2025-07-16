@@ -24,7 +24,8 @@
       "Toggle": "Toggle Effect",
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
+      "Inactive": "Inactive Effects",
+      "Potency": "Potency"
     },
     "Attributes": {
       "Rank": "Rank",
@@ -50,6 +51,10 @@
       "Waw": "Waw",
       "Aleph": "Aleph"
     },
+    "HealingType": {
+      "Value": "Value",
+      "Temporary": "Temporary"
+    },
     "DAMAGE_TYPE": {
       "Slash": "Slash",
       "Pierce": "Pierce",
@@ -58,7 +63,13 @@
       "Sinking": "Sinking",
       "Rupture": "Rupture",
       "Frostbite": "Frostbite",
-      "Bleed": "Bleed"
+      "Bleed": "Bleed",
+      "Tremor": "Tremor",
+      "Critical": "Critical",
+      "Devastating": "Devastating",
+      "Physical": "Physical",
+      "Force": "Force",
+      "Falling": "Falling"
     },
     "Condition": {
       "Burn": "Burned",

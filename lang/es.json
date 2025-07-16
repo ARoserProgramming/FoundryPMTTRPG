@@ -24,7 +24,8 @@
       "Toggle": "Alternar Efecto",
       "Temporary": "Effectos Temporales",
       "Passive": "Efectos Pasivos",
-      "Inactive": "Efectos Inactivos"
+      "Inactive": "Efectos Inactivos",
+      "Potency": "Potencia"
     },
     "Attributes": {
       "Rank": "Rango",
@@ -50,6 +51,10 @@
       "Waw": "Waw",
       "Aleph": "Aleph"
     },
+    "HealingType": {
+      "Value": "Valor",
+      "Temporary": "Temporal"
+    },
     "DAMAGE_TYPE": {
       "Slash": "Corte",
       "Pierce": "Perforación",
@@ -58,7 +63,13 @@
       "Sinking": "Hundimiento",
       "Rupture": "Ruptura",
       "Frostbite": "Congelación",
-      "Bleed": "Sangrado"
+      "Bleed": "Sangrado",
+      "Tremor": "Temblor",
+      "Critical": "Crítico",
+      "Devastating": "Devastador",
+      "Physical": "Físico",
+      "Force": "Fuerza",
+      "Falling": "Caída"
     },
     "Condition": {
       "Burn": "Quemado",
