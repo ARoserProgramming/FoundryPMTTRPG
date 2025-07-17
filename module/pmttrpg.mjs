@@ -11,6 +11,7 @@ import PMTTRPGToken from "./overrides/TokenOverride.mjs";
 
 // Import DataModel classes
 import * as models from './data/_module.mjs';
+import {aplicarDañoAutomatizado} from "./helpers/effects.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -137,6 +138,38 @@ Hooks.once('ready', async function () {
             }
         }
     }
+    // Tipos de daño especiales
+    const specialTypes = ["burn","sinking","rupture"];
+    const testDamage2 = 2;
+
+    for (const actor of game.actors.contents) {
+        if (!actor.system?.health_points || !actor.system?.stagger_threshold) continue;
+        console.log(`\n--- Test daño especial en ${actor.name} ---`);
+        for (const damageType of specialTypes) {
+            try {
+                console.log(`Aplicando ${testDamage} de daño tipo "${damageType}" con aplicarDañoAutomatizado`);
+                await aplicarDañoAutomatizado(actor, damageType, testDamage2);
+                console.log(`Nuevo estado de health_points:`, foundry.utils.deepClone(actor.system.health_points));
+                console.log(`Nuevo estado de stagger_threshold:`, foundry.utils.deepClone(actor.system.stagger_threshold));
+                if (actor.system.sanity_points)
+                    console.log(`Nuevo estado de sanity_points:`, foundry.utils.deepClone(actor.system.sanity_points));
+            } catch (e) {
+                console.error(`Error al aplicar daño tipo "${damageType}" en ${actor.name}:`, e);
+            }
+            // Restaurar valores
+            try {
+                await actor.update({
+                    "system.health_points.value": actor.system.health_points.max,
+                    "system.stagger_threshold.value": actor.system.stagger_threshold.max,
+                    ...(actor.system.sanity_points && {"system.sanity_points.value": actor.system.sanity_points.max})
+                });
+            } catch (e) {
+                console.error(`Error al restaurar recursos en ${actor.name}:`, e);
+            }
+        }
+    }
+
+
 });
 
 /* -------------------------------------------- */

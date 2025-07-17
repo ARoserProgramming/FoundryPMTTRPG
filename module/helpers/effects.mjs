@@ -66,3 +66,22 @@ export function prepareActiveEffectCategories(effects) {
   }
   return categories;
 }
+// Mapeo de tipo de daño a recurso
+const damageTypeToResource = {
+  burn: "health_points",
+  rupture: "stagger_threshold",
+  sinking: "sanity_points"
+  // Añade más según tu sistema
+};
+
+/**
+ * Aplica daño usando el método takeDamage del actor, eligiendo el recurso automáticamente.
+ * @param {PMTTRPGActorBase} actor
+ * @param {string} damageType
+ * @param {number} amount
+ * @param {Object} opciones
+ */
+export async function aplicarDañoAutomatizado(actor, damageType, amount, opciones = {}) {
+  const targetResource = damageTypeToResource[damageType] ?? "health_points";
+  return actor.system.takeDamage(amount, { type: damageType, targetResource, ...opciones });
+}
