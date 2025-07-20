@@ -9,7 +9,7 @@ export default class PMTTRPGCharacter extends PMTTRPGActorBase {
         schema.sanity_points = new fields.SchemaField({
             value: new fields.NumberField({initial: 15, nullable: false, integer: true}),
             max: new fields.NumberField({initial: 15, nullable: false, integer: true}),
-            temporal: new fields.NumberField({initial: 0, nullable: false, integer: true}),
+            temporal: new fields.NumberField({initial:0, value: 0, nullable: false, integer: true}),
         })
         return schema;
     }

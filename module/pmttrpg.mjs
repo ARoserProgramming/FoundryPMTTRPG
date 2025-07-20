@@ -1,17 +1,36 @@
+// import * as canvas from "./canvas/_module.mjs";
+ import * as documents from "./documents/_module.mjs";
+import * as sheets from "./sheets/_module.mjs";
+// import * as applications from "./applications/_module.mjs";
+// import * as helpers from "./helpers/_module.mjs";
+// import * as rolls from "./rolls/_module.mjs";
+// import * as data from "./data/_module.mjs";
+// import * as utils from "./utils/_module.mjs";
 // Import document classes.
-import {PMTTRPGActor} from './documents/actor.mjs';
-import {PMTTRPGItem} from './documents/item.mjs';
 // Import sheet classes.
-import {PMTTRPGActorSheet} from './sheets/actor-sheet.mjs';
-import {PMTTRPGItemSheet} from './sheets/item-sheet.mjs';
+import PMTTRPGActor from './documents/actor.mjs';
+import PMTTRPGItem from './documents/item.mjs';
 // Import helper/utility classes and constants.
 import {preloadHandlebarsTemplates} from './helpers/templates.mjs';
 import {PMTTRPG} from './helpers/config.mjs';
 import PMTTRPGToken from "./overrides/TokenOverride.mjs";
-
+globalThis.pmttrpg = {
+    // canvas,
+    documents,
+    sheets,
+    // applications,
+    // helpers,
+    // rolls,
+    // data,
+    // utils,
+    // CONST: PM_CONST,
+    CONFIG: PMTTRPG,
+};
 // Import DataModel classes
 import * as models from './data/_module.mjs';
 import {aplicarDañoAutomatizado} from "./helpers/effects.mjs";
+import PMTTRPGActorSheet from "./sheets/actor-sheet.mjs";
+import PMTTRPGItemSheet from "./sheets/item-sheet.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -48,7 +67,8 @@ Hooks.once('init', function () {
         character: models.PMTTRPGCharacter,
         abnormality: models.PMTTRPGAbnormality,
         distortion: models.PMTTRPGDistortion,
-        npc: models.PMTTRPGNpc
+        npc: models.PMTTRPGNpc,
+        effect: models.PMTTRPGActiveEffect,
     }
     CONFIG.Item.documentClass = PMTTRPGItem;
     CONFIG.Item.dataModels = {
@@ -189,19 +209,6 @@ Handlebars.registerHelper('array', function (start, end, options) {
     let result = [];
     for (let i = start; i <= end; i++) result.push(i);
     return options.fn ? options.fn(result) : result;
-});
-Handlebars.registerHelper('resistancetext', function (valor) {
-    if (valor == null) return "";
-    if (valor === 0) return "Inmune";
-    if (valor < 1) return "Resistente";
-    if(valor >= 1 && valor < 1.5) return "Normal";
-    if(valor >= 1.5 && valor <2) return "Débil";
-    if(valor >= 2) return "Fatal";
-    return valor;
-});
-Handlebars.registerHelper('array', function() {
-    // Convierte los argumentos en un array, ignorando el último (options)
-    return Array.prototype.slice.call(arguments, 0, -1);
 });
 
 

@@ -12,7 +12,6 @@ export default class PMTTRPGDistortion extends PMTTRPGCharacter {
   }
   static defineSchema() {
     const fields = foundry.data.fields;
-    const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
     schema.risk = new fields.StringField({
       required: true,
@@ -25,10 +24,6 @@ export default class PMTTRPGDistortion extends PMTTRPGCharacter {
   prepareDerivedData() {
     // Loop through ability scores, and add their modifiers to our sheet output.
    super.prepareDerivedData();
-    this.sanity_points = {
-      value: 15,
-      max: 15 + (this.abilities.prd.value * 3),
-    };
   }
 
   getRollData() {
