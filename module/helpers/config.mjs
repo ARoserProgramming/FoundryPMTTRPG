@@ -21,6 +21,14 @@ PMTTRPG.abilityAbbreviations = {
     ins: 'PMTTRPG.Ability.Ins.long',
     tmp: 'PMTTRPG.Ability.Tmp.long',
 };
+PMTTRPG.abilityImages = {
+    ftd: 'systems/pmttrpg/assets/imgs/ftd.png',
+    prd: 'systems/pmttrpg/assets/imgs/prd.png',
+    jst: 'systems/pmttrpg/assets/imgs/jst.png',
+    chr: 'systems/pmttrpg/assets/imgs/chr.png',
+    ins: 'systems/pmttrpg/assets/imgs/ins.png',
+    tmp: 'systems/pmttrpg/assets/imgs/tmp.png',
+};
 PMTTRPG.damageTypes = {
     slash: {
         label: 'PMTTRPG.DAMAGE_TYPE.Slash',

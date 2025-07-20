@@ -31,7 +31,27 @@
       "Rank": "Rank",
       "Level": "Level",
       "Light": "Light",
-      "XP": "Experience Points"
+      "XP": "Experience Points",
+      "AttackModifier": "Attack Modifier",
+      "EvadeModifier": "Evade Modifier",
+      "BlockModifier": "Block Modifier",
+      "EquipmentLimit": "Equipment Limit",
+      "ToolSlots": "Tool Slots",
+      "Resistances": {
+        "Slash": "Slash Resistance",
+        "Pierce": "Pierce Resistance",
+        "Blunt": "Blunt Resistance",
+        "Burn": "Burn Resistance",
+        "Sinking": "Sinking Resistance",
+        "Rupture": "Rupture Resistance",
+        "Frostbite": "Frostbite Resistance",
+        "Bleed": "Bleed Resistance",
+        "Tremor": "Tremor Resistance",
+        "Critical": "Critical Resistance",
+        "Devastating": "Devastating Resistance",
+        "force": "Force Resistance",
+        "Falling": "Falling Resistance"
+      }
     },
     "Stats": {
       "HealthPoints": "Health Points",

@@ -69,6 +69,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             for (const key in this.abilities) {
                 this.abilities[key].mod = this.abilities[key].value;
                 this.abilities[key].label = game.i18n.localize(CONFIG.PMTTRPG.abilities[key]) ?? key;
+                this.abilities[key].img = CONFIG.PMTTRPG.abilityImages[key];
             }
         }
         // Common attribute logic

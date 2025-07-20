@@ -68,7 +68,135 @@
 .formulario .separadores .separadores2 button {
     color: white;
 }
+/*Hoja de character*/
+.character-sheet h1{
+    font-size: 1em;
+}
+.character-sheet{
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+.character-header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.portrait{
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+}
+.portrait img{
+    max-width: 100%;
+    height: auto;
+    border: 1px solid white;
+}
+.character-header div h1 {
+    text-align: center;
+}
+.all-all-abilities{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.all-abilities{
+    width: 294px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.abilities{
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.ability-ftd{
+    font-weight: bold;
+    background-color: red;
+    color: darkred;
+    border: none;
+    clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 0 100%);
+}
+.ability-prd{
+    font-weight: bold;
+    background-color: darkgray;
+    color: gray;
+    border: none;
+    clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 10px 100%, 0 -33%);
+}
+.ability-jst{
+    font-weight: bold;
+    background-color: lightskyblue;
+    color: mediumblue;
+    border: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
+}
+.ability-chr{
+    font-weight: bold;
+    background-color: plum;
+    color: mediumpurple;
+    border: none;
+    clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 0 100%);
+}
+.ability-ins{
+    font-weight: bold;
+    background-color: #FFFFC5;
+    color: gold;
+    border: none;
+    clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 10px 100%, 0 -33%);
+}
+.ability-tmp{
+    font-weight: bold;
+    background-color: mediumpurple;
+    color: rebeccapurple;
+    border: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
+}
+.abilities img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain; /* O usa 'cover' si prefieres recortar */
+    display: block;
+    margin: 0 auto;
+    border: none;
+}
+.ability-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.ability-label input {
+    width: 32px;      /* Solo lo necesario para una cifra */
+    text-align: center;
+    margin: 0 4px;    /* Espacio a los lados si lo necesitas */
+    padding: 2px;
+    box-sizing: border-box;
+    color: white; /* Texto en blanco */
+    border: 1px solid white;
+}
+input:disabled:hover{
+    border: 1px solid white !important; /* Mantiene el borde blanco al pasar el mouse */
+}
+.ability-label span {
+    display: flex;
+    align-items: center; /* Centra verticalmente la imagen dentro del span */
+    margin-left: 8px;    /* Espacio entre input e imagen */
+}
+.ability-label span img{
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;}
 
+
+/**/
 .manufacturing-consent-regular {
     font-family: "Manufacturing Consent", system-ui;
     font-weight: 400;
