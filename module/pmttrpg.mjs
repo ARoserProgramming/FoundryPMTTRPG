@@ -1,14 +1,28 @@
+// import * as canvas from "./canvas/_module.mjs";
+ import * as documents from "./documents/_module.mjs";
+// import * as applications from "./applications/_module.mjs";
+// import * as helpers from "./helpers/_module.mjs";
+// import * as rolls from "./rolls/_module.mjs";
+// import * as data from "./data/_module.mjs";
+// import * as utils from "./utils/_module.mjs";
 // Import document classes.
-import {PMTTRPGActor} from './documents/actor.mjs';
-import {PMTTRPGItem} from './documents/item.mjs';
 // Import sheet classes.
-import {PMTTRPGActorSheet} from './sheets/actor-sheet.mjs';
-import {PMTTRPGItemSheet} from './sheets/item-sheet.mjs';
+
 // Import helper/utility classes and constants.
 import {preloadHandlebarsTemplates} from './helpers/templates.mjs';
 import {PMTTRPG} from './helpers/config.mjs';
 import PMTTRPGToken from "./overrides/TokenOverride.mjs";
-
+globalThis.pmttrpg = {
+    // canvas,
+    documents,
+    // applications,
+    // helpers,
+    // rolls,
+    // data,
+    // utils,
+    // CONST: PM_CONST,
+    CONFIG: PMTTRPG,
+};
 // Import DataModel classes
 import * as models from './data/_module.mjs';
 
@@ -47,7 +61,8 @@ Hooks.once('init', function () {
         character: models.PMTTRPGCharacter,
         abnormality: models.PMTTRPGAbnormality,
         distortion: models.PMTTRPGDistortion,
-        npc: models.PMTTRPGNpc
+        npc: models.PMTTRPGNpc,
+        effect: models.PMTTRPGEffect,
     }
     CONFIG.Item.documentClass = PMTTRPGItem;
     CONFIG.Item.dataModels = {

@@ -312,5 +312,75 @@ PMTTRPG.conditions = {
         name: 'PMTTRPG.Condition.LimbLossLeg',
         img: 'systems/pmttrpg/assets/imgs/conditions/limb_loss_leg.png',
         potency: {value: 1, min: 0, max: 2}
+    }
+}
+PMTTRPG.effectEnd ={
+    round_end: {
+        label: 'PMTTRPG.EffectEnd.RoundEnd',
+        value: 'round_end',
     },
+    potency_to_zero: {
+        label: 'PMTTRPG.EffectEnd.PotencyToZero',
+        value: 'potency_to_zero',
+    },
+    burst:{
+        label: 'PMTTRPG.EffectEnd.Burst',
+        value: 'burst',
+    },
+    combat_end: {
+        label: 'PMTTRPG.EffectEnd.CombatEnd',
+        value: 'combat_end',
+    },
+    save: {
+        label: 'PMTTRPG.EffectEnd.Save',
+        value: 'save',
+    }
+}
+PMTTRPG.potencyReduce = {
+    clash: {
+        label: 'PMTTRPG.PotencyReduce.Clash',
+        value: 'clash',
+    },
+    clash_end: {
+        label: 'PMTTRPG.PotencyReduce.ClashEnd',
+        value: 'clash_end',
+    },
+    clash_win: {
+        label: 'PMTTRPG.PotencyReduce.ClashWin',
+        value: 'clash_win',
+    },
+    clash_loss: {
+        label: 'PMTTRPG.PotencyReduce.ClashLose',
+        value: 'clash_loss',
+    },
+    consume: {
+        label: 'PMTTRPG.PotencyReduce.Consume',
+        value: 'consume',
+    },
+    use:{
+        label: 'PMTTRPG.PotencyReduce.Use',
+        value: 'use',
+    },
+    end: {
+        label: 'PMTTRPG.PotencyReduce.End',
+        value: 'end',
+    },
+}
+PMTTRPG.target_attributes = {
+    health_points:{
+        label: 'PMTTRPG.TargetAttribute.HealthPoints',
+        value: 'health_points',
+    },
+    stagger_threshold:{
+        label: 'PMTTRPG.TargetAttribute.StaggerThreshold',
+        value: 'stagger_threshold',
+    },
+    sanity_points:{
+        label: 'PMTTRPG.TargetAttribute.SanityPoints',
+        value: 'sanity_points',
+    },
+    other: {
+        label: 'PMTTRPG.TargetAttribute.Other',
+        value: 'other',
+    }
 }
