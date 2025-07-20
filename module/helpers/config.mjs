@@ -323,9 +323,9 @@ PMTTRPG.effectEnd ={
         label: 'PMTTRPG.EffectEnd.PotencyToZero',
         value: 'potency_to_zero',
     },
-    burst_or_turn_end:{
-        label: 'PMTTRPG.EffectEnd.BurstOrTurnEnd',
-        value: 'burst_or_turn_end',
+    burst_or_round_end:{
+        label: 'PMTTRPG.EffectEnd.BurstOrRoundEnd',
+        value: 'burst_or_round_end',
     },
     combat_end: {
         label: 'PMTTRPG.EffectEnd.CombatEnd',
