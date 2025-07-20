@@ -78,7 +78,7 @@ export default class PMTTRPGActor extends Actor {
    * @param {boolean} [options.active]        Force the effect to be active or inactive regardless of its current state
    * @param {boolean} [options.overlay=false] Display the toggled effect as an overlay
    * @param {string} [options.effectEnd]      Value for `system.end.type`
-   * @returns {Promise<DrawSteelActiveEffect|boolean|undefined>}  A promise which resolves to one of the following values:
+   * @returns {Promise<PMTTRPGActiveEffect|boolean|undefined>}  A promise which resolves to one of the following values:
    *                                 - ActiveEffect if a new effect need to be created
    *                                 - true if was already an existing effect
    *                                 - false if an existing effect needed to be removed
@@ -119,6 +119,6 @@ export default class PMTTRPGActor extends Actor {
     if (target_attribute) effect.updateSource({ "system.target_attribute": target_attribute });
     if (potency_reduce) effect.updateSource({ "system.potency_reduce": potency_reduce });
 
-    return BaseEffectModel.create(effect, { parent: this, keepId: true });
+    return PMTTRPGActiveEffect.create(effect, { parent: this, keepId: true });
   }
 }

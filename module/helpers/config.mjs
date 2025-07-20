@@ -323,9 +323,9 @@ PMTTRPG.effectEnd ={
         label: 'PMTTRPG.EffectEnd.PotencyToZero',
         value: 'potency_to_zero',
     },
-    burst:{
-        label: 'PMTTRPG.EffectEnd.Burst',
-        value: 'burst',
+    burst_or_turn_end:{
+        label: 'PMTTRPG.EffectEnd.BurstOrTurnEnd',
+        value: 'burst_or_turn_end',
     },
     combat_end: {
         label: 'PMTTRPG.EffectEnd.CombatEnd',
@@ -334,6 +334,10 @@ PMTTRPG.effectEnd ={
     save: {
         label: 'PMTTRPG.EffectEnd.Save',
         value: 'save',
+    },
+    burst: {
+        label: 'PMTTRPG.EffectEnd.Burst',
+        value: 'burst',
     }
 }
 PMTTRPG.potencyReduce = {

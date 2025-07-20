@@ -18,19 +18,16 @@ export default class BaseEffectModel extends foundry.abstract.TypeDataModel {
 
     /* -------------------------------------------------- */
 
-    /** @inheritdoc */
-    static LOCALIZATION_PREFIXES = ["PMTTRPG.ActiveEffect.base"];
-
     /* -------------------------------------------------- */
 
     /** @inheritdoc */
     static defineSchema() {
         const fields = foundry.data.fields;
-        const config = ds.CONFIG;
+        const config = pmttrpg  .CONFIG;
         return {
             end: new fields.SchemaField({
                 type: new fields.StringField({ choices: config.effectEnd, blank: true, required: true }),
-                roll: new FormulaField({ initial: "1d10 + @combat.save.bonus" }),
+                roll: new fields.StringField({deterministic: false, initial: "1d10 + @combat.save.bonus" }),
             }),
             potencyReduce: new fields.SchemaField({
                 type: new fields.StringField({
@@ -74,7 +71,7 @@ export default class BaseEffectModel extends foundry.abstract.TypeDataModel {
      * @returns {string}
      */
     get durationLabel() {
-        return ds.CONFIG.effectEnds[this.end.type]?.abbreviation ?? "";
+        return pmttrpg.CONFIG.effectEnd[this.end.type]?.abbreviation ?? "";
     }
 
     /* -------------------------------------------------- */

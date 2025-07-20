@@ -3,7 +3,7 @@
 /**
  * A document subclass adding system-specific behavior and registered in CONFIG.ActiveEffect.documentClass
  */
-export default class PMTTRPGActiveEffect extends foundry.documents.ActiveEffect{
+export default class PMTTRPGActiveEffect extends ActiveEffect{
     /**
      * Checks if a status condition applies to the actor
      * @param {StatusEffectConfig} status An entry in CONFIG.statusEffects

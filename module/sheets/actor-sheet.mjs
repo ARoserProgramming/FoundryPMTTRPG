@@ -8,7 +8,7 @@ import LevelUpDialog from '../dialog/level-up-dialog.mjs';
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class PMTTRPGActorSheet extends ActorSheet {
+export default class PMTTRPGActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
