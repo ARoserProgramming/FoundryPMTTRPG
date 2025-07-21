@@ -230,11 +230,11 @@ input:disabled:hover{
     align-items: center;
     justify-content: space-between;
 }
-.rank table{
+.rank table, .basic-stats table {
     border-collapse: collapse;
     border: 1px solid white;
 }
-.rank table td{
+.rank table td, .basic-stats table td{
     border: 1px solid white;
     padding: 2px;
     text-align: center;
