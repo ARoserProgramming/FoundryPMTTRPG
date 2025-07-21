@@ -36,6 +36,27 @@
                            value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
             </div>
+            <div class="rank">
+                <table>
+                    <tr>
+                        <td>Rank</td>
+                        <td colspan="3">
+                            <input type="text" name="system.rank" value="{{system.rank}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>XP</td>
+                        <td>
+                            <input type="number" name="system.xp" value="{{system.xp}}" data-dtype="Number">
+                        </td>
+                        <td>Level</td>
+                        <td>
+                            <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
         </div>
         <div class="all-all-abilities">
             <h1>Stats</h1>
@@ -55,6 +76,56 @@
                         </label>
                     </div>
                 {{/each}}
+            </div>
+            <div class="basic-stats">
+                <table>
+                    <tr>
+                        <td>Health</td>
+                        <td>
+                            <input type="number" name="system.health_points" min="0" max="{{system.health_points.max}}" value="{{system.health_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        </td>
+                        <td>
+                            <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled/>
+                        </td>
+                        <td>Stagger Res</td>
+                        <td>
+                            <input type="number" name="system.stagger_threshold" min="0" max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        </td>
+                        <td>
+                            <input type="number" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mentality</td>
+                        <td>
+                            <input type="number" name="system.mentality_points" min="0" max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        </td>
+                        <td>
+                            <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
+                        </td>
+                        <td>Light</td>
+                        <td>
+                            <input type="number" name="system.light" min="0" max="{{system.light.max}}" value="{{system.light.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        </td>
+                        <td>
+                            <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Att</td>
+                        <td>
+                            <input type="number" name="system.attack_points" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
+                        </td>
+                        <td>Def</td>
+                        <td>
+                            <input type="number" name="system.defense_points" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
+                        </td>
+                        <td>Evd</td>
+                        <td>
+                            <input type="number" name="system.evasion_points" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </header>

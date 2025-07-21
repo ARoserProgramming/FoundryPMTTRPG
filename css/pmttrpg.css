@@ -82,7 +82,7 @@
     margin-top: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
@@ -100,7 +100,7 @@
 .resistances-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
@@ -111,10 +111,10 @@
     align-items: center;
     width: 100px;
 }
-.resistances input:disabled{
+.rank input:disabled, .resistances input:disabled{
     color: white !important; /* Asegura que el texto sea blanco */
 }
-.resistances input:disabled:hover{
+.resistances input:disabled:hover, .rank input:disabled:hover, .basic-stats input:disabled:hover{
     border: none !important;
 }
 .resistances img{
@@ -134,7 +134,7 @@
     margin-bottom: 10px;
 }
 .all-abilities{
-    width: 333px;
+    width: 270px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,8 +189,8 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
 }
 .abilities img{
-    width: 96px;
-    height: 96px;
+    width: 90px;
+    height: 90px;
     object-fit: contain; /* O usa 'cover' si prefieres recortar */
     display: block;
     margin: 0 auto;
@@ -224,8 +224,32 @@ input:disabled:hover{
     height: 32px;
     object-fit: contain;
     display: block;}
-
-
+.rank{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.rank table{
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+.rank table td{
+    border: 1px solid white;
+    padding: 2px;
+    text-align: center;
+    width: 32px; /* Ancho fijo para las celdas */
+}
+.rank input{
+    text-align: center;
+    color: white;
+}
+.basic-stats{
+    width: 270px;
+}
+.basic-stats input{
+    color: white;
+}
 /**/
 .manufacturing-consent-regular {
     font-family: "Manufacturing Consent", system-ui;
