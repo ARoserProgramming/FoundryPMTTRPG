@@ -1,0 +1,186 @@
+    <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            <div class="resources grid grid-3col">
+                <div class="resource flex-group-center">
+                    <label for="system.health_points.value" class="resource-label">{{localize_health}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.health_points.value" min=0 max="{{system.health_points.max}}" value="{{system.health_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <span> / </span>
+                        <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.stagger_threshold.value" min=0 max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <span> / </span>
+                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.sanity_points.value" class="resource-label">{{localize_mentality}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.sanity_points.value" min=0 max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <span> / </span>
+                        <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.light.value" class="resource-label">{{localize_light}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.light.value" min=0 max="{{system.light.max}}" value="{{system.light.value}}" oninput="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number"/>
+                        <span> / </span>
+                        <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.rank" class="resource-label">{{localize_rank}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.rank" value="{{system.rank}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.level" class="resource-label">{{localize_level}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.xp" class="resource-label">{{localize_xp}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.xp" value="{{system.xp}}" data-dtype="Number"/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.attack_modifier" class="resource-label">{{localize "PMTTRPG.Attributes.AttackModifier"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.attack_modifier" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.block_modifier.value" class="resource-label">{{localize "PMTTRPG.Attributes.BlockModifier"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.block_modifier.value" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.evade_modifier" class="resource-label">{{localize "PMTTRPG.Attributes.EvadeModifier"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.evade_modifier" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.equipment_rank_limit" class="resource-label">{{localize "PMTTRPG.Attributes.EquipmentLimit"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.equipment_rank_limit" value="{{system.equipment_rank_limit}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+                <div class="resource flex-group-center">
+                    <label for="system.tool_slots.value" class="resource-label">{{localize "PMTTRPG.Attributes.ToolSlots"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="number" name="system.tool_slots.value" value="{{system.tool_slots.initial}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.resistances.slash" class="resource-label">{{localize "PMTTRPG.Attributes.Resistances.Slash"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}" value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.resistances.pierce" class="resource-label">{{localize "PMTTRPG.Attributes.Resistances.Pierce"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.resistances.pierce" data-tooltip="x{{system.resistances.pierce}}" value="{{resistancetext system.resistances.pierce}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+                <div class="resource flex-group-center">
+                    <label for="system.resistances.blunt" class="resource-label">{{localize "PMTTRPG.Attributes.Resistances.Blunt"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                        <input type="text" name="system.resistances.blunt" data-tooltip="x{{system.resistances.blunt}}" value="{{resistancetext system.resistances.blunt}}" data-dtype="Number" disabled/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="features">Features</a>
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="items">Items</a>
+        <a class="item" data-tab="spells">Spells</a>
+        <a class="item" data-tab="effects">Effects</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Owned Features Tab --}}
+        <div class="tab features" data-group="primary" data-tab="features">
+            <section class="grid grid-3col">
+                <aside class="sidebar">
+                    <div class="abilities flexcol">
+                        {{#each system.abilities as |ability key|}}
+                            <div class="ability flexrow flex-group-center">
+                                <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
+                                    {{localize (lookup @root.config.abilities key)}}
+                                    <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
+                                </span>
+                                </label>
+                                <input type="number" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+                                <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
+                                <span class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                                <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
+                                    <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/>
+                                </span>
+                            </span>
+                            </div>
+                        {{/each}}
+                    </div>
+                </aside>
+
+                <section class="main grid-span-2">
+                    {{> "systems/pmttrpg/templates/actor/parts/actor-features.hbs"}}
+                </section>
+            </section>
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="description">
+            {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+        </div>
+
+        {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+            {{> "systems/pmttrpg/templates/actor/parts/actor-items.hbs"}}
+        </div>
+
+        {{!-- Owned Spells Tab --}}
+        <div class="tab spells" data-group="primary" data-tab="spells">
+            {{> "systems/pmttrpg/templates/actor/parts/actor-spells.hbs"}}
+        </div>
+
+        {{!-- Active Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/pmttrpg/templates/actor/parts/actor-effects.hbs"}}
+        </div>
+
+    </section>
+</form>
