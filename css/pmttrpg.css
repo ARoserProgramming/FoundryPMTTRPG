@@ -79,8 +79,10 @@
     color: white;
 }
 .character-header{
+    margin-top: 5px;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
@@ -95,6 +97,34 @@
     height: auto;
     border: 1px solid white;
 }
+.resistances-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.resistances{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
+}
+.resistances input:disabled{
+    color: white !important; /* Asegura que el texto sea blanco */
+}
+.resistances input:disabled:hover{
+    border: none !important;
+}
+.resistances img{
+    width: 32px;
+    height: 32px;
+    object-fit: contain; /* O usa 'cover' si prefieres recortar */
+    display: block;
+    margin: 0;
+    border: none;
+}
 .character-header div h1 {
     text-align: center;
 }
@@ -104,7 +134,7 @@
     margin-bottom: 10px;
 }
 .all-abilities{
-    width: 294px;
+    width: 333px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,8 +189,8 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
 }
 .abilities img{
-    width: 80px;
-    height: 80px;
+    width: 96px;
+    height: 96px;
     object-fit: contain; /* O usa 'cover' si prefieres recortar */
     display: block;
     margin: 0 auto;

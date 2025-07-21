@@ -3,35 +3,36 @@
         <div class="portrait">
             <h1>Character Portrait</h1>
             <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="imagen actor"/>
+            <h1>Resistances</h1>
             <div class="resistances-container">
-                <div>
-                    <img src="{{asset 'assets/imgs'}}" alt="slash" style="width:32px; height:32px; margin-right:8px;">
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.slash 'health' 'slash'}}" alt="slash" >
                     <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
                            value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
                 </div>
-                <div>
-                    <img src="" alt="slash" style="width:32px; height:32px; margin-right:8px;">
-                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.slash 'stagger' 'slash'}}" alt="stagger_slash">
+                    <input type="text" name="system.resistances.pierce" data-tooltip="x{{system.resistances.slash}}"
+                           value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
+                </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.pierce 'health' 'pierce'}}" alt="pierce">
+                    <input type="text" name="system.resistances.blunt" data-tooltip="x{{system.resistances.pierce}}"
                            value="{{resistancetext system.resistances.pierce}}" data-dtype="Number" disabled/>
                 </div>
-                <div>
-                    <img src="" alt="slash" style="width:32px; height:32px; margin-right:8px;">
-                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
-                           value="{{resistancetext system.resistances.blunt}}" data-dtype="Number" disabled/>
-                </div>
-                <div>
-                    <img src="" alt="slash" style="width:32px; height:32px; margin-right:8px;">
-                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
-                           value="{{resistancetext system.resistances.stagger_slash}}" data-dtype="Number" disabled/>
-                </div>
-                <div>
-                    <img src="" alt="slash" style="width:32px; height:32px; margin-right:8px;">
-                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_pierce 'stagger' 'pierce'}}" alt="stagger_pierce">
+                    <input type="text" name="system.resistances.stagger_slash" data-tooltip="x{{system.resistances.stagger_pierce}}"
                            value="{{resistancetext system.resistances.stagger_pierce}}" data-dtype="Number" disabled/>
                 </div>
-                <div>
-                    <img src="" alt="slash" style="width:32px; height:32px; margin-right:8px;">
-                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_blunt 'health' 'blunt'}}" alt="blunt">
+                    <input type="text" name="system.resistances.stagger_pierce" data-tooltip="x{{system.resistances.stagger_blunt}}"
+                           value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
+                </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_blunt 'stagger' 'blunt'}}" alt="stagger_blunt">
+                    <input type="text" name="system.resistances.stagger_blunt" data-tooltip="x{{system.resistances.stagger_blunt}}"
                            value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
             </div>
@@ -50,7 +51,7 @@
                             <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod"
                                   data-ability="{{key}}"
                                   data-label="{{localize (lookup @root.config.abilities key)}}"><img
-                                    src="{{asset 'assets/Images/Die_Bg.png'}}" alt="roll 2d6"></span>
+                                    src="{{asset 'assets/imgs/Die_Bg.png'}}" alt="roll 2d6"></span>
                         </label>
                     </div>
                 {{/each}}

@@ -20,8 +20,8 @@
   "media": [
     {
       "type": "setup",
-      "url": "systems/pmttrpg/assets/Images/PM_LOGO.png",
-      "thumbnail": "systems/pmttrpg/assets/Images/PM_LOGO.png"
+      "url": "systems/pmttrpg/assets/imgs/PM_LOGO.png",
+      "thumbnail": "systems/pmttrpg/assets/imgs/PM_LOGO.png"
     }
   ],
   "version": "1.0.0",

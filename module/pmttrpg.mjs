@@ -14,6 +14,7 @@ import PMTTRPGItem from './documents/item.mjs';
 import {preloadHandlebarsTemplates} from './helpers/templates.mjs';
 import {PMTTRPG} from './helpers/config.mjs';
 import PMTTRPGToken from "./overrides/TokenOverride.mjs";
+import PMTTRPGUtils from "./helpers/utils.mjs";
 globalThis.pmttrpg = {
     // canvas,
     documents,
@@ -204,11 +205,22 @@ Handlebars.registerHelper('asset', function (path) {
     return `/systems/pmttrpg/${path}`;
 });
 // Registrar helper para array si no existe
-
 Handlebars.registerHelper('array', function (start, end, options) {
     let result = [];
     for (let i = start; i <= end; i++) result.push(i);
     return options.fn ? options.fn(result) : result;
+});
+Handlebars.registerHelper('resistancetext', function (valor) {
+    if (valor == null) return "";
+    if (valor < 0.25) return "Ineffective";
+    if (valor >= 0.25 && valor < 1) return "Resistant";
+    if(valor >= 1 && valor < 1.5) return "Normal";
+    if(valor >= 1.5 && valor <2) return "Weak";
+    if(valor >= 2) return "Fatal";
+    return valor;
+});
+Handlebars.registerHelper('varImage', function (valor, resource, type) {
+    return PMTTRPGUtils.getResistanceImage(valor, resource, type);
 });
 
 
