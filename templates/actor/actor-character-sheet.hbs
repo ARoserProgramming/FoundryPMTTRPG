@@ -6,7 +6,7 @@
             <h1>Resistances</h1>
             <div class="resistances-container">
                 <div class="resistances">
-                    <img src="{{varImage system.resistances.slash 'health' 'slash'}}" alt="slash" >
+                    <img src="{{varImage system.resistances.slash 'health' 'slash'}}" alt="slash">
                     <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
                            value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
                 </div>
@@ -22,17 +22,20 @@
                 </div>
                 <div class="resistances">
                     <img src="{{varImage system.resistances.stagger_pierce 'stagger' 'pierce'}}" alt="stagger_pierce">
-                    <input type="text" name="system.resistances.stagger_slash" data-tooltip="x{{system.resistances.stagger_pierce}}"
+                    <input type="text" name="system.resistances.stagger_slash"
+                           data-tooltip="x{{system.resistances.stagger_pierce}}"
                            value="{{resistancetext system.resistances.stagger_pierce}}" data-dtype="Number" disabled/>
                 </div>
                 <div class="resistances">
                     <img src="{{varImage system.resistances.stagger_blunt 'health' 'blunt'}}" alt="blunt">
-                    <input type="text" name="system.resistances.stagger_pierce" data-tooltip="x{{system.resistances.stagger_blunt}}"
+                    <input type="text" name="system.resistances.stagger_pierce"
+                           data-tooltip="x{{system.resistances.stagger_blunt}}"
                            value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
                 <div class="resistances">
                     <img src="{{varImage system.resistances.stagger_blunt 'stagger' 'blunt'}}" alt="stagger_blunt">
-                    <input type="text" name="system.resistances.stagger_blunt" data-tooltip="x{{system.resistances.stagger_blunt}}"
+                    <input type="text" name="system.resistances.stagger_blunt"
+                           data-tooltip="x{{system.resistances.stagger_blunt}}"
                            value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
             </div>
@@ -51,7 +54,20 @@
                         </td>
                         <td>Level</td>
                         <td>
-                            <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" disabled/>
+                            <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number"
+                                   disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stats</td>
+                        <td colspan="3">
+                            {{#if system.levelUpPending}}
+                                <button type="button" class="level-up-pending-btn">
+                                    Spend Points
+                                </button>
+                            {{else}}
+                                All Points Spent
+                            {{/if}}
                         </td>
                     </tr>
                 </table>
@@ -80,49 +96,72 @@
             <div class="basic-stats">
                 <table>
                     <tr>
-                        <td>Health</td>
-                        <td>
-                            <input type="number" name="system.health_points.value" min="0" max="{{system.health_points.max}}" value="{{system.health_points.value}}" onchange="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <td class="health-td">HEALTH</td>
+                        <td class="white-td">
+                            <input type="number" name="system.health_points.value" min="0"
+                                   max="{{system.health_points.max}}" value="{{system.health_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
                         </td>
-                        <td>
-                            <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled/>
+                        <td class="gray-td">
+                            <input type="number" name="system.health_points.max" value="{{system.health_points.max}}"
+                                   data-dtype="Number" disabled/>
                         </td>
-                        <td>Stagger Res</td>
-                        <td>
-                            <input type="number" name="system.stagger_threshold.value" min="0" max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" onchange="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <td class="stagger-td">STAGGER</td>
+                        <td class="white-td">
+                            <input type="number" name="system.stagger_threshold.value" min="0"
+                                   max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
                         </td>
-                        <td>
-                            <input type="number" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                        <td class="gray-td">
+                            <input type="number" name="system.stagger_threshold.max"
+                                   value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Mentality</td>
-                        <td>
-                            <input type="number" name="system.sanity_points.value" min="0" max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" onchange="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <td class="mentality-td">MENTALITY</td>
+                        <td class="white-td">
+                            <input type="number" name="system.sanity_points.value" min="0"
+                                   max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
                         </td>
-                        <td>
-                            <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
+                        <td class="gray-td">
+                            <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}"
+                                   data-dtype="Number" disabled/>
                         </td>
-                        <td>Light</td>
-                        <td>
-                            <input type="number" name="system.light.value" min="0" max="{{system.light.max}}" value="{{system.light.value}}" onchange="this.value = Math.clamp(this.value, this.min, this.max)" data-dtype="Number">
+                        <td class="light-td">LIGHT</td>
+                        <td class="white-td">
+                            <input type="number" name="system.light.value" min="0" max="{{system.light.max}}"
+                                   value="{{system.light.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
                         </td>
-                        <td>
-                            <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
+                        <td class="gray-td">
+                            <input type="number" name="system.light.max" value="{{system.light.max}}"
+                                   data-dtype="Number" disabled/>
                         </td>
                     </tr>
+                </table>
+            </div>
+            <div class="basic-stats-modifiers">
+                <table>
                     <tr>
                         <td>Att</td>
                         <td>
-                            <input type="number" name="system.attack_points" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
+                            <input type="number" name="system.attack_points" value="{{system.attack_modifier}}"
+                                   data-dtype="Number" disabled/>
                         </td>
                         <td>Def</td>
                         <td>
-                            <input type="number" name="system.defense_points" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
+                            <input type="number" name="system.defense_points" value="{{system.block_modifier}}"
+                                   data-dtype="Number" disabled/>
                         </td>
                         <td>Evd</td>
                         <td>
-                            <input type="number" name="system.evasion_points" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
+                            <input type="number" name="system.evasion_points" value="{{system.evade_modifier}}"
+                                   data-dtype="Number" disabled/>
                         </td>
                     </tr>
                 </table>

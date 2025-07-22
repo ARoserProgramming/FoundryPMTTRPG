@@ -80,6 +80,7 @@ export default class LevelUpDialog extends Application {
 
     async _onSubmit(html) {
         if (this.sum !== this.maxPoints) {
+            await this.actor.update({'system.levelUpPending': true});
             ui.notifications.warn(`You must spend exactly ${this.maxPoints} points for level ${this.newLevel}!`);
             return;
         }
@@ -92,7 +93,7 @@ export default class LevelUpDialog extends Application {
                 updates[`system.abilities.${stat}.value`] = value;
             }
         });
-
+        updates['system.levelUpPending'] = false;
         await this.actor.update(updates);
         this.close();
     }
@@ -106,5 +107,12 @@ export default class LevelUpDialog extends Application {
             onclick: () => this._onSubmit(this.element.find('.window-content')),
         });
         return buttons;
+    }
+    async close(options) {
+        // Si no se gastaron todos los puntos, marca el flag en el actor
+        if (this.sum !== this.maxPoints) {
+            await this.actor.update({'system.levelUpPending': true});
+        }
+        return super.close(options);
     }
 }
