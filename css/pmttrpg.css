@@ -282,23 +282,29 @@ input:disabled:hover{
     line-height: normal !important;
 }
 .mentality-td{
-    background-color: lightskyblue;
-    border-radius: 0 10px 0 0;
+    font-family: Impact, serif;
+    background-color: blue;
+    clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
+    color: lightskyblue;
 }
 .health-td{
+    font-family: Impact, serif;
     background-color: red;
-    border-radius: 0 10px 0 0;
+    clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
+    color: linen;
 }
 .stagger-td{
+    font-family: Impact, serif;
     background-color: darkgoldenrod;
-    border-radius: 0 10px 0 0;
+    clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
 }
 .light-td{
+    font-family: Impact, serif;
     background-color: #FFFFC5;
-    border-radius: 0 10px 0 0;
+    clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
     color: orange;
 }
@@ -310,6 +316,21 @@ input:disabled:hover{
 }
 .gray-td{
     background-color: gray;
+}
+.att-td{
+    font-family: Impact, serif;
+    font-weight: bold;
+    color: red;
+}
+.def-td{
+    font-family: Impact, serif;
+    font-weight: bold;
+    color: blue;
+}
+.evd-td{
+    font-family: Impact, serif;
+    font-weight: bold;
+    color: yellow;
 }
 /*###############################*/
 .manufacturing-consent-regular {
@@ -567,7 +588,7 @@ input:disabled:hover{
 .pmttrpg .sheet-body,
 .pmttrpg .sheet-body .tab,
 .pmttrpg .sheet-body .tab .editor {
-    height: 100%;
+    height: auto;
 }
 
 .pmttrpg .tox .tox-editor-container {
@@ -610,7 +631,6 @@ input:disabled:hover{
     padding: 0;
     overflow-y: auto;
     scrollbar-width: thin;
-    color: #444;
 }
 
 .pmttrpg .items-list .item-list {
@@ -658,7 +678,7 @@ input:disabled:hover{
 }
 
 .pmttrpg .items-list .item .item-name {
-    color: #191813;
+    color: white;
 }
 
 .pmttrpg .items-list .item .item-name .item-image {
