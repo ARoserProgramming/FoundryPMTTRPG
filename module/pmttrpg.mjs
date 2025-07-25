@@ -105,9 +105,7 @@ Hooks.once('init', function () {
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
-Hooks.on('createActor', (actor, data, options) => {
 
-});
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
         // Verificar si hay cambios en el sistema y específicamente en xp
