@@ -105,7 +105,67 @@ Hooks.once('init', function () {
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
+Hooks.on('createActor', async (actor, options, userId) => {
+    if (!actor || actor.type !== 'character') return;
 
+    const rangos = [
+        { label: "0", xp: -24 },
+        { label: "1", xp: 0 },
+        { label: "2", xp: 24 },
+        { label: "3", xp: 48 },
+        { label: "4", xp: 72 },
+        { label: "5", xp: 96 },
+        { label: "EX", xp: 120 }
+    ];
+
+    const content = `
+<form>
+    <div class="form-group">
+        <label>Selecciona el rango inicial:</label>
+        <select id="rango-inicial">
+            ${rangos.map((r, i) => `<option value="${i}">${r.label}</option>`).join('')}
+        </select>
+        <select id="nivel-inicial"></select>
+    </div>
+</form>
+<script>
+    const rangos = ${JSON.stringify(rangos)};
+    function niveles(rango) {
+        return [
+            { label: ((rango * 3) - 3), xp: 0 },
+            { label: ((rango * 3) - 2), xp: 8 },
+            { label: ((rango * 3) - 1), xp: 16 }
+        ];
+    }
+    function updateNiveles() {
+        const rangoIdx = document.getElementById('rango-inicial').value;
+        const rango = rangos[rangoIdx].label === "EX" ? 6 : parseInt(rangos[rangoIdx].label);
+        const nivelSelect = document.getElementById('nivel-inicial');
+        const nivelesArr = niveles(rango);
+        nivelSelect.innerHTML = nivelesArr.map((n, i) => \`<option value="\${i}">\${n.label}</option>\`).join('');
+    }
+    document.getElementById('rango-inicial').addEventListener('change', updateNiveles);
+    updateNiveles();
+</script>
+`;
+
+    new Dialog({
+        title: "Rango Inicial",
+        content,
+        buttons: {
+            ok: {
+                label: "Aceptar",
+                callback: async (html) => {
+                    const idx = parseInt(html.find('#rango-inicial').val());
+                    const nivelIdx = parseInt(html.find('#nivel-inicial').val());
+                    const xp = rangos[idx].xp + nivelIdx;
+                    await actor.update({ "system.xp": xp });
+                }
+            }
+        },
+        default: "ok"
+    }).render(true);
+});
 Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
         // Verificar si hay cambios en el sistema y específicamente en xp
