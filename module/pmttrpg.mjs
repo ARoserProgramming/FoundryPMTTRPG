@@ -150,21 +150,21 @@ Hooks.on('createActor', async (actor, options, userId) => {
         default: "ok"
     }).render(true);
 });
-// Guarda el nivel anterior antes de actualizar
+// save the previous level before the actor is updated
 Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
     if (!changes.system || !('xp' in changes.system)) return;
     const prevXp = actor.system.xp ?? 0;
     actor._oldLevel = Math.floor(prevXp / 8);
 });
 
-// Compara después de actualizar
+// compare after the actor is updated
 Hooks.on('updateActor', async (actor, changes, options, userId) => {
     try {
         if (!changes.system || !('xp' in changes.system)) return;
         const newXp = actor.system.xp ?? 0;
         const newLevel = Math.floor(newXp / 8);
         const oldLevel = actor._oldLevel ?? newLevel;
-        delete actor._oldLevel; // Limpia la propiedad temporal
+        delete actor._oldLevel; // Clear temporary property
 
         if (newLevel !== oldLevel) {
             if (actor.sheet) {
