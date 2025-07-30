@@ -1,12 +1,12 @@
 {
   "PMTTRPG": {
     "Ability": {
-      "Ftd": { "long": "Fortaleza", "abbr": "ftd" },
-      "Prd": { "long": "Prudencia", "abbr": "prd" },
-      "Jst": { "long": "Justicia", "abbr": "jst" },
-      "Chr": { "long": "Encanto", "abbr": "chr" },
-      "Ins": { "long": "Comprensión", "abbr": "ins" },
-      "Tmp": { "long": "Temple", "abbr": "tmp" }
+      "Ftd": { "long": "Fortaleza", "abbr": "ftd", "tooltip": "Fortaleza representa la destreza física y la capacidad de soportar daño" },
+      "Prd": { "long": "Prudencia", "abbr": "prd", "tooltip": "Prudencia representa el conocimiento cognitivo y la capacidad de análisis del personaje" },
+      "Jst": { "long": "Justicia", "abbr": "jst", "tooltip": "Justicia representa la capacidad del personaje para actuar rápidamente y sin miedo" },
+      "Chr": { "long": "Encanto", "abbr": "chr", "tooltip": "Encanto representa la conciencia social y la habilidad del personaje para cautivar a otros" },
+      "Ins": { "long": "Comprensión", "abbr": "ins", "tooltip": "Comprensión representa la capacidad del personaje para recibir información a través de sus sentidos" },
+      "Tmp": { "long": "Temple", "abbr": "tmp", "tooltip": "Temple representa la capacidad del personaje para actuar con cautela y controlar sus propias emociones" }
     },
     "SheetLabels": {
       "Actor": "PmTTRPG Hoja de Actor",

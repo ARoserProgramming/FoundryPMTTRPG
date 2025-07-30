@@ -1,12 +1,12 @@
 {
   "PMTTRPG": {
     "Ability": {
-      "Ftd": { "long": "Fortitude", "abbr": "ftd" },
-      "Prd": { "long": "Prudence", "abbr": "prd" },
-      "Jst": { "long": "Justice", "abbr": "jst" },
-      "Chr": { "long": "Charm", "abbr": "chr" },
-      "Ins": { "long": "Insight", "abbr": "ins" },
-      "Tmp": { "long": "Temperance", "abbr": "tmp" }
+      "Ftd": { "long": "Fortitude", "abbr": "ftd", "tooltip": "Fortitude represents physical prowess and the capacity to endure harm" },
+      "Prd": { "long": "Prudence", "abbr": "prd", "tooltip": "Prudence represents the cognitive knowledge and the capacity of analysis of the character" },
+      "Jst": { "long": "Justice", "abbr": "jst", "tooltip": "Justice represents the capacity of the character to act quickly and without fear" },
+      "Chr": { "long": "Charm", "abbr": "chr", "tooltip": "Charm represents the social awareness and finesse of the character to enchant others" },
+      "Ins": { "long": "Insight", "abbr": "ins", "tooltip": "Insight represents the capacity of the character to receive information through their senses" },
+      "Tmp": { "long": "Temperance", "abbr": "tmp","tooltip": "Temperance represents the capacity of the character to act cautiously and control their own emotions" }
     },
     "SheetLabels": {
       "Actor": "PmTTRPG Actor Sheet",

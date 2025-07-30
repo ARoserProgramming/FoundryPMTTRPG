@@ -29,6 +29,14 @@ PMTTRPG.abilityImages = {
     ins: 'systems/pmttrpg/assets/imgs/ins.png',
     tmp: 'systems/pmttrpg/assets/imgs/tmp.png',
 };
+PMTTRPG.abilityTooltips = {
+    ftd: 'PMTTRPG.Ability.Ftd.tooltip',
+    prd: 'PMTTRPG.Ability.Prd.tooltip',
+    jst: 'PMTTRPG.Ability.Jst.tooltip',
+    chr: 'PMTTRPG.Ability.Chr.tooltip',
+    ins: 'PMTTRPG.Ability.Ins.tooltip',
+    tmp: 'PMTTRPG.Ability.Tmp.tooltip',
+}
 PMTTRPG.damageTypes = {
     slash: {
         label: 'PMTTRPG.DAMAGE_TYPE.Slash',
