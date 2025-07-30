@@ -46,7 +46,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
                 return obj;
             }, {})
         );
-        schema.levelUpPending = new fields.BooleanField({initial: false, required: true});
+        schema.levelUpPending = new fields.BooleanField({initial: true, required: true});
         return schema;
     }
 

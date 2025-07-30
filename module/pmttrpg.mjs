@@ -243,6 +243,9 @@ Hooks.once('ready', async function () {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here is a useful example:
+Handlebars.registerHelper('add', function(a, b) {
+    return Number(a) + Number(b);
+});
 Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase();
 });

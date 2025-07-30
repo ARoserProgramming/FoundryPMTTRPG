@@ -244,7 +244,8 @@ export default class PMTTRPGActorSheet extends ActorSheet {
   }
   async _showLevelUpDialog() {
     const currentLevel = Math.floor(this.actor.system.xp / 8);
-    const dialog = new LevelUpDialog(this.actor, currentLevel);
+    const currentRank = this.actor.system.rank;
+    const dialog = new LevelUpDialog(this.actor, currentLevel, currentRank);
     dialog.render(true);
     }
   /**

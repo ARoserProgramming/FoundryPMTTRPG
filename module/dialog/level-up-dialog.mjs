@@ -1,8 +1,9 @@
 export default class LevelUpDialog extends Application {
-    constructor(actor, newLevel, options = {}) {
+    constructor(actor, newLevel,currentRank, options = {}) {
         super(options);
         this.actor = actor;
         this.newLevel = newLevel;
+        this.currentRank = currentRank;
         this.maxPoints = this._calculateMaxPoints();
         this.sum = 0;
     }
@@ -30,6 +31,7 @@ export default class LevelUpDialog extends Application {
         return {
             actor: this.actor,
             newLevel: this.newLevel,
+            currentRank: this.currentRank,
             abilities: this.actor.system.abilities,
         };
     }
