@@ -23,7 +23,7 @@ export default class LevelUpDialog extends Application {
 
     _calculateMaxPoints() {
         // Adjust this logic based on your system's rules for max points per level
-        return this.newLevel * 2;
+        return Math.max(0, (this.newLevel + 3) * 2);
     }
 
     async getData() {

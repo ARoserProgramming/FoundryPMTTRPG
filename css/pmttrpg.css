@@ -190,7 +190,7 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
 }
 .pmttrpg.sheet.actor .abilities img{
-    width: 95px;
+    width: 100px;
     height: 95px;
     object-fit: contain; /* O usa 'cover' si prefieres recortar */
     display: block;
