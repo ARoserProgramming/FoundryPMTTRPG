@@ -29,6 +29,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             value: new fields.NumberField({initial: 4, nullable: false, integer: true}),
             max: new fields.NumberField({initial: 4, nullable: false, integer: true}),
         });
+        schema.movement_speed = new fields.NumberField({initial: 30, nullable: false, integer: true});
         schema.xp = new fields.NumberField({...requiredInteger, initial: 0, min: -24, max: 128});
         schema.biography = new fields.StringField({required: true, blank: true});
         // Abilities schema

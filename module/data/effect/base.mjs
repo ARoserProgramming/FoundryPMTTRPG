@@ -144,5 +144,4 @@ export default class BaseEffectModel extends foundry.abstract.TypeDataModel {
     //
     //     return roll.toMessage(messageData, messageOptions);
     // }
-
 }
