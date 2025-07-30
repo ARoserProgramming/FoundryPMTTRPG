@@ -170,7 +170,6 @@ Hooks.on('updateActor', (actor, changes, options, userId) => {
     try {
         // Verificar si hay cambios en el sistema y específicamente en xp
         if (!changes.system || !('xp' in changes.system)) return;
-        if (actor.type !== 'character' && actor.type !== 'distortion') return;
         let newHp = actor.system.health_points.value;
         let newMaxHp = actor.system.health_points.max;
         // Calcular el nuevo nivel basado en el xp total
