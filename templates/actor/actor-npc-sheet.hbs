@@ -1,108 +1,173 @@
-<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
-
-    {{!-- Sheet Header --}}
-    <header class="sheet-header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-        <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-            <div class="resources grid grid-3col">
-                <div class="resource flex-group-center">
-                    <label for="system.health_points.value" class="resource-label">{{localize_health}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.health_points.value" min=0 max="{{system.health_points.max}}" value="{{system.health_points.value}}" data-dtype="Number">
-                        <span> / </span>
-                        <input type="number" name="system.health_points.max" value="{{system.health_points.max}}" data-dtype="Number" disabled>
-                    </div>
+<form class="character-sheet" autocomplete="off">
+    <header class="character-header">
+        <div class="portrait">
+            <h1>Character Portrait</h1>
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="imagen actor"/>
+            <h1>Resistances</h1>
+            <div class="resistances-container">
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.slash 'health' 'slash'}}" alt="slash">
+                    <input type="text" name="system.resistances.slash" data-tooltip="x{{system.resistances.slash}}"
+                           value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.stagger_threshold.value" class="resource-label">{{localize_stagger}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.stagger_threshold.value" min=0 max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}" data-dtype="Number">
-                        <span> / </span>
-                        <input type="text" name="system.stagger_threshold.max" value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
-                    </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.slash 'stagger' 'slash'}}" alt="stagger_slash">
+                    <input type="text" name="system.resistances.pierce" data-tooltip="x{{system.resistances.slash}}"
+                           value="{{resistancetext system.resistances.slash}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.sanity_points.value" class="resource-label">{{localize_mentality}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.sanity_points.value" min=0 max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}" data-dtype="Number">
-                        <span> / </span>
-                        <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}" data-dtype="Number" disabled/>
-                    </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.pierce 'health' 'pierce'}}" alt="pierce">
+                    <input type="text" name="system.resistances.blunt" data-tooltip="x{{system.resistances.pierce}}"
+                           value="{{resistancetext system.resistances.pierce}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.light.value" class="resource-label">{{localize_light}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input class="clamp-attribute" type="number" name="system.light.value" min=0 max="{{system.light.max}}" value="{{system.light.value}}" data-dtype="Number"/>
-                        <span> / </span>
-                        <input type="number" name="system.light.max" value="{{system.light.max}}" data-dtype="Number" disabled/>
-                    </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_pierce 'stagger' 'pierce'}}" alt="stagger_pierce">
+                    <input type="text" name="system.resistances.stagger_slash"
+                           data-tooltip="x{{system.resistances.stagger_pierce}}"
+                           value="{{resistancetext system.resistances.stagger_pierce}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.rank" class="resource-label">{{localize_rank}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.rank" value="{{system.rank}}" data-dtype="Number" disabled/>
-                    </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_blunt 'health' 'blunt'}}" alt="blunt">
+                    <input type="text" name="system.resistances.stagger_pierce"
+                           data-tooltip="x{{system.resistances.stagger_blunt}}"
+                           value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.level" class="resource-label">{{localize_level}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" disabled/>
-                    </div>
+                <div class="resistances">
+                    <img src="{{varImage system.resistances.stagger_blunt 'stagger' 'blunt'}}" alt="stagger_blunt">
+                    <input type="text" name="system.resistances.stagger_blunt"
+                           data-tooltip="x{{system.resistances.stagger_blunt}}"
+                           value="{{resistancetext system.resistances.stagger_blunt}}" data-dtype="Number" disabled/>
                 </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.xp" class="resource-label">{{localize_xp}}</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.xp" value="{{system.xp}}" data-dtype="Number"/>
-                    </div>
-                </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.attack_modifier" class="resource-label">AttackModifier</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.attack_modifier" value="{{system.attack_modifier}}" data-dtype="Number" disabled/>
-                    </div>
-                </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.block_modifier.value" class="resource-label">BlockModifier</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.block_modifier.value" value="{{system.block_modifier}}" data-dtype="Number" disabled/>
-                    </div>
-                </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.evade_modifier" class="resource-label">EvadeModifier</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.evade_modifier" value="{{system.evade_modifier}}" data-dtype="Number" disabled/>
-                    </div>
-                </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.equipment_rank_limit" class="resource-label">Equipmentlimit</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.equipment_rank_limit" value="{{system.equipment_rank_limit}}" data-dtype="Number" disabled/>
-                    </div>
-                </div>
-
-                <div class="resource flex-group-center">
-                    <label for="system.tool_slots.value" class="resource-label">ToolSlots</label>
-                    <div class="resource-content flexrow flex-center flex-between">
-                        <input type="number" name="system.tool_slots.value" value="{{system.tool_slots.value}}" data-dtype="Number" disabled/>
-                    </div>
-                </div>
+            </div>
+            <div class="rank">
+                <table>
+                    <tr>
+                        <td>Rank</td>
+                        <td colspan="3">
+                            <input type="text" name="system.rank" value="{{system.rank}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>XP</td>
+                        <td>
+                            <input type="number" name="system.xp" value="{{system.xp}}" data-dtype="Number">
+                        </td>
+                        <td>Level</td>
+                        <td>
+                            <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number"
+                                   disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stats</td>
+                        <td colspan="3">
+                            {{#if system.levelUpPending}}
+                                <button type="button" class="level-up-pending-btn">
+                                    Spend Points
+                                </button>
+                            {{else}}
+                                All Points Spent
+                            {{/if}}
+                        </td>
+                    </tr>
+                </table>
 
             </div>
         </div>
+        <div class="all-all-abilities">
+            <h1>Stats</h1>
+            <div class="all-abilities">
+                {{#each actor.system.abilities as |ability key|}}
+                    <div class="abilities">
+                        <h1 class="ability-{{key}}">{{ability.label}}</h1>
+                        <img src="{{ability.img}}" alt="{{ability.label}}">
+                        <label class="ability-label">
+                            <span width="20px"></span>
+                            <input type="number" value="{{ability.value}}" data-dtype="Number"
+                                   name="system.abilities.{{key}}.value" disabled/>
+                            <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod"
+                                  data-ability="{{key}}"
+                                  data-label="{{localize (lookup @root.config.abilities key)}}"><img
+                                    src="{{asset 'assets/imgs/Die_Bg.png'}}" alt="roll 2d6"></span>
+                        </label>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="basic-stats">
+                <table>
+                    <tr>
+                        <td class="health-td">HEALTH</td>
+                        <td class="white-td">
+                            <input type="number" name="system.health_points.value" min="0"
+                                   max="{{system.health_points.max}}" value="{{system.health_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
+                        </td>
+                        <td class="gray-td">
+                            <input type="number" name="system.health_points.max" value="{{system.health_points.max}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                        <td class="stagger-td">STAGGER</td>
+                        <td class="white-td">
+                            <input type="number" name="system.stagger_threshold.value" min="0"
+                                   max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
+                        </td>
+                        <td class="gray-td">
+                            <input type="number" name="system.stagger_threshold.max"
+                                   value="{{system.stagger_threshold.max}}" data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mentality-td">MENTALITY</td>
+                        <td class="white-td">
+                            <input type="number" name="system.sanity_points.value" min="0"
+                                   max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
+                        </td>
+                        <td class="gray-td">
+                            <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                        <td class="light-td">LIGHT</td>
+                        <td class="white-td">
+                            <input type="number" name="system.light.value" min="0" max="{{system.light.max}}"
+                                   value="{{system.light.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
+                                   data-dtype="Number">
+                        </td>
+                        <td class="gray-td">
+                            <input type="number" name="system.light.max" value="{{system.light.max}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="basic-stats-modifiers">
+                <table>
+                    <tr>
+                        <td class="att-td">Att</td>
+                        <td class="white-td">
+                            <input type="number" name="system.attack_points" value="{{system.attack_modifier}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                        <td class="def-td">Def</td>
+                        <td class="white-td">
+                            <input type="number" name="system.defense_points" value="{{system.block_modifier}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                        <td class="evd-td">Evd</td>
+                        <td class="white-td">
+                            <input type="number" name="system.evasion_points" value="{{system.evade_modifier}}"
+                                   data-dtype="Number" disabled/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </header>
-
-    {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="features">Features</a>
         <a class="item" data-tab="description">Description</a>
@@ -117,26 +182,6 @@
         {{!-- Owned Features Tab --}}
         <div class="tab features" data-group="primary" data-tab="features">
             <section class="grid grid-3col">
-                <aside class="sidebar">
-                    <div class="abilities flexcol">
-                        {{#each system.abilities as |ability key|}}
-                            <div class="ability flexrow flex-group-center">
-                                <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
-                                    {{localize (lookup @root.config.abilities key)}}
-                                    <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
-                                </span>
-                                </label>
-                                <input type="number" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-                                <span class="ability-mod rollable" data-roll="2d6+@abilities.{{key}}.mod" data-ability="{{key}}" data-label="{{localize (lookup @root.config.abilities key)}}">
-                                <span class="mod-value">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                                <span class="dice-icon rollable" title="{{localize 'PMTTRPG.Tabs.Stats'}} Roll 2d6">
-                                    <img class="dice-icon rollable" src="{{asset 'assets/Images/Die_Bg.png'}}" alt="2d6 Dice" width="32" height="32"/>
-                                </span>
-                            </span>
-                            </div>
-                        {{/each}}
-                    </div>
-                </aside>
 
                 <section class="main grid-span-2">
                     {{> "systems/pmttrpg/templates/actor/parts/actor-features.hbs"}}
