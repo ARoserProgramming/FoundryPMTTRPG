@@ -48,7 +48,7 @@
   "socket": false,
   "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
   "download": "This must link to a .zip file of the current version",
-  "background": "systems/pmttrpg/assets/Images/City_map.webp",
+  "background": "systems/pmttrpg/assets/imgs/City_map.webp",
   "grid": {
     "distance": 5,
     "units": "feet"
