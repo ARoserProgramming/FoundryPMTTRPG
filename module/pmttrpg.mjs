@@ -148,7 +148,7 @@ Hooks.on('createActor', async (actor, options, userId) => {
             }
         },
         default: "ok"
-    }).render(true);
+    }).render(true, { left: 100, top: 100 });
 });
 // save the previous level before the actor is updated
 Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
