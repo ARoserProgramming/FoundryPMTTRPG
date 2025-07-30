@@ -1,9 +1,9 @@
 <form class="{{cssClass}} character-sheet" autocomplete="off">
     <header class="character-header">
         <div class="portrait">
-            <h1>Character Portrait</h1>
+            <h1 class="titles">Character Portrait</h1>
             <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="imagen actor"/>
-            <h1>Resistances</h1>
+            <h1 class="titles">Resistances</h1>
             <div class="resistances-container">
                 <div class="resistances">
                     <img src="{{varImage system.resistances.slash 'health' 'slash'}}" alt="slash">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="all-all-abilities">
-            <h1>Stats</h1>
+            <h1 class="titles">Stats</h1>
             <div class="all-abilities">
                 {{#each actor.system.abilities as |ability key|}}
                     <div class="abilities">

@@ -71,6 +71,7 @@
 /*Hoja de character*/
 .pmttrpg.sheet.actor .character-sheet h1{
     font-size: 1em;
+    border-bottom: none;
 }
 .pmttrpg.sheet.actor .character-sheet{
     padding: 0;
@@ -244,7 +245,7 @@
     padding: 2px;
     text-align: center;
     width: 37px; /* Ancho fijo para las celdas */
-    height: 27px;
+    height: 33px;
 }
 .pmttrpg.sheet.actor .rank table td{
     border: 1px solid white;
@@ -334,6 +335,11 @@
 }
 .pmttrpg.sheet.actor .window-content{
     padding: 0;
+}
+.pmttrpg.sheet.actor .titles{
+    background-color: gray;
+    font-family: Impact, serif;
+    margin-top: 5px;
 }
 /*###############################*/
 .manufacturing-consent-regular {
