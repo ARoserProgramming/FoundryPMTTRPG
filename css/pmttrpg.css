@@ -69,16 +69,16 @@
     color: white;
 }
 /*Hoja de character*/
-.character-sheet h1{
+.pmttrpg.sheet.actor .character-sheet h1{
     font-size: 1em;
 }
-.character-sheet{
+.pmttrpg.sheet.actor .character-sheet{
     padding: 0;
     margin: 0;
     background-color: black;
     color: white;
 }
-.character-header{
+.pmttrpg.sheet.actor .character-header{
     margin-top: 5px;
     display: flex;
     flex-direction: row;
@@ -87,17 +87,17 @@
     width: 100%;
     margin-bottom: 10px;
 }
-.portrait{
+.pmttrpg.sheet.actor .portrait{
     display: flex;
     width: 200px;
     flex-direction: column;
 }
-.portrait img{
+.pmttrpg.sheet.actor .portrait img{
     max-width: 100%;
     height: auto;
     border: 1px solid white;
 }
-.resistances-container{
+.pmttrpg.sheet.actor .resistances-container{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -105,19 +105,19 @@
     width: 100%;
     margin-bottom: 10px;
 }
-.resistances{
+.pmttrpg.sheet.actor .resistances{
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100px;
 }
-.rank input:disabled, .resistances input:disabled{
+.pmttrpg.sheet.actor .rank input:disabled, .pmttrpg.sheet.actor .resistances input:disabled{
     color: white !important; /* Asegura que el texto sea blanco */
 }
-.resistances input:disabled:hover, .rank input:disabled:hover, .basic-stats input:disabled:hover{
+.pmttrpg.sheet.actor .resistances input:disabled:hover, .pmttrpg.sheet.actor .rank input:disabled:hover, .pmttrpg.sheet.actor .basic-stats input:disabled:hover{
     border: none !important;
 }
-.resistances img{
+.pmttrpg.sheet.actor .resistances img{
     width: 32px;
     height: 32px;
     object-fit: contain; /* O usa 'cover' si prefieres recortar */
@@ -125,15 +125,15 @@
     margin: 0;
     border: none;
 }
-.character-header div h1 {
+.pmttrpg.sheet.actor .character-header div h1 {
     text-align: center;
 }
-.all-all-abilities{
+.pmttrpg.sheet.actor .all-all-abilities{
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
-.all-abilities{
+.pmttrpg.sheet.actor .all-abilities{
     width: 300px;
     display: flex;
     align-items: center;
@@ -142,53 +142,53 @@
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
-.abilities{
+.pmttrpg.sheet.actor .abilities{
     box-sizing: border-box;
     margin-bottom: 5px;
 }
-.ability-ftd{
+.pmttrpg.sheet.actor .ability-ftd{
     font-weight: bold;
     background-color: red;
     color: darkred;
     border: none;
     clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 0 100%);
 }
-.ability-prd{
+.pmttrpg.sheet.actor .ability-prd{
     font-weight: bold;
     background-color: darkgray;
     color: gray;
     border: none;
     clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 10px 100%, 0 -33%);
 }
-.ability-jst{
+.pmttrpg.sheet.actor .ability-jst{
     font-weight: bold;
     background-color: lightskyblue;
     color: mediumblue;
     border: none;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
 }
-.ability-chr{
+.pmttrpg.sheet.actor .ability-chr{
     font-weight: bold;
     background-color: plum;
     color: mediumpurple;
     border: none;
     clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 0 100%);
 }
-.ability-ins{
+.pmttrpg.sheet.actor .ability-ins{
     font-weight: bold;
     background-color: #FFFFC5;
     color: gold;
     border: none;
     clip-path: polygon(0 0, 90% 0, 100% 20px, 100% 100%, 10px 100%, 0 -33%);
 }
-.ability-tmp{
+.pmttrpg.sheet.actor .ability-tmp{
     font-weight: bold;
     background-color: mediumpurple;
     color: rebeccapurple;
     border: none;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 -33%);
 }
-.abilities img{
+.pmttrpg.sheet.actor .abilities img{
     width: 95px;
     height: 95px;
     object-fit: contain; /* O usa 'cover' si prefieres recortar */
@@ -196,13 +196,13 @@
     margin: 0 auto;
     border: none;
 }
-.ability-label{
+.pmttrpg.sheet.actor .ability-label{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
-.ability-label input {
+.pmttrpg.sheet.actor .ability-label input {
     width: 32px;      /* Solo lo necesario para una cifra */
     text-align: center;
     margin: 0 4px;    /* Espacio a los lados si lo necesitas */
@@ -211,68 +211,68 @@
     color: white; /* Texto en blanco */
     border: 1px solid white;
 }
-input:disabled:hover{
+.pmttrpg.sheet.actor input:disabled:hover{
     border: 1px solid white !important; /* Mantiene el borde blanco al pasar el mouse */
 }
-.ability-label span {
+.pmttrpg.sheet.actor .ability-label span {
     display: flex;
     align-items: center; /* Centra verticalmente la imagen dentro del span */
     margin-left: 8px;    /* Espacio entre input e imagen */
 }
-.ability-label span img{
+.pmttrpg.sheet.actor .ability-label span img{
     width: 32px;
     height: 32px;
     object-fit: contain;
     display: block;}
-.rank{
+.pmttrpg.sheet.actor .rank{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-.rank table {
+.pmttrpg.sheet.actor .rank table {
     border-collapse: collapse;
     border: 1px solid white;
 }
-.basic-stats table{
+.pmttrpg.sheet.actor .basic-stats table{
     border-collapse: separate;
     border-spacing: 0;
     border: 1px solid white; /* Borde exterior blanco */
 }
-.basic-stats table td{
+.pmttrpg.sheet.actor .basic-stats table td{
     border: 1px solid black;
     padding: 2px;
     text-align: center;
     width: 37px; /* Ancho fijo para las celdas */
     height: 27px;
 }
-.rank table td{
+.pmttrpg.sheet.actor .rank table td{
     border: 1px solid white;
     padding: 2px;
     text-align: center;
     width: 37px; /* Ancho fijo para las celdas */
     height: 33px;
 }
-.basic-stats-modifiers table td{
+.pmttrpg.sheet.actor .basic-stats-modifiers table td{
     border: 1px solid white;
     padding: 2px;
     text-align: center;
     width: 34px; /* Ancho fijo para las celdas */
     height: 38px;
 }
-.basic-stats-modifiers table{
+.pmttrpg.sheet.actor .basic-stats-modifiers table{
     margin: 0 auto;
     border-collapse: collapse;
     border: 1px solid white;
 }
-.rank input{
+.pmttrpg.sheet.actor .rank input{
     text-align: center;
     color: white;
 }
-.basic-stats input, .basic-stats-modifiers input{
+.pmttrpg.sheet.actor .basic-stats input, .pmttrpg.sheet.actor .basic-stats-modifiers input{
     color: white;
 }
-.level-up-pending-btn{
+.pmttrpg.sheet.actor .level-up-pending-btn{
     background-color: #FFFFC5;
     width: 100%;
     box-sizing: border-box;
@@ -281,56 +281,59 @@ input:disabled:hover{
     color: black;
     line-height: normal !important;
 }
-.mentality-td{
+.pmttrpg.sheet.actor .mentality-td{
     font-family: Impact, serif;
     background-color: blue;
     clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
     color: lightskyblue;
 }
-.health-td{
+.pmttrpg.sheet.actor .health-td{
     font-family: Impact, serif;
     background-color: red;
     clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
     color: linen;
 }
-.stagger-td{
+.pmttrpg.sheet.actor .stagger-td{
     font-family: Impact, serif;
     background-color: darkgoldenrod;
     clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
 }
-.light-td{
+.pmttrpg.sheet.actor .light-td{
     font-family: Impact, serif;
     background-color: #FFFFC5;
     clip-path: polygon(0 0, 89% 0, 100% 9px, 100% 100%, 0 100%);
     font-weight: bold;
     color: orange;
 }
-.white-td{
+.pmttrpg.sheet.actor .white-td{
     background-color: white;
 }
-.white-td input{
+.pmttrpg.sheet.actor .white-td input{
     color: black;
 }
-.gray-td{
+.pmttrpg.sheet.actor .gray-td{
     background-color: gray;
 }
-.att-td{
+.pmttrpg.sheet.actor .att-td{
     font-family: Impact, serif;
     font-weight: bold;
     color: red;
 }
-.def-td{
+.pmttrpg.sheet.actor .def-td{
     font-family: Impact, serif;
     font-weight: bold;
     color: blue;
 }
-.evd-td{
+.pmttrpg.sheet.actor .evd-td{
     font-family: Impact, serif;
     font-weight: bold;
     color: yellow;
+}
+.pmttrpg.sheet.actor .window-content{
+    padding: 0;
 }
 /*###############################*/
 .manufacturing-consent-regular {
