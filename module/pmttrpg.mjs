@@ -119,35 +119,15 @@ Hooks.on('createActor', async (actor, options, userId) => {
     ];
 
     const content = `
-<form>
-    <div class="form-group">
-        <label>Selecciona el rango inicial:</label>
-        <select id="rango-inicial">
-            ${rangos.map((r, i) => `<option value="${i}">${r.label}</option>`).join('')}
-        </select>
-        <select id="nivel-inicial"></select>
-    </div>
-</form>
-<script>
-    const rangos = ${JSON.stringify(rangos)};
-    function niveles(rango) {
-        return [
-            { label: ((rango * 3) - 3), xp: 0 },
-            { label: ((rango * 3) - 2), xp: 8 },
-            { label: ((rango * 3) - 1), xp: 16 }
-        ];
-    }
-    function updateNiveles() {
-        const rangoIdx = document.getElementById('rango-inicial').value;
-        const rango = rangos[rangoIdx].label === "EX" ? 6 : parseInt(rangos[rangoIdx].label);
-        const nivelSelect = document.getElementById('nivel-inicial');
-        const nivelesArr = niveles(rango);
-        nivelSelect.innerHTML = nivelesArr.map((n, i) => \`<option value="\${i}">\${n.label}</option>\`).join('');
-    }
-    document.getElementById('rango-inicial').addEventListener('change', updateNiveles);
-    updateNiveles();
-</script>
-`;
+    <form>
+        <div class="form-group">
+            <label>Selecciona el rango inicial:</label>
+            <select id="rango-inicial">
+                ${rangos.map((r, i) => `<option value="${i}">${r.label}</option>`).join('')}
+            </select>
+        </div>
+    </form>
+    `;
 
     new Dialog({
         title: "Rango Inicial",
@@ -157,29 +137,39 @@ Hooks.on('createActor', async (actor, options, userId) => {
                 label: "Aceptar",
                 callback: async (html) => {
                     const idx = parseInt(html.find('#rango-inicial').val());
-                    const nivelIdx = parseInt(html.find('#nivel-inicial').val());
-                    const xp = rangos[idx].xp + nivelIdx;
+                    const xp = rangos[idx].xp;
                     await actor.update({ "system.xp": xp });
+                    // Calcula el nivel inicial según el XP
+                    const newLevel = Math.floor(xp / 8);
+                    // Abre el diálogo de subida de nivel
+                    const LevelUpDialog = (await import('./module/dialog/level-up-dialog.mjs')).default;
+                    new LevelUpDialog(actor, newLevel).render(true);
                 }
             }
         },
         default: "ok"
     }).render(true);
 });
-Hooks.on('updateActor', (actor, changes, options, userId) => {
+// Guarda el nivel anterior antes de actualizar
+Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
+    if (!changes.system || !('xp' in changes.system)) return;
+    const prevXp = actor.system.xp ?? 0;
+    actor._oldLevel = Math.floor(prevXp / 8);
+});
+
+// Compara después de actualizar
+Hooks.on('updateActor', async (actor, changes, options, userId) => {
     try {
-        // Verificar si hay cambios en el sistema y específicamente en xp
         if (!changes.system || !('xp' in changes.system)) return;
-        // Calcular el nuevo nivel basado en el xp total
-        const currentXp = actor.system.xp + (changes.system.xp || 0);
-        const newLevel = Math.floor(currentXp / 8); // Asumiendo 8 XP por nivel
-        const oldLevel = actor.system.level;
-        // Si el nuevo nivel es distinto que el anterior, mostrar el diálogo
-        if (newLevel !== oldLevel || newLevel === 0) {
+        const newXp = actor.system.xp ?? 0;
+        const newLevel = Math.floor(newXp / 8);
+        const oldLevel = actor._oldLevel ?? newLevel;
+        delete actor._oldLevel; // Limpia la propiedad temporal
+
+        if (newLevel !== oldLevel) {
             if (actor.sheet) {
-                actor.sheet._showLevelUpDialog();
-                // Actualizar el nivel del actor después de mostrar el diálogo (opcional)
-                actor.update({'system.level': newLevel});
+                await actor.sheet._showLevelUpDialog();
+                await actor.update({'system.level': newLevel});
             }
         }
     } catch (error) {
