@@ -106,7 +106,7 @@ Hooks.once('init', function () {
     return preloadHandlebarsTemplates();
 });
 Hooks.on('createActor', async (actor, options, userId) => {
-    if (!actor || actor.type !== 'character') return;
+    if (!actor) return;
 
     const rangos = [
         { label: "0", xp: -24 },
