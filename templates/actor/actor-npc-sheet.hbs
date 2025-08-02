@@ -100,6 +100,7 @@
                         <td class="white-td">
                             <input type="number" name="system.health_points.value" min="0"
                                    max="{{system.health_points.max}}" value="{{system.health_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
                                    data-dtype="Number">
                         </td>
                         <td class="gray-td">
@@ -110,6 +111,7 @@
                         <td class="white-td">
                             <input type="number" name="system.stagger_threshold.value" min="0"
                                    max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
                                    data-dtype="Number">
                         </td>
                         <td class="gray-td">
@@ -122,6 +124,7 @@
                         <td class="white-td">
                             <input type="number" name="system.sanity_points.value" min="0"
                                    max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
                                    data-dtype="Number">
                         </td>
                         <td class="gray-td">
@@ -132,6 +135,7 @@
                         <td class="white-td">
                             <input type="number" name="system.light.value" min="0" max="{{system.light.max}}"
                                    value="{{system.light.value}}"
+                                   onchange="this.value = Math.clamp(this.value, this.min, this.max)"
                                    data-dtype="Number">
                         </td>
                         <td class="gray-td">
