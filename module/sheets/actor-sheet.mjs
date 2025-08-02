@@ -192,6 +192,20 @@ export default class PMTTRPGActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    const maxFields = [
+      "system.health_points.max",
+      "system.stagger_threshold.max",
+      "system.sanity_points.max",
+      "system.light.max"
+    ];
+
+    maxFields.forEach(field => {
+      html.find(`input[name="${field}"]`).on("change", event => {
+        const value = Number(event.target.value);
+        this.actor.update({ [field]: value });
+      });
+    });
+
     html.find('.level-up-pending-btn').on('click', async (event) => {
       // Abre el diálogo de subida de nivel
       const LevelUpDialog = (await import('../dialog/level-up-dialog.mjs')).default;
