@@ -14,10 +14,8 @@ export default class PMTTRPGToken extends Token {
     _drawBar(number, bar, data) {
         console.log("Usando clase:", this.constructor.name);
 
-        // ❌ Skip drawing the second bar (index 1)
         if (number === 1) return false;
 
-        // Calculate percentages for stagger threshold and health points
         const pctstagger = Math.clamp(
             this.actor.system.stagger_threshold?.value,
             0,
