@@ -199,10 +199,51 @@ export default class PMTTRPGActorSheet extends ActorSheet {
       "system.light.max"
     ];
 
+    const maxValuePairs = {
+      "system.health_points.max": "system.health_points.value",
+      "system.stagger_threshold.max": "system.stagger_threshold.value",
+      "system.sanity_points.max": "system.sanity_points.value",
+      "system.light.max": "system.light.value"
+    };
+
     maxFields.forEach(field => {
-      html.find(`input[name="${field}"]`).on("change", event => {
+      const $input = html.find(`input[name="${field}"]`);
+      if ($input.length > 0) {
+        $input.on("change", async (event) => {
+          const value = Number(event.target.value);
+
+          if (isNaN(value) || value < 0) {
+            ui.notifications.warn(`Invalid value for ${field.split('.')[1]}. Please enter a non-negative number.`);
+            return;
+          }
+
+          try {
+            // Actualizar el max
+            await this.actor.update({ [field]: value });
+
+            // Ajustar el value correspondiente
+            const valueField = maxValuePairs[field];
+            const currentValue = this.actor.system[valueField.split('.')[1]].value;
+            const clampedValue = Math.min(value, Math.max(0, currentValue));
+
+            if (clampedValue !== currentValue) {
+              await this.actor.update({ [valueField]: clampedValue });
+            }
+          } catch (error) {
+            ui.notifications.error(`Failed to update ${field.split('.')[1]}.`);
+          }
+        });
+      }
+    });
+
+    // Mantener el clamping de value en los inputs si lo deseas
+    const valueFields = Object.values(maxValuePairs);
+    valueFields.forEach(field => {
+      html.find(`input[name="${field}"]`).on("change", (event) => {
         const value = Number(event.target.value);
-        this.actor.update({ [field]: value });
+        const maxField = Object.keys(maxValuePairs).find(key => maxValuePairs[key] === field);
+        const maxValue = this.actor.system[maxField.split('.')[1]].max;
+        event.target.value = Math.clamp(value, 0, maxValue);
       });
     });
 
