@@ -250,7 +250,7 @@ export default class PMTTRPGActorSheet extends ActorSheet {
     html.find('.level-up-pending-btn').on('click', async (event) => {
       // Abre el diálogo de subida de nivel
       const LevelUpDialog = (await import('../dialog/level-up-dialog.mjs')).default;
-      new LevelUpDialog(this.actor, this.actor.system.level).render(true);
+      new LevelUpDialog(this.actor, this.actor.system.level, this.actor.system.rank).render(true);
     });
 
     // Render the item sheet for viewing/editing prior to the editable check.

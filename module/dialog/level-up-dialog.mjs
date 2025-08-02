@@ -47,7 +47,7 @@ export default class LevelUpDialog extends Application {
             const button = event.currentTarget;
             const stat = button.getAttribute('data-stat');
             const max = this.actor.system.abilities[stat]?.max ?? 6;
-            const currentRank = this.actor.system.rank || 1; // Assuming level is stored in actor.system.level
+            const currentRank = this.actor.system.rank || 1; // Assuming level is stored in actor.system.rank
             const span = button.parentElement.querySelector('.stat-value');
             let value = parseInt(span.textContent) || 0;
 

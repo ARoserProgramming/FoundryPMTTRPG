@@ -141,9 +141,10 @@ Hooks.on('createActor', async (actor, options, userId) => {
                     await actor.update({ "system.xp": xp });
                     // Calcula el nivel inicial según el XP
                     const newLevel = Math.floor(xp / 8);
+                    const currentRank = this.actor.system.rank;
                     // Abre el diálogo de subida de nivel
                     const LevelUpDialog = (await import('./module/dialog/level-up-dialog.mjs')).default;
-                    new LevelUpDialog(actor, newLevel).render(true);
+                    new LevelUpDialog(actor, newLevel, currentRank).render(true);
                 }
             }
         },
