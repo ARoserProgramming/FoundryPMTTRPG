@@ -106,7 +106,7 @@ export default class PMTTRPGNpc extends PMTTRPGDataModel {
         if (allowed === false) return false;
         const updates = {
             prototypeToken: {
-                displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER
+                displayBars: CONST.TOKEN_DISPLAY_MODES.ALWAYS
             }
         };
         this.parent.updateSource(updates);
