@@ -177,6 +177,7 @@ Hooks.on('updateActor', async (actor, changes, options, userId) => {
         console.error('Error in updateActor hook:', error);
     }
 });
+/*
 Hooks.once('ready', async function () {
     // Tipos de daño físicos fijos
     const physicalTypes = ["slash", "pierce", "blunt"];
@@ -238,6 +239,7 @@ Hooks.once('ready', async function () {
 
 
 });
+*/
 
 /* -------------------------------------------- */
 /*  Handlebars Helpers                          */
