@@ -478,6 +478,10 @@ PMTTRPG.potencyReduce = {
         label: 'PMTTRPG.PotencyReduce.End',
         value: 'end',
     },
+    action_use: {
+        label: 'PMTTRPG.PotencyReduce.ActionUse',
+        value: 'action_use',
+    }
 }
 PMTTRPG.target_attributes = {
     health_points:{
