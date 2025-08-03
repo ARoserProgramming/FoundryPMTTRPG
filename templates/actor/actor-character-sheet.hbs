@@ -96,6 +96,19 @@
             <div class="basic-stats">
                 <table>
                     <tr>
+                        <td colspan="2" class="health-td">TEMP. HEALTH</td>
+                        <td class="white-td">
+                            <input type="number" name="system.health_points.temporal"
+                                   value="{{system.health_points.temporal}}"
+                                   data-dtype="Number">
+                        </td>
+                        <td colspan="2" class="stagger-td">TEMP. STAGGER</td>
+                        <td class="white-td">
+                            <input type="number" name="system.stagger_threshold.temporal"
+                                   value="{{system.stagger_threshold.temporal}}"
+                                   data-dtype="Number">
+                    </tr>
+                    <tr>
                         <td class="health-td">HEALTH</td>
                         <td class="white-td">
                             <input type="number" name="system.health_points.value" min="0"
