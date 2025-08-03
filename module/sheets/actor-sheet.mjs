@@ -192,59 +192,71 @@ export default class PMTTRPGActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    const maxFields = [
-      "system.health_points.max",
-      "system.stagger_threshold.max",
-      "system.sanity_points.max",
-      "system.light.max"
-    ];
+    // Listener for changes to max inputs (only on change event)
+    html.find('input[name$=".max"]').on('change', (event) => {
+      const $maxInput = $(event.currentTarget);
+      const maxValue = Number($maxInput.val()) || 0; // Fallback to 0 if invalid
+      const maxName = $maxInput.attr('name');
+      const valueName = maxName.replace('.max', '.value');
+      const $valueInput = html.find(`input[name="${valueName}"]`);
 
-    const maxValuePairs = {
-      "system.health_points.max": "system.health_points.value",
-      "system.stagger_threshold.max": "system.stagger_threshold.value",
-      "system.sanity_points.max": "system.sanity_points.value",
-      "system.light.max": "system.light.value"
-    };
+      if ($valueInput.length) {
+        // Update the value input
+        $valueInput.val(maxValue).trigger('change');
 
-    maxFields.forEach(field => {
-      const $input = html.find(`input[name="${field}"]`);
-      if ($input.length > 0) {
-        $input.on("change", async (event) => {
-          const value = Number(event.target.value);
-
-          if (isNaN(value) || value < 0) {
-            ui.notifications.warn(`Invalid value for ${field.split('.')[1]}. Please enter a non-negative number.`);
-            return;
-          }
-
-          try {
-            // Actualizar el max
-            await this.actor.update({ [field]: value });
-
-            // Ajustar el value correspondiente
-            const valueField = maxValuePairs[field];
-            const currentValue = this.actor.system[valueField.split('.')[1]].value;
-            const clampedValue = Math.min(value, Math.max(0, currentValue));
-
-            if (clampedValue !== currentValue) {
-              await this.actor.update({ [valueField]: clampedValue });
-            }
-          } catch (error) {
-            ui.notifications.error(`Failed to update ${field.split('.')[1]}.`);
-          }
+        // Update the actor's data model to ensure persistence
+        const updateData = {};
+        updateData[valueName] = maxValue;
+        this.actor.update(updateData).catch(err => {
+          console.error(`Failed to update actor data for ${valueName}:`, err);
         });
+      } else {
+        console.warn(`Value input not found for name: ${valueName}`);
       }
     });
+    // Listener for changes to temporal inputs (only on change event)
+    html.find('input[name$=".temporal"]').on('change', async (event) => {
+      const $temporalInput = $(event.currentTarget);
+      const temporalValue = Number($temporalInput.val()) || 0; // Fallback to 0 if invalid
+      const temporalName = $temporalInput.attr('name');
+      let maxName, valueName;
 
-    // Mantener el clamping de value en los inputs si lo deseas
-    const valueFields = Object.values(maxValuePairs);
-    valueFields.forEach(field => {
-      html.find(`input[name="${field}"]`).on("change", (event) => {
-        const value = Number(event.target.value);
-        const maxField = Object.keys(maxValuePairs).find(key => maxValuePairs[key] === field);
-        const maxValue = this.actor.system[maxField.split('.')[1]].max;
-        event.target.value = Math.clamp(value, 0, maxValue);
+      if (temporalName === 'system.health_points.temporal') {
+        maxName = 'system.health_points.max';
+        valueName = 'system.health_points.value';
+      } else if (temporalName === 'system.stagger_threshold.temporal') {
+        maxName = 'system.stagger_threshold.max';
+        valueName = 'system.stagger_threshold.value';
+      } else {
+        console.warn(`[Temporal Listener] Unknown temporal input: ${temporalName}`);
+        return;
+      }
+
+      // Update the actor's temporal value
+      const updateData = {};
+      updateData[temporalName] = temporalValue;
+      await this.actor.update(updateData).catch(err => {
+        console.error(`[Temporal Listener] Failed to update actor data for ${temporalName}:`, err);
       });
+
+
+      // Get the updated max from the actor's data model
+      const maxValue = Number(getProperty(this.actor.system, maxName.replace('system.', ''))) || 0;
+      const $valueInput = html.find(`input[name="${valueName}"]`);
+
+      if ($valueInput.length) {
+        console.debug(`[Temporal Listener] ${temporalName} changed to ${temporalValue}, syncing ${valueName} to max: ${maxValue}`);
+        $valueInput.val(maxValue).trigger('change');
+
+        // Update the actor's data model
+        const syncData = {};
+        syncData[valueName] = maxValue;
+        this.actor.update(syncData).catch(err => {
+          console.error(`[Temporal Listener] Failed to update actor data for ${valueName}:`, err);
+        });
+      } else {
+        console.warn(`[Temporal Listener] Value input not found for name: ${valueName}`);
+      }
     });
 
     html.find('.level-up-pending-btn').on('click', async (event) => {

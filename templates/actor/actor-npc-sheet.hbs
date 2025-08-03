@@ -80,7 +80,7 @@
                 {{#each actor.system.abilities as |ability key|}}
                     <div class="abilities">
                         <h1 class="ability-{{key}}">{{ability.label}}</h1>
-                        <img src="{{ability.img}}" alt="{{ability.label}}">
+                        <img src="{{ability.img}}" alt="{{ability.label}}" data-tooltip="{{ability.tooltip}}"/>
                         <label class="ability-label">
                             <span width="20px"></span>
                             <input type="number" value="{{ability.value}}" data-dtype="Number"
