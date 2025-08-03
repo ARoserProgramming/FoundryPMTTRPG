@@ -14,7 +14,7 @@ export default class PMTTRPGItem extends PMTTRPGItemBase {
     schema.roll = new fields.SchemaField({
       diceNum: new fields.NumberField({ ...requiredInteger, initial: 1, min: 1 }),
       diceSize: new fields.StringField({ initial: "d12" }),
-      diceBonus: new fields.StringField({ initial: "0" })
+      diceBonus: new fields.StringField({ initial: "" })
     })
 
     schema.formula = new fields.StringField({ blank: true });
