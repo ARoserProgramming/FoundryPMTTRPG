@@ -87,7 +87,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         };
         this.equipment_rank_limit = this.rank + 1;
         this.stagger_threshold.max = 20 + (this.abilities.chr.value * 4) + (this.rank * 4) + this.stagger_threshold.temporal;
-        this.health_points.max = 72 + (this.abilities.ftd.value * 8) + (this.rank * 8) + this.health_points.temporal;
+        this.health_points.max = 72 + (this.abilities.ftd.value * 8) + (this.rank * 8);
         this.light.max = 3 + this.rank;
     }
 
