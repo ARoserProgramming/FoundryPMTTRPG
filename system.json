@@ -29,8 +29,12 @@
     "minimum": 12,
     "verified": "12"
   },
-  "esmodules": ["module/pmttrpg.mjs"],
-  "styles": ["css/pmttrpg.css"],
+  "esmodules": [
+    "module/pmttrpg.mjs"
+  ],
+  "styles": [
+    "css/pmttrpg.css"
+  ],
   "languages": [
     {
       "lang": "en",
@@ -49,6 +53,20 @@
   "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
   "download": "This must link to a .zip file of the current version",
   "background": "systems/pmttrpg/assets/imgs/City_map.webp",
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "abnormality": {},
+      "distortion": {},
+      "npc": {}
+    },
+    "Item": {
+      "item": {},
+      "feature": {},
+      "spell": {},
+      "weapon": {}
+    }
+  },
   "grid": {
     "distance": 5,
     "units": "feet"

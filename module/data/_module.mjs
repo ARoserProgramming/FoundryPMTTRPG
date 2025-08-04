@@ -10,4 +10,4 @@ export {default as PMTTRPGItemBase} from "./base-item.mjs";
 export {default as PMTTRPGItem} from "./item-item.mjs";
 export {default as PMTTRPGFeature} from "./item-feature.mjs";
 export {default as PMTTRPGSpell} from "./item-spell.mjs";
-
+export {default as PMTTRPGWeapon} from "./item-weapon.mjs";

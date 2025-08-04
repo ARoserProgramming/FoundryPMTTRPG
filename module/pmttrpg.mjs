@@ -75,7 +75,8 @@ Hooks.once('init', function () {
     CONFIG.Item.dataModels = {
         item: models.PMTTRPGItem,
         feature: models.PMTTRPGFeature,
-        spell: models.PMTTRPGSpell
+        spell: models.PMTTRPGSpell,
+        weapon: models.PMTTRPGWeapon,
     }
 
     // Active Effects are never copied to the Actor,
@@ -102,6 +103,7 @@ Hooks.once('init', function () {
         CONFIG.statusEffects.push({id, ...value});
     }
     console.log(PMTTRPG.damageTypes);
+    console.log(CONFIG.Item.dataModels);
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
