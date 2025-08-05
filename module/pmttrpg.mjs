@@ -299,33 +299,38 @@ Hooks.once('ready', function () {
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-async function createItemMacro(data, slot) {
-    // First, determine if this is a valid owned item.
+function createItemMacro(data, slot) {
     if (data.type !== 'Item') return;
     if (!data.uuid.includes('Actor.') && !data.uuid.includes('Token.')) {
         return ui.notifications.warn(
             'You can only create macro buttons for owned Items'
         );
     }
-    // If it is, retrieve it based on the uuid.
-    const item = await Item.fromDropData(data);
-
-    // Create the macro command using the uuid.
+    // Busca la macro existente de forma síncrona
     const command = `game.pmttrpg.rollItemMacro("${data.uuid}");`;
-    let macro = game.macros.find(
-        (m) => m.name === item.name && m.command === command
+    const macro = game.macros.find(
+        (m) => m.name === data.name && m.command === command
     );
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name,
-            type: 'script',
-            img: item.img,
-            command: command,
-            flags: {'pmttrpg.itemMacro': true},
-        });
+    if (macro) {
+        game.user.assignHotbarMacro(macro, slot);
+    } else {
+        // Si no existe, delega la creación asíncrona
+        createItemMacroAsync(data, slot);
     }
-    game.user.assignHotbarMacro(macro, slot);
     return false;
+}
+
+async function createItemMacroAsync(data, slot) {
+    const item = await Item.fromDropData(data);
+    const command = `game.pmttrpg.rollItemMacro("${data.uuid}");`;
+    const macro = await Macro.create({
+        name: item.name,
+        type: 'script',
+        img: item.img,
+        command: command,
+        flags: {'pmttrpg.itemMacro': true},
+    });
+    game.user.assignHotbarMacro(macro, slot);
 }
 
 /**
