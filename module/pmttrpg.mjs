@@ -107,6 +107,51 @@ Hooks.once('init', function () {
    // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });
+Hooks.once('ready', () => {
+    // Inyectar CSS para establecer el cursor predeterminado y manejar el estado
+    const style = document.createElement('style');
+    style.id = 'custom-cursor-style'; // Añadir ID para referencia
+    style.textContent = `
+    * {
+      cursor: url('/systems/pmttrpg/assets/cursors/mouse_off.png') 20 5, auto !important;
+    }
+    body.cursor-on {
+      cursor: url('/systems/pmttrpg/assets/cursors/mouse_on.png') 20 5, auto !important;
+    }
+  `;
+    document.head.appendChild(style);
+
+    // Aplicar la clase inicial al body
+    $('body').removeClass('cursor-on');
+});
+
+Hooks.on('canvasReady', () => {
+    // Añadir listener global para cambiar el cursor al clicar o mantener el clic
+    $(document).off('mousedown mouseup mouseout'); // Evitar duplicados
+    $(document).on('mousedown', (event) => {
+        // Desactivar temporalmente el estilo base de *
+        const styleElement = document.getElementById('custom-cursor-style');
+        const originalStyle = styleElement.textContent;
+        styleElement.textContent = `
+      * {
+        cursor: url('/systems/pmttrpg/assets/cursors/mouse_on.png') 20 5, auto !important;
+      }
+    `;
+        $('body').addClass('cursor-on');
+    }).on('mouseup mouseout', (event) => {
+        // Restaurar el estilo base
+        const styleElement = document.getElementById('custom-cursor-style');
+        styleElement.textContent = `
+      * {
+        cursor: url('/systems/pmttrpg/assets/cursors/mouse_off.png') 20 5, auto !important;
+      }
+      body.cursor-on {
+        cursor: url('/systems/pmttrpg/assets/cursors/mouse_on.png') 20 5, auto !important;
+      }
+    `;
+        $('body').removeClass('cursor-on');
+    });
+});
 Hooks.on('createActor', async (actor, options, userId) => {
     if (!actor) return;
 
