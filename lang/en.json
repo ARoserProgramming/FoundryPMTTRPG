@@ -30,7 +30,7 @@
     "Attributes": {
       "Rank": "Rank",
       "Level": "Level",
-      "Light": "Light",
+      "Light": "LIGHT",
       "XP": "Experience Points",
       "AttackModifier": "Attack Modifier",
       "EvadeModifier": "Evade Modifier",
@@ -54,9 +54,11 @@
       }
     },
     "Stats": {
-      "HealthPoints": "Health Points",
-      "StaggerThreshold": "Stagger Threshold",
-      "Mentality": "Mentality",
+      "TemporalHealth": "TEMP. HEALTH",
+      "HealthPoints": "HEALTH",
+      "TemporalStagger": "TEMP. STAGGER",
+      "StaggerThreshold": "STAGGER",
+      "Mentality": "MENTALITY",
       "Risk": "Risk"
     },
     "Tabs": {

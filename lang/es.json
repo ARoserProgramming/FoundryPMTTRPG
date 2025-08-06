@@ -30,13 +30,15 @@
     "Attributes": {
       "Rank": "Rango",
       "Level": "Nivel",
-      "Light": "Luz",
+      "Light": "LUZ",
       "XP": "Puntos de Experiencia"
     },
     "Stats": {
-      "HealthPoints": "Puntos de Salud",
-      "StaggerThreshold": "Umbral de Aturdimiento",
-      "Mentality": "Mentalidad",
+      "TemporalHealth": "VIDA TEMP.",
+      "HealthPoints": "VIDA",
+      "TemporalStagger": "ATURDIMIENTO TEMP.",
+      "StaggerThreshold": "ATURDIMIENTO",
+      "Mentality": "MENTALIDAD",
       "Risk": "Peligro"
     },
     "Tabs": {

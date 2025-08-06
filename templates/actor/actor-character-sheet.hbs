@@ -96,20 +96,20 @@
             <div class="basic-stats">
                 <table>
                     <tr>
-                        <td colspan="2" class="health-td">TEMP. HEALTH</td>
+                        <td colspan="2" class="health-td">{{localize 'PMTTRPG.Stats.TemporalHealth'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.health_points.temporal"
                                    value="{{system.health_points.temporal}}"
                                    data-dtype="Number">
                         </td>
-                        <td colspan="2" class="stagger-td">TEMP. STAGGER</td>
+                        <td colspan="2" class="stagger-td">{{localize 'PMTTRPG.Stats.TemporalStagger'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.stagger_threshold.temporal"
                                    value="{{system.stagger_threshold.temporal}}"
                                    data-dtype="Number">
                     </tr>
                     <tr>
-                        <td class="health-td">HEALTH</td>
+                        <td class="health-td">{{localize 'PMTTRPG.Stats.HealthPoints'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.health_points.value" min="0"
                                    max="{{system.health_points.max}}" value="{{system.health_points.value}}"
@@ -120,7 +120,7 @@
                             <input type="number" name="system.health_points.max" value="{{system.health_points.max}}"
                                    data-dtype="Number" disabled/>
                         </td>
-                        <td class="stagger-td">STAGGER</td>
+                        <td class="stagger-td">{{localize 'PMTTRPG.Stats.StaggerThreshold'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.stagger_threshold.value" min="0"
                                    max="{{system.stagger_threshold.max}}" value="{{system.stagger_threshold.value}}"
@@ -133,7 +133,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="mentality-td">MENTALITY</td>
+                        <td class="mentality-td">{{localize 'PMTTRPG.Stats.Mentality'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.sanity_points.value" min="0"
                                    max="{{system.sanity_points.max}}" value="{{system.sanity_points.value}}"
@@ -144,7 +144,7 @@
                             <input type="number" name="system.sanity_points.max" value="{{system.sanity_points.max}}"
                                    data-dtype="Number" disabled/>
                         </td>
-                        <td class="light-td">LIGHT</td>
+                        <td class="light-td">{{localize 'PMTTRPG.Attributes.Light'}}</td>
                         <td class="white-td">
                             <input type="number" name="system.light.value" min="0" max="{{system.light.max}}"
                                    value="{{system.light.value}}"
