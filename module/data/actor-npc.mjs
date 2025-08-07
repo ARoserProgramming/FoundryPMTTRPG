@@ -51,6 +51,11 @@ export default class PMTTRPGNpc extends PMTTRPGDataModel {
                 return obj;
             }, {})
         );
+        schema.reactions = new fields.SchemaField({
+            value: new fields.NumberField({initial: 0, nullable: false, integer: true}),
+            max: new fields.NumberField({initial: 10, nullable: false, integer: true}),
+            bonus: new fields.NumberField({initial: 0, nullable: false, integer: true}),
+        });
         schema.levelUpPending = new fields.BooleanField({initial: true, required: true});
         return schema;
     }
@@ -91,6 +96,8 @@ export default class PMTTRPGNpc extends PMTTRPGDataModel {
             max: 4,
         };
         this.equipment_rank_limit = this.rank + 1;
+        this.reactions.max = this.rank + this.reactions.bonus;
+
     }
 
     /**
