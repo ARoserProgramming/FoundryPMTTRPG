@@ -613,8 +613,11 @@
 
 .pmttrpg .sheet-body,
 .pmttrpg .sheet-body .tab,
-.pmttrpg .sheet-body .tab .editor {
+.pmttrpg .sheet-body .tab {
     height: auto;
+}
+.editor{
+    height: 100%;
 }
 
 .pmttrpg .tox .tox-editor-container {
