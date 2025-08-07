@@ -35,7 +35,7 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         schema.reactions = new fields.SchemaField({
             value: new fields.NumberField({initial: 0, nullable: false, integer: true}),
             max: new fields.NumberField({initial: 10, nullable: false, integer: true}),
-            bonus: new fields.NumberField({initial: 0, nullable: false, integer: true})
+            bonus: new fields.NumberField({initial: 0, nullable: false, integer: true}),
         });
         // Abilities schema
         schema.abilities = new fields.SchemaField(Object.keys(CONFIG.PMTTRPG.abilities).reduce((obj, ability) => {
