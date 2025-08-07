@@ -1,4 +1,5 @@
 import PMTTRPGDataModel from "./base-model.mjs";
+import {schema} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/prosemirror/schema";
 
 /**
  * Base class for actors in the PMTTRPG system.
@@ -67,6 +68,9 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
      * Calculates values such as level, rank, attack modifiers, and equipment limits.
      */
     prepareDerivedData() {
+        if(!this.reactions){
+            schema.reactions = new fields.NumberField({...requiredInteger, initial: 0, bonus: 0})
+        }
         // Common ability modifier logic
         if (this.abilities) {
             for (const key in this.abilities) {
