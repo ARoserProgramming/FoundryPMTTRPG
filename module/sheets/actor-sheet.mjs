@@ -190,6 +190,11 @@ export default class PMTTRPGActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    html.find('input[name="name"]').on('change', async (event) => {
+      const newName = event.target.value;
+      await this.actor.update({ name: newName });
+    });
+
     // Listener for changes to max inputs (only on change event)
     html.find('input[name$=".max"]').on('change', (event) => {
       const $maxInput = $(event.currentTarget);
