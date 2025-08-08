@@ -69,16 +69,17 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
     console.log("owner", this.owner, "actor", this.actor, "system", this.system);
     // Convierte los valores a número para la fórmula
     const roll = this.roll;
-    const diceNum = Number(roll.diceNum.value);
-    const diceSize = Number(roll.diceSize.value);
-    const diceBonus = roll.diceBonus.value;
-    console.log("Actor attack_modifier:", this.actor?.attack_modifier);
-    roll.diceBonus.value = this.actor?.attack_modifier ?? 0;
+    //const diceNum = Number(roll.diceNum.value);
+    //const diceSize = Number(roll.diceSize.value);
+    //const diceBonus = roll.diceBonus.value;
+    //console.log("Actor attack_modifier:", this.actor?.attack_modifier);
+    //roll.diceBonus.value = this.actor?.attack_modifier ?? 0;
 
     // Construye la fórmula
-    this.formula = `${diceNum}d${diceSize}+${diceBonus}`;
+    this.formula = `${roll.diceNum.value}d${roll.diceSize.value}+${roll.diceBonus.value}`;
 
     // Aplica efectos según la propiedad de forma
+    /*
     const formProperty = this.meleeFormProperty;
     if(this.weaponType === "Melee"){
       switch (formProperty) {
@@ -117,6 +118,6 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
       switch (formProperty){
 
       }
-    }
+    }*/
   }
 }
