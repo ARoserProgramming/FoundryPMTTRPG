@@ -9,10 +9,21 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
 
     schema.quantity = new fields.NumberField({ ...requiredInteger, initial: 1, min: 1 });
     schema.weight = new fields.NumberField({ required: true, nullable: false, initial: 0, min: 0 });
-    schema.formProperty = new fields.StringField({
+    schema.meleeAttackRange = new fields.NumberField({ required: true, nullable: false, initial: 1});
+    schema.rangedAttackRange = new fields.NumberField({ required: true, nullable: false, initial: 10});
+    schema.weaponType = new fields.StringField({
+      required:true,
+      label: "Weapon Type",
+      initial: "Melee",
+      choices: [
+        "Melee",
+        "Ranged"
+      ]
+    });
+    schema.meleeFormProperty = new fields.StringField({
       required: true,
-      label: "Form Property",
-      initial: "Medium",
+      label: "Melee Form Property",
+      initial: "Small",
       choices: [
         "Small",
         "Medium",
@@ -21,11 +32,22 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
         "Hybrid"
       ]
     });
-
+    schema.rangedFormProperty = new fields.StringField({
+      required: true,
+      label: "Ranged Form Property",
+      initial: "Low Caliber",
+      choices: [
+        "Low Caliber",
+        "High Caliber",
+        "Reactive",
+        "Hybrid"
+      ]
+    })
     // Break down roll formula into three independent fields
     schema.roll = new fields.SchemaField({
       diceNum: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 1 })
+        value: new fields.NumberField({ ...requiredInteger, initial: 1 }),
+        bonus: new fields.NumberField({ ...requiredInteger, initial: 0 })
       }),
       diceSize: new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10 }),
@@ -54,35 +76,44 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
     this.formula = `${diceNum}d${diceSize}${diceBonus}`;
 
     // Aplica efectos según la propiedad de forma
-    const formProperty = this.formProperty;
-    switch (formProperty) {
-      case "Small":
-        // Ejemplo: +1 reacción extra
-        this.system.reactions.bonus = 1;
-        break;
-      case "Medium":
-        // Ejemplo: +2 al tamaño del dado
-        roll.diceSize.bonus = 2;
-        roll.diceSize.value = diceSize + roll.diceSize.bonus;
-        this.formula = `${diceNum}d${roll.diceSize.value}${diceBonus}`;
-        break;
-      case "Large":
-        // Ejemplo: +1 dado extra
-        roll.diceNum.bonus = 1;
-        roll.diceNum.value = diceNum + roll.diceNum.bonus;
-        this.formula = `${roll.diceNum.value}d${diceSize}${diceBonus}`;
-        break;
-      case "Massive":
-        // Ejemplo: +2 dados y +2 tamaño de dado
-        roll.diceNum.bonus = 2;
-        roll.diceSize.bonus = 2;
-        roll.diceNum.value = diceNum + roll.diceNum.bonus;
-        roll.diceSize.value = diceSize + roll.diceSize.bonus;
-        this.formula = `${roll.diceNum.value}d${roll.diceSize.value}${diceBonus}`;
-        break;
-      default:
-        // No aplicar bonificaciones
-        break;
+    const formProperty = this.meleeFormProperty;
+    if(this.weaponType === "Melee"){
+      switch (formProperty) {
+        case "Small":
+          // Ejemplo: +1 reacción extra
+          if (this.actor) {
+            this.actor.update({ "system.counterReactions.bonus": (this.actor.system.counterReactions.bonus) = 1 });
+          }
+          break;
+        case "Medium":
+          // Ejemplo: +2 al tamaño del dado
+          roll.diceSize.bonus = 2;
+          roll.diceSize.value = diceSize + roll.diceSize.bonus;
+          this.formula = `${diceNum}d${roll.diceSize.value}${diceBonus}`;
+          break;
+        case "Long":
+          this.meleeAttackRange = 2;
+          //On Clash Win with this weapon against an adjacent target, you may choose to move the target 1 SQR in any
+          //direction on the ground. This movement does not proc Force Damage or Opportunity Attacks.
+          this.system.throwingRange.bonus = 1;
+          break;
+        case "Sturdy":
+          this.system.blockReactions.bonus = 1;
+          break;
+        case "Hybrid":
+          //You can choose to make either a Melee or Ranged Attack with this weapon, decided before the clash is rolled.
+          //
+          // Incompatible Hand Properties do not apply their bonuses, and bullets are still consumed as normal for Ranged Attacks.
+          // [M] and [R] exclusive effects also do not take effect if incompatible.
+          break;
+        default:
+          // No aplicar bonificaciones
+          break;
+      }
+    }else if(this.weaponType === "Ranged"){
+      switch (formProperty){
+
+      }
     }
   }
 }
