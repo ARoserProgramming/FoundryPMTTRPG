@@ -152,7 +152,7 @@ Hooks.on('canvasReady', () => {
         $('body').removeClass('cursor-on');
     });
 });
-Hooks.on('createActor', async (actor, options, userId) => {
+async function showInitialRankDialog(actor) {
     if (!actor) return;
 
     const rangos = [
@@ -186,17 +186,15 @@ Hooks.on('createActor', async (actor, options, userId) => {
                     const idx = parseInt(html.find('#rango-inicial').val());
                     const xp = rangos[idx].xp;
                     await actor.update({ "system.xp": xp });
-                    // Calcula el nivel inicial según el XP
-                    const newLevel = Math.floor(xp / 8);
-                    const currentRank = this.actor.system.rank;
-                    // Abre el diálogo de subida de nivel
-                    const LevelUpDialog = (await import('./module/dialog/level-up-dialog.mjs')).default;
-                    new LevelUpDialog(actor, newLevel, currentRank).render(true);
                 }
             }
         },
         default: "ok"
     }).render(true, { left: 100, top: 100 });
+}
+
+Hooks.on('createActor', async (actor, options, userId) => {
+    await showInitialRankDialog(actor);
 });
 // save the previous level before the actor is updated
 Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
