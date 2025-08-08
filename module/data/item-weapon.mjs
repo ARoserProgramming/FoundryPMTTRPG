@@ -54,7 +54,7 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
         bonus: new fields.NumberField({ ...requiredInteger, initial: 0 })
       }),
       diceBonus: new fields.SchemaField({
-        value: new fields.StringField({ initial: "" })
+        value: new fields.NumberField({ initial: 2})
       })
     });
 
@@ -66,14 +66,17 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
 
   }
   prepareDerivedData() {
+    console.log("owner", this.owner, "actor", this.actor, "system", this.system);
     // Convierte los valores a número para la fórmula
     const roll = this.roll;
     const diceNum = Number(roll.diceNum.value);
     const diceSize = Number(roll.diceSize.value);
-    const diceBonus = roll.diceBonus.value || "";
+    const diceBonus = roll.diceBonus.value;
+    console.log("Actor attack_modifier:", this.actor?.attack_modifier);
+    roll.diceBonus.value = this.actor?.attack_modifier ?? 0;
 
     // Construye la fórmula
-    this.formula = `${diceNum}d${diceSize}${diceBonus}`;
+    this.formula = `${diceNum}d${diceSize}+${diceBonus}`;
 
     // Aplica efectos según la propiedad de forma
     const formProperty = this.meleeFormProperty;
@@ -89,7 +92,7 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
           // Ejemplo: +2 al tamaño del dado
           roll.diceSize.bonus = 2;
           roll.diceSize.value = diceSize + roll.diceSize.bonus;
-          this.formula = `${diceNum}d${roll.diceSize.value}${diceBonus}`;
+          this.formula = `${diceNum}d${roll.diceSize.value}+${diceBonus}`;
           break;
         case "Long":
           this.meleeAttackRange = 2;
