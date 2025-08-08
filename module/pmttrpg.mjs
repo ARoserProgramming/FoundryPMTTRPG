@@ -157,7 +157,7 @@ Hooks.on('createActor', async (actor, options, userId) => {
     if (game.user.id !== userId) return; // Solo el creador ejecuta esto
     if(actor.sheet){
         // If the actor has a sheet, show the initial rank dialog
-        await actor.sheet._showInitialRankDialog(actor);
+        await actor.sheet._showInitialRankDialog();
     }
 });
 // save the previous level before the actor is updated
