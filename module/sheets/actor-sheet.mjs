@@ -319,10 +319,8 @@ export default class PMTTRPGActorSheet extends ActorSheet {
     const dialog = new LevelUpDialog(this.actor, currentLevel, currentRank);
     dialog.render(true);
     }
-  async _showInitialRankDialog(actor) {
-    if (!actor) return;
-
-    const dialog = new InitialRankDialog(actor);
+  async _showInitialRankDialog() {
+    const dialog = new InitialRankDialog(this.actor);
     dialog.render(true, {left: 100, top: 100});
   }
   /**
