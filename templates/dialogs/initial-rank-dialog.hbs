@@ -1,0 +1,10 @@
+<form>
+    <div class="form-group">
+        <label>Selecciona el rango inicial:</label>
+        <select id="rango-inicial">
+            {{#each rangos}}
+                <option value="{{@index}}">{{label}}</option>
+            {{/each}}
+        </select>
+    </div>
+</form>
