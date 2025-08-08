@@ -152,49 +152,12 @@ Hooks.on('canvasReady', () => {
         $('body').removeClass('cursor-on');
     });
 });
-async function showInitialRankDialog(actor) {
-    if (!actor) return;
-
-    const rangos = [
-        { label: "0", xp: -24 },
-        { label: "1", xp: 0 },
-        { label: "2", xp: 24 },
-        { label: "3", xp: 48 },
-        { label: "4", xp: 72 },
-        { label: "5", xp: 96 },
-        { label: "EX", xp: 120 }
-    ];
-
-    const content = `
-    <form>
-        <div class="form-group">
-            <label>Selecciona el rango inicial:</label>
-            <select id="rango-inicial">
-                ${rangos.map((r, i) => `<option value="${i}">${r.label}</option>`).join('')}
-            </select>
-        </div>
-    </form>
-    `;
-
-    new Dialog({
-        title: "Rango Inicial",
-        content,
-        buttons: {
-            ok: {
-                label: "Aceptar",
-                callback: async (html) => {
-                    const idx = parseInt(html.find('#rango-inicial').val());
-                    const xp = rangos[idx].xp;
-                    await actor.update({ "system.xp": xp });
-                }
-            }
-        },
-        default: "ok"
-    }).render(true, { left: 100, top: 100 });
-}
 
 Hooks.on('createActor', async (actor, options, userId) => {
-    await showInitialRankDialog(actor);
+    if(actor.sheet){
+        // If the actor has a sheet, show the initial rank dialog
+        await actor.sheet._showInitialRankDialog(actor);
+    }
 });
 // save the previous level before the actor is updated
 Hooks.on('preUpdateActor', (actor, changes, options, userId) => {
