@@ -76,6 +76,9 @@ export default class PMTTRPGNpc extends PMTTRPGDataModel {
      * Calculates values such as level, rank, attack modifiers, and equipment limits.
      */
     prepareDerivedData() {
+        for (const item of this.parent.items) {
+            item.system.preparePostActorPrepData();
+        }
         // Common ability modifier logic
         if (this.abilities) {
             for (const key in this.abilities) {

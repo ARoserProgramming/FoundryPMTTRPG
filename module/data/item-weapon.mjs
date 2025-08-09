@@ -62,17 +62,22 @@ export default class PMTTRPGWeapon extends PMTTRPGItemBase {
 
     return schema;
   }
+  preparePostActorPrepData() {
+    super.preparePostActorPrepData();
+
+  }
+
   onCreate(data, options, user) {
 
   }
   prepareDerivedData() {
-    console.log("owner", this.owner, "actor", this.actor, "system", this.system);
+    //console.log("owner", this.owner, "actor", this.actor, "system", this.system);
     // Convierte los valores a número para la fórmula
     const roll = this.roll;
-    //const diceNum = Number(roll.diceNum.value);
-    //const diceSize = Number(roll.diceSize.value);
-    //const diceBonus = roll.diceBonus.value;
-    //console.log("Actor attack_modifier:", this.actor?.attack_modifier);
+    const diceNum = Number(roll.diceNum.value);
+    const diceSize = Number(roll.diceSize.value);
+    const diceBonus = roll.diceBonus.value;
+    //console.log("Actor attack_modifier:", this.actor.attack_modifier);
     //roll.diceBonus.value = this.actor?.attack_modifier ?? 0;
 
     // Construye la fórmula

@@ -10,5 +10,10 @@ export default class PMTTRPGItemBase extends PMTTRPGDataModel {
 
     return schema;
   }
+  preparePostActorPrepData(){
 
+  }
+  get actor() {
+    return this.parent.actor;
+  }
 }

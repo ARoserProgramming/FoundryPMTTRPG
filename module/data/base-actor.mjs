@@ -5,7 +5,6 @@ import PMTTRPGDataModel from "./base-model.mjs";
  * Extends PMTTRPGDataModel and defines core logic for attributes, resistances, and damage handling.
  */
 export default class PMTTRPGActorBase extends PMTTRPGDataModel {
-
     /**
      * Defines the data schema for actors.
      * Includes attributes such as health points, stagger threshold, resistances, abilities, etc.
@@ -80,6 +79,9 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
      * Calculates values such as level, rank, attack modifiers, and equipment limits.
      */
     prepareDerivedData() {
+        for (const item of this.parent.items) {
+            item.system.preparePostActorPrepData();
+        }
         // Common ability modifier logic
         if (this.abilities) {
             for (const key in this.abilities) {
