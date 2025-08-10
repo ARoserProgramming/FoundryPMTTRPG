@@ -191,6 +191,19 @@ export default class PMTTRPGActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
+    html.find('input[name="system.potency.value"]').on('change', async (event) => {
+        const $input = $(event.currentTarget);
+        const newPotency = Number($input.val()) || 0; // Fallback to 0 if invalid
+        const effectId = $input.closest('.effect').data('effectId');
+        const effect = this.actor.effects.get(effectId);
+
+        if (effect) {
+            await effect.update({ 'system.potency.value': newPotency });
+        } else {
+            console.warn(`Effect with ID ${effectId} not found on actor.`);
+        }
+    });
+
     html.find('input[name="name"]').on('change', async (event) => {
       const newName = event.target.value;
       await this.actor.update({ name: newName });

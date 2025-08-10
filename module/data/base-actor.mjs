@@ -35,6 +35,11 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
             value: new fields.NumberField({initial: 1, nullable: false, integer: true}),
             bonus: new fields.NumberField({initial: 0, nullable: false, integer: true}),
         })
+        schema.potency = new fields.SchemaField({
+            value: new fields.NumberField({initial: 0, nullable: false, integer: true}),
+            max: new fields.NumberField({initial: 10, nullable: false, integer: true}),
+            bonus: new fields.NumberField({initial: 0, nullable: false, integer: true}),
+        });
         schema.counterReactions = new fields.SchemaField({
             value: new fields.NumberField({initial: 0, nullable: false, integer: true}),
             max: new fields.NumberField({initial: 10, nullable: false, integer: true}),
