@@ -20,12 +20,19 @@
         <h1 class="titles">Description</h1>
         <input style="background: white" name="system.background.description" type="text" value="{{system.background.description}}" placeholder="{{localize 'Description'}}"/>
     </div>
-    <div>
-        <h1 class="titles">Background</h1>
-        <div class="biography">
-            {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+    {{#if actor.isOwner}}
+        <div>
+            <h1 class="titles">Background</h1>
+            <div class="biography">
+                {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+            </div>
         </div>
-    </div>
+    {{else}}
+        <div>
+            <h1 class="titles">Background</h1>
+            <p><em>This biography is private.</em></p>
+        </div>
+    {{/if}}
     <div>
         <h1 class="titles">Personality</h1>
         <input style="background: white" name="system.background.personality" type="text" value="{{system.background.personality}}" placeholder="{{localize 'Personality'}}"/>
