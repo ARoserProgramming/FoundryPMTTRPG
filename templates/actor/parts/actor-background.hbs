@@ -1,0 +1,37 @@
+
+<div>
+    <div>
+        <h1 class="titles">Subject Name</h1>
+        <input style="background: white" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"/>
+    </div>
+    <div>
+        <h1 class="titles">Age</h1>
+            <input style="background: white" name="system.age" type="number" value="{{system.background.age.value}}" placeholder="{{localize 'Age'}}"/>
+        <h1 class="titles">Birthplace</h1>
+            <input style="background: white" name="system.birthplace" type="text" value="{{system.background.birthplace.value}}" placeholder="{{localize 'Birthplace'}}"/>
+    </div>
+    <div>
+        <h1 class="titles">Height</h1>
+        <input style="background: white" name="system.height" type="text" value="{{system.background.height.value}}" placeholder="{{localize 'Height'}}"/>
+        <h1 class="titles">Residence</h1>
+        <input style="background: white" name="system.residence" type="text" value="{{system.background.residence}}" placeholder="{{localize 'Residence'}}"/>
+    </div>
+    <div>
+        <h1 class="titles">Description</h1>
+        <input style="background: white" name="system.background.description" type="text" value="{{system.background.description}}" placeholder="{{localize 'Description'}}"/>
+    </div>
+    <div>
+        <h1 class="titles">Background</h1>
+        <div class="biography">
+            {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+        </div>
+    </div>
+    <div>
+        <h1 class="titles">Personality</h1>
+        <input style="background: white" name="system.background.personality" type="text" value="{{system.background.personality}}" placeholder="{{localize 'Personality'}}"/>
+    </div>
+    <div>
+        <h1 class="titles">Ahn</h1>
+        <input style="background: white" name="system.background.ahn" type="text" value="{{system.background.ahn}}" placeholder="{{localize 'Ahn'}}"/>
+    </div>
+</div>

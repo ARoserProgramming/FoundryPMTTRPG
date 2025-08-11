@@ -208,6 +208,34 @@ export default class PMTTRPGActorSheet extends ActorSheet {
       const newName = event.target.value;
       await this.actor.update({ name: newName });
     });
+    html.find('input[name="system.age"]').on('change', async (event) => {
+        const newAge = Number(event.target.value) || 0; // Fallback to 0 if invalid
+        await this.actor.update({ 'system.background.age.value': newAge });
+    });
+    html.find('input[name="system.birthplace"]').on('change', async (event) => {
+        const newBirthplace = event.target.value;
+        await this.actor.update({ 'system.background.birthplace.value': newBirthplace });
+    });
+    html.find('input[name="system.height"]').on('change', async (event) => {
+        const newHeight = event.target.value;
+        await this.actor.update({ 'system.background.height.value': newHeight });
+    });
+    html.find('input[name="system.residence"]').on('change', async (event) => {
+        const newResidence = event.target.value;
+        await this.actor.update({ 'system.background.residence': newResidence });
+    });
+    html.find('input[name="system.description"]').on('change', async (event) => {
+        const newDescription = event.target.value;
+        await this.actor.update({ 'system.background.description': newDescription });
+    });
+    html.find('input[name="system.personality"]').on('change', async (event) => {
+        const newPersonality = event.target.value;
+        await this.actor.update({ 'system.background.personality': newPersonality });
+    });
+    html.find('input[name="system.ahn"]').on('change', async (event) => {
+        const newAhn = event.target.value;
+        await this.actor.update({ 'system.background.ahn': newAhn });
+    });
 
     // Listener for changes to max inputs (only on change event)
     html.find('input[name$=".max"]').on('change', (event) => {

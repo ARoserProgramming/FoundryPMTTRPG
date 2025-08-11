@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/pmttrpg/templates/actor/parts/actor-items.hbs',
     'systems/pmttrpg/templates/actor/parts/actor-spells.hbs',
     'systems/pmttrpg/templates/actor/parts/actor-effects.hbs',
+    'systems/pmttrpg/templates/actor/parts/actor-background.hbs',
     // Item partials
     'systems/pmttrpg/templates/item/parts/item-effects.hbs',
   ]);

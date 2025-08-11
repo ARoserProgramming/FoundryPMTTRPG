@@ -31,6 +31,22 @@ export default class PMTTRPGActorBase extends PMTTRPGDataModel {
         schema.movement_speed = new fields.NumberField({initial: 30, nullable: false, integer: true});
         schema.xp = new fields.NumberField({...requiredInteger, initial: 0, min: -24, max: 120});
         schema.biography = new fields.StringField({required: true, blank: true});
+        schema.background = new fields.SchemaField({
+            value: new fields.StringField({required: true, blank: true}),
+            age: new fields.SchemaField({
+                value: new fields.NumberField({initial: 18 ,required: true, nullable: false, integer: true}),
+            }),
+            birthplace: new fields.SchemaField({
+                value: new fields.StringField({required: true, blank: true}),
+            }),
+            height: new fields.SchemaField({
+                value: new fields.StringField({required: true, blank: true}),
+            }),
+            residence: new fields.StringField({required: true, blank: true}),
+            description: new fields.StringField({required: true, blank: true}),
+            personality: new fields.StringField({required: true, blank: true}),
+            ahn: new fields.StringField({required: true, blank: true}),
+        });
         schema.throwingRange = new fields.SchemaField({
             value: new fields.NumberField({initial: 1, nullable: false, integer: true}),
             bonus: new fields.NumberField({initial: 0, nullable: false, integer: true}),
