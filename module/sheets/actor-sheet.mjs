@@ -204,37 +204,55 @@ export default class PMTTRPGActorSheet extends ActorSheet {
         }
     });
 
-    html.find('input[name="name"]').on('change', async (event) => {
-      const newName = event.target.value;
-      await this.actor.update({ name: newName });
-    });
-    html.find('input[name="system.age"]').on('change', async (event) => {
-        const newAge = Number(event.target.value) || 0; // Fallback to 0 if invalid
-        await this.actor.update({ 'system.background.age.value': newAge });
-    });
-    html.find('input[name="system.birthplace"]').on('change', async (event) => {
-        const newBirthplace = event.target.value;
-        await this.actor.update({ 'system.background.birthplace.value': newBirthplace });
-    });
-    html.find('input[name="system.height"]').on('change', async (event) => {
-        const newHeight = event.target.value;
-        await this.actor.update({ 'system.background.height.value': newHeight });
-    });
-    html.find('input[name="system.residence"]').on('change', async (event) => {
-        const newResidence = event.target.value;
-        await this.actor.update({ 'system.background.residence': newResidence });
-    });
-    html.find('input[name="system.description"]').on('change', async (event) => {
-        const newDescription = event.target.value;
-        await this.actor.update({ 'system.background.description': newDescription });
-    });
-    html.find('input[name="system.personality"]').on('change', async (event) => {
-        const newPersonality = event.target.value;
-        await this.actor.update({ 'system.background.personality': newPersonality });
-    });
-    html.find('input[name="system.ahn"]').on('change', async (event) => {
-        const newAhn = event.target.value;
-        await this.actor.update({ 'system.background.ahn': newAhn });
+    // Mapeo de campos que requieren conversión especial
+    const specialParsers = {
+      'system.background.age.value': v => Number(v) || 0
+    };
+
+// Selecciona todos los inputs que comiencen con "name" o "system."
+    html.find('input[name]').on('change', async event => {
+      const input = event.target;
+      let path;
+
+      // Caso especial para "name" (raíz del actor)
+      if (input.name === "name") {
+        path = "name";
+      } else {
+        // Convertimos name de HTML a la ruta real
+        // Reemplaza si tus inputs usan otra convención
+        const nameAttr = input.name;
+        switch (nameAttr) {
+          case "system.age":
+            path = "system.background.age.value";
+            break;
+          case "system.birthplace":
+            path = "system.background.birthplace.value";
+            break;
+          case "system.height":
+            path = "system.background.height.value";
+            break;
+          case "system.residence":
+            path = "system.background.residence";
+            break;
+          case "system.description":
+            path = "system.background.description";
+            break;
+          case "system.personality":
+            path = "system.background.personality";
+            break;
+          case "system.ahn":
+            path = "system.background.ahn";
+            break;
+          default:
+            return; // ignorar inputs no mapeados
+        }
+      }
+
+      // Parsear el valor según el tipo especial, si existe
+      const parser = specialParsers[path] || (v => v);
+      const newValue = parser(input.value);
+
+      await this.actor.update({ [path]: newValue });
     });
 
     // Listener for changes to max inputs (only on change event)
